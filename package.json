@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 3000",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "clean": "rm -rf node_modules .next",
     "lint:fix": "next lint --fix",
     "test": "jest",
     "test:watch": "jest --watch",
