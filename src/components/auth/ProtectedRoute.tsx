@@ -14,7 +14,7 @@ export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
   children,
   adminOnly = false,
 }) => {
-  const { isAuthenticated, isCheckingAuth, isAdmin, user } = useAuth();
+  const { isAuthenticated, isCheckingAuth, isAdmin } = useAuth();
   const router = useRouter();
 
   useEffect(() => {
