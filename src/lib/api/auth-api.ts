@@ -28,7 +28,7 @@ export const authApi = createApi({
     baseUrl: 'http://localhost:3001/auth',
     prepareHeaders: (headers, { getState }) => {
       // Get the token from the auth state
-      const token = (getState() as RootState).auth.token;
+      const token = (getState() as unknown as RootState).auth.token;
       
       // If we have a token, add it to the headers
       if (token) {
