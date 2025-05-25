@@ -1,4 +1,4 @@
-import { getToken, removeToken, storeToken, isTokenExpired } from './token-manager';
+import { getToken, removeToken, isTokenExpired } from './token-manager';
 import { store } from '../store/store';
 import { logout, setCredentials } from '../store/slices/auth-slice';
 
@@ -49,6 +49,7 @@ export const logoutUser = (): void => {
 };
 
 // Check if user has admin role
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const isAdmin = (user: any): boolean => {
   return user?.role === 'admin';
 };

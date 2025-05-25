@@ -33,6 +33,7 @@ export const useAuth = () => {
           }
         }
       } catch (error) {
+        console.error('Error initializing auth:', error);
         // Token invalid or profile fetch failed
         removeToken();
         dispatch(logout());
@@ -52,8 +53,8 @@ export const useAuth = () => {
       storeToken(result.accessToken);
       router.push(AUTH_CONFIG.DASHBOARD_ROUTE);
       return true;
-    } catch (error: any) {
-      dispatch(setError(error?.data?.message || 'Login failed'));
+    } catch (error:unknown) {
+      dispatch(setError(((error as { data: { message: string } })?.data?.message || 'Login failed')));
       return false;
     }
   };

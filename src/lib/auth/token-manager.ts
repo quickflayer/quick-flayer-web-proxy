@@ -32,6 +32,7 @@ export const isTokenExpired = (token: string): boolean => {
     // Check if the token has expired
     return payload.exp * 1000 < Date.now();
   } catch (error) {
+    console.error('Error parsing token:', error);
     return true;
   }
 };
@@ -45,6 +46,7 @@ export const getUserRoleFromToken = (token: string): string | null => {
     const payload = JSON.parse(atob(token.split('.')[1]));
     return payload.role || null;
   } catch (error) {
+    console.error('Error extracting user role from token:', error);
     return null;
   }
 };
