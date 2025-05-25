@@ -1,0 +1,26 @@
+import { AuthProvider } from '../../components/auth/AuthProvider';
+import { ProtectedRoute } from '../../components/auth/ProtectedRoute';
+import { Header } from '../../components/layout/header';
+import { Sidebar } from '../../components/layout/sidebar';
+
+export default function ProtectedLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <AuthProvider>
+      <ProtectedRoute adminOnly>
+        <div className="min-h-screen bg-gray-100 flex flex-col">
+          <Header />
+          <div className="flex flex-1">
+            <Sidebar />
+            <main className="flex-1 overflow-y-auto">
+              {children}
+            </main>
+          </div>
+        </div>
+      </ProtectedRoute>
+    </AuthProvider>
+  );
+}
