@@ -2,7 +2,7 @@ import { Header } from '@core/layout/header';
 import { Sidebar } from '@core/layout/sidebar';
 
 import AuthProvider from '@/core/providers/AuthProvider';
-import { ProtectedRoute } from '@/views/auth/ProtectedRoute';
+import { ProtectedRoute } from '@/core/guard/ProtectedRoute';
 
 export default function ProtectedLayout({
   children,

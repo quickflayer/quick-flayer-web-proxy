@@ -1,6 +1,7 @@
 import React, { useCallback } from 'react';
 
 import { useForm } from 'react-hook-form';
+import { z } from 'zod';
 
 import { Box, Card, CardContent, Typography, Link, Grid } from '@mui/material';
 
@@ -9,9 +10,10 @@ import { storeToken } from '@utils/auth/token-manager';
 import { useDispatch } from 'react-redux';
 import { setCredentials } from '@redux/auth/auth.slice';
 import { useToast } from '@hooks/use-toast';
+import { TextFieldController } from '@/components/field-controller';
+import resolver from '@/utils/resolver';
 
 import AppButton from '@core/components/app-button/Button';
-import AppTextField from '@core/components/app-inputs/TextField';
 import PasswordStrength from '@/components/password-strength';
 
 interface RegisterFormProps {
@@ -19,13 +21,37 @@ interface RegisterFormProps {
   onSwitchToLogin?: () => void;
 }
 
-interface RegisterFormValues {
-  email: string;
-  password: string;
-  confirmPassword: string;
-  firstName: string;
-  lastName: string;
-}
+// Register Schema
+const registerSchema = z
+  .object({
+    firstName: z
+      .string()
+      .min(2, 'First name must be at least 2 characters')
+      .optional()
+      .or(z.literal('')),
+    lastName: z
+      .string()
+      .min(2, 'Last name must be at least 2 characters')
+      .optional()
+      .or(z.literal('')),
+    email: z.string().email('Please provide a valid email address'),
+    password: z
+      .string()
+      .min(8, 'Password must be at least 8 characters long')
+      .regex(/[A-Z]/, 'Password must contain at least one uppercase letter')
+      .regex(/[a-z]/, 'Password must contain at least one lowercase letter')
+      .regex(
+        /((?=.*\d)|(?=.*\W+))/,
+        'Password must contain at least one number or special character'
+      ),
+    confirmPassword: z.string(),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords don't match",
+    path: ['confirmPassword'],
+  });
+
+type RegisterFormValues = z.infer<typeof registerSchema>;
 
 const RegisterForm = ({ onSuccess, onSwitchToLogin }: RegisterFormProps) => {
   const dispatch = useDispatch();
@@ -33,11 +59,20 @@ const RegisterForm = ({ onSuccess, onSwitchToLogin }: RegisterFormProps) => {
   const { showError, showSuccess } = useToast();
 
   const {
-    register,
+    control,
     handleSubmit,
     watch,
-    formState: { errors },
-  } = useForm<RegisterFormValues>();
+    formState: { isSubmitting },
+  } = useForm<RegisterFormValues>({
+    resolver: resolver(registerSchema),
+    defaultValues: {
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: '',
+      confirmPassword: '',
+    },
+  });
 
   const password = watch('password');
 
@@ -47,8 +82,8 @@ const RegisterForm = ({ onSuccess, onSwitchToLogin }: RegisterFormProps) => {
         const result = await registerMutation({
           email: data.email,
           password: data.password,
-          firstName: data.firstName.trim() || undefined,
-          lastName: data.lastName.trim() || undefined,
+          firstName: data.firstName?.trim() || undefined,
+          lastName: data.lastName?.trim() || undefined,
         }).unwrap();
 
         storeToken(result.accessToken);
@@ -134,103 +169,74 @@ const RegisterForm = ({ onSuccess, onSwitchToLogin }: RegisterFormProps) => {
           >
             <Grid container spacing={2}>
               <Grid size={{ xs: 12, sm: 6 }}>
-                <AppTextField
+                <TextFieldController
+                  name="firstName"
+                  control={control}
                   label="First Name (Optional)"
                   type="text"
                   placeholder="John"
                   fullWidth
                   size="medium"
-                  error={!!errors.firstName}
-                  helperText={errors.firstName?.message}
-                  {...register('firstName', {
-                    minLength: {
-                      value: 2,
-                      message: 'First name must be at least 2 characters',
-                    },
-                  })}
+                  autoComplete="given-name"
                 />
               </Grid>
               <Grid size={{ xs: 12, sm: 6 }}>
-                <AppTextField
+                <TextFieldController
+                  name="lastName"
+                  control={control}
                   label="Last Name (Optional)"
                   type="text"
                   placeholder="Doe"
                   fullWidth
                   size="medium"
-                  error={!!errors.lastName}
-                  helperText={errors.lastName?.message}
-                  {...register('lastName', {
-                    minLength: {
-                      value: 2,
-                      message: 'Last name must be at least 2 characters',
-                    },
-                  })}
+                  autoComplete="family-name"
                 />
               </Grid>
             </Grid>
 
-            <AppTextField
+            <TextFieldController
+              name="email"
+              control={control}
               label="Email"
               type="email"
               placeholder="name@example.com"
               fullWidth
               size="medium"
-              error={!!errors.email}
-              helperText={errors.email?.message}
-              {...register('email', {
-                required: 'Email is required',
-                pattern: {
-                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                  message: 'Please provide a valid email address',
-                },
-              })}
+              autoComplete="email"
+              isRequired
             />
 
             <Box>
-              <AppTextField
+              <TextFieldController
+                name="password"
+                control={control}
                 label="Password"
                 type="password"
                 placeholder="••••••••"
                 fullWidth
                 size="medium"
-                error={!!errors.password}
-                helperText={errors.password?.message}
-                {...register('password', {
-                  required: 'Password is required',
-                  minLength: {
-                    value: 8,
-                    message: 'Password must be at least 8 characters long',
-                  },
-                  pattern: {
-                    value:
-                      /((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/,
-                    message:
-                      'Password must contain at least 1 uppercase letter, 1 lowercase letter, and 1 number or special character',
-                  },
-                })}
+                autoComplete="new-password"
+                isRequired
               />
               <PasswordStrength password={password} />
             </Box>
 
-            <AppTextField
+            <TextFieldController
+              name="confirmPassword"
+              control={control}
               label="Confirm Password"
               type="password"
               placeholder="••••••••"
               fullWidth
               size="medium"
-              error={!!errors.confirmPassword}
-              helperText={errors.confirmPassword?.message}
-              {...register('confirmPassword', {
-                required: 'Please confirm your password',
-                validate: (value) =>
-                  value === password || 'Passwords do not match',
-              })}
+              autoComplete="new-password"
+              isRequired
             />
 
             <AppButton
               type="submit"
               variant="contained"
-              loading={isLoading}
+              loading={isLoading || isSubmitting}
               size="large"
               sx={{
                 mt: 2,
@@ -242,7 +248,9 @@ const RegisterForm = ({ onSuccess, onSwitchToLogin }: RegisterFormProps) => {
                 },
               }}
             >
-              Create Account
+              {isLoading || isSubmitting
+                ? 'Creating Account...'
+                : 'Create Account'}
             </AppButton>
           </Box>
 

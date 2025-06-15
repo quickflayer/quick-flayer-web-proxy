@@ -1,34 +1,45 @@
 import React, { useCallback } from 'react';
 
 import { useForm } from 'react-hook-form';
+import { z } from 'zod';
 
 import { Box, Card, CardContent, Typography, Link } from '@mui/material';
 
 import { useAuth } from '@hooks/use-auth';
 import { useToast } from '@hooks/use-toast';
+import { TextFieldController } from '@/components/field-controller';
+import resolver from '@/utils/resolver';
 
 import AppButton from '@core/components/app-button/Button';
-import AppTextField from '@core/components/app-inputs/TextField';
 
 interface LoginFormProps {
   onSuccess?: () => void;
   onSwitchToRegister?: () => void;
 }
 
-interface LoginFormValues {
-  email: string;
-  password: string;
-}
+// Login Schema
+const loginSchema = z.object({
+  email: z.string().email('Please provide a valid email address'),
+  password: z.string().min(8, 'Password must be at least 8 characters long'),
+});
+
+type LoginFormValues = z.infer<typeof loginSchema>;
 
 const LoginForm = ({ onSuccess, onSwitchToRegister }: LoginFormProps) => {
   const { login, isLoading } = useAuth();
   const { showError, showSuccess } = useToast();
 
   const {
-    register,
+    control,
     handleSubmit,
-    formState: { errors },
-  } = useForm<LoginFormValues>();
+    formState: { errors, isSubmitting },
+  } = useForm<LoginFormValues>({
+    resolver: resolver(loginSchema),
+    defaultValues: {
+      email: '',
+      password: '',
+    },
+  });
 
   const onSubmit = useCallback(
     async (data: LoginFormValues) => {
@@ -105,44 +116,34 @@ const LoginForm = ({ onSuccess, onSwitchToRegister }: LoginFormProps) => {
             onSubmit={handleSubmit(onSubmit)}
             sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}
           >
-            <AppTextField
+            <TextFieldController
+              name="email"
+              control={control}
               label="Email"
               type="email"
               placeholder="name@example.com"
               fullWidth
               size="medium"
-              error={!!errors.email}
-              helperText={errors.email?.message}
-              {...register('email', {
-                required: 'Email is required',
-                pattern: {
-                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                  message: 'Please provide a valid email address',
-                },
-              })}
+              autoComplete="email"
+              isRequired
             />
 
-            <AppTextField
+            <TextFieldController
+              name="password"
+              control={control}
               label="Password"
               type="password"
               placeholder="••••••••"
               fullWidth
               size="medium"
-              error={!!errors.password}
-              helperText={errors.password?.message}
-              {...register('password', {
-                required: 'Password is required',
-                minLength: {
-                  value: 8,
-                  message: 'Password must be at least 8 characters long',
-                },
-              })}
+              autoComplete="current-password"
+              isRequired
             />
 
             <AppButton
               type="submit"
               variant="contained"
-              loading={isLoading}
+              loading={isLoading || isSubmitting}
               size="large"
               sx={{
                 mt: 2,
@@ -154,7 +155,7 @@ const LoginForm = ({ onSuccess, onSwitchToRegister }: LoginFormProps) => {
                 },
               }}
             >
-              Sign In
+              {isLoading || isSubmitting ? 'Signing In...' : 'Sign In'}
             </AppButton>
           </Box>
 
