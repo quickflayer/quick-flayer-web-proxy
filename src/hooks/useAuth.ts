@@ -1,23 +1,26 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useRouter } from 'next/navigation';
-import { RootState } from '../lib/store/store';
-import { useLoginMutation, useGetProfileQuery } from '../lib/api/auth-api';
-import { setCredentials, logout, setError } from '../lib/store/slices/auth-slice';
+import { RootState } from '../lib/store';
+// Import both RTK Query and Axios-based hooks for comparison
+import { useLoginMutation as useRTKLoginMutation, useGetProfileQuery } from '../redux/auth/auth.api';
+import { useLoginMutation, useProfileQuery } from './useAuthQueries';
+import { setCredentials, logout, setError } from '../redux/auth/auth.slice';
 import { storeToken, removeToken, getToken, isTokenExpired } from '../lib/auth/token-manager';
 import { AUTH_CONFIG } from '../lib/auth/auth-config';
+import AuthService from '../redux/auth/auth.service';
 
 export const useAuth = () => {
   const dispatch = useDispatch();
   const router = useRouter();
-  const [login, { isLoading: isLoginLoading }] = useLoginMutation();
+
+  // Use Axios-based hooks instead of RTK Query
+  const loginMutation = useLoginMutation();
   const { user, isAuthenticated, error } = useSelector((state: RootState) => state.auth);
   const [isCheckingAuth, setIsCheckingAuth] = useState(true);
 
-  // Auto-fetch profile when authenticated
-  const { data: profileData, refetch } = useGetProfileQuery(undefined, {
-    skip: !isAuthenticated,
-  });
+  // Auto-fetch profile when authenticated using Axios
+  const { data: profileData, refetch, isLoading: isProfileLoading } = useProfileQuery(isAuthenticated);
 
   // Initialize auth state from token
   useEffect(() => {
@@ -61,10 +64,10 @@ export const useAuth = () => {
     initAuth();
   }, [dispatch, refetch]); // Remove profileData dependency to avoid infinite loop
 
-  // Handle login
+  // Handle login using Axios
   const handleLogin = async (email: string, password: string) => {
     try {
-      const result = await login({ email, password }).unwrap();
+      const result = await loginMutation.mutateAsync({ email, password });
 
       // Store token in both localStorage and cookies
       storeToken(result.accessToken);
@@ -75,9 +78,9 @@ export const useAuth = () => {
       console.log('Login successful, redirecting to dashboard');
       router.push(AUTH_CONFIG.DASHBOARD_ROUTE);
       return true;
-    } catch (error:unknown) {
+    } catch (error: any) {
       console.error('Login failed:', error);
-      dispatch(setError(((error as { data: { message: string } })?.data?.message || 'Login failed')));
+      dispatch(setError(error.message || 'Login failed'));
       return false;
     }
   };
@@ -103,10 +106,12 @@ export const useAuth = () => {
     user,
     isAuthenticated,
     isCheckingAuth,
-    isLoading: isLoginLoading,
+    isLoading: loginMutation.isLoading,
+    isProfileLoading,
     error,
     login: handleLogin,
     logout: handleLogout,
     isAdmin,
+    refetch,
   };
 };

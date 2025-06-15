@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '../lib/store/store';
-import { logout } from '../lib/store/slices/auth-slice';
+import { RootState } from '../lib/store';
+import { logout } from '../redux/auth/auth.slice';
 import { removeToken } from '../lib/auth/token-manager';
 import { AUTH_CONFIG } from '../lib/auth/auth-config';
 

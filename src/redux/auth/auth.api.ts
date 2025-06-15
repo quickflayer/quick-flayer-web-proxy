@@ -1,5 +1,5 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { RootState } from '../store/store';
+import { createApi } from '@reduxjs/toolkit/query/react';
+import query from '@lib/http/query';
 
 interface LoginRequest {
   email: string;
@@ -24,34 +24,21 @@ interface AuthResponse {
 
 export const authApi = createApi({
   reducerPath: 'authApi',
-  baseQuery: fetchBaseQuery({
-    baseUrl: 'http://localhost:3001/auth',
-    prepareHeaders: (headers, { getState }) => {
-      // Get the token from the auth state
-      const token = (getState() as unknown as RootState).auth.token;
-      
-      // If we have a token, add it to the headers
-      if (token) {
-        headers.set('authorization', `Bearer ${token}`);
-      }
-      
-      return headers;
-    },
-  }),
+  baseQuery: query(),
   endpoints: (builder) => ({
     login: builder.mutation<AuthResponse, LoginRequest>({
       query: (credentials) => ({
-        url: '/login',
+        url: '/auth/login',
         method: 'POST',
         body: credentials,
       }),
     }),
     getProfile: builder.query<User, void>({
-      query: () => '/profile',
+      query: () => ({url:'/auth/profile', method: 'GET'}),
     }),
     verifyToken: builder.mutation<{ valid: boolean }, { token: string }>({
       query: (tokenData) => ({
-        url: '/verify',
+        url: '/auth/verify',
         method: 'POST',
         body: tokenData,
       }),

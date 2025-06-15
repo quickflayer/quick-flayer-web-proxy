@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Provider } from 'react-redux';
-import { store } from '../../lib/store/store';
+import { store } from '../../lib/store';
 import { useAuth } from '../../hooks/useAuth';
 import { useAuthTimer } from '../../hooks/useAuthTimer';
 

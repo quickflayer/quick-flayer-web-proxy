@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useAuth } from '../../hooks/useAuth';
-import { Button } from '../ui/button';
-import { Input } from '../ui/input';
+import { Button } from '../../core/ui/button';
+import { Input } from '../../core/ui/input';
 
 interface LoginFormProps {
   onSuccess?: () => void;

@@ -1,6 +1,6 @@
 import { getToken, removeToken, isTokenExpired } from './token-manager';
-import { store } from '../store/store';
-import { logout, setCredentials } from '../store/slices/auth-slice';
+import { store } from '../store';
+import { logout, setCredentials } from '../../redux/auth/auth.slice';
 
 // Initialize auth state from stored token
 export const initializeAuth = async (): Promise<boolean> => {
