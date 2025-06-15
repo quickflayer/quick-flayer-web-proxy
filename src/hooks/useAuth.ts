@@ -25,16 +25,26 @@ export const useAuth = () => {
       try {
         const token = localStorage.getItem('auth_token');
         if (token && !isTokenExpired(token)) {
-          // Token exists and is valid, fetch profile
-          await refetch().unwrap();
-          // If we get here, the token is valid
-          if (profileData) {
-            dispatch(setCredentials({ user: profileData, accessToken: token }));
+          // Token exists and is valid, dispatch credentials before fetch
+          // This avoids dependency cycle with profileData
+          dispatch(setCredentials({ user: null, accessToken: token }));
+          
+          try {
+            // Now fetch the profile
+            await refetch();
+          } catch (profileError) {
+            console.error('Error fetching profile:', profileError);
+            removeToken();
+            dispatch(logout());
           }
+        } else {
+          // No valid token found
+          removeToken();
+          dispatch(logout());
         }
       } catch (error) {
         console.error('Error initializing auth:', error);
-        // Token invalid or profile fetch failed
+        // Token invalid or other error
         removeToken();
         dispatch(logout());
       } finally {
@@ -43,7 +53,7 @@ export const useAuth = () => {
     };
 
     initAuth();
-  }, [dispatch, refetch, profileData]);
+  }, [dispatch, refetch]); // Remove profileData dependency to avoid infinite loop
 
   // Handle login
   const handleLogin = async (email: string, password: string) => {
