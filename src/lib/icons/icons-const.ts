@@ -28,4 +28,11 @@ export const ICONS = {
   FEMALE_ICON: 'ic:outline-female',
   CARDS_ICON: 'tabler:cards',
   CIRCLE_OUTLINE: 'mdi:circle-outline',
+  // Mobile Navigation Icons
+  HAMBURGER_MENU: 'line-md:menu-fold-left',
+  HAMBURGER_CLOSE: 'line-md:menu-unfold-left',
+  USER_ICON: 'ic:outline-person',
+  SETTINGS_ICON: 'ic:outline-settings',
+  USERS_ICON: 'ic:outline-people',
+  LOGOUT_ICON: 'ic:outline-logout',
 } as const;
