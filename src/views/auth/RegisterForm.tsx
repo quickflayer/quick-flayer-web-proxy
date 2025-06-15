@@ -15,6 +15,7 @@ import resolver from '@/utils/resolver';
 
 import AppButton from '@core/components/app-button/Button';
 import PasswordStrength from '@/components/password-strength';
+import { logger } from '@/utils/logger';
 
 interface RegisterFormProps {
   onSuccess?: () => void;
@@ -55,7 +56,7 @@ type RegisterFormValues = z.infer<typeof registerSchema>;
 
 const RegisterForm = ({ onSuccess, onSwitchToLogin }: RegisterFormProps) => {
   const dispatch = useDispatch();
-  const [registerMutation, { isLoading }] = useRegisterMutation();
+  const [register, { isLoading }] = useRegisterMutation();
   const { showError, showSuccess } = useToast();
 
   const {
@@ -79,7 +80,9 @@ const RegisterForm = ({ onSuccess, onSwitchToLogin }: RegisterFormProps) => {
   const onSubmit = useCallback(
     async (data: RegisterFormValues) => {
       try {
-        const result = await registerMutation({
+        logger.log('Registering user:', data);
+
+        const result = await register({
           email: data.email,
           password: data.password,
           firstName: data.firstName?.trim() || undefined,
@@ -112,7 +115,7 @@ const RegisterForm = ({ onSuccess, onSwitchToLogin }: RegisterFormProps) => {
         showError(errorMessage);
       }
     },
-    [registerMutation, dispatch, onSuccess, showError, showSuccess]
+    [register, dispatch, onSuccess, showError, showSuccess]
   );
 
   return (
