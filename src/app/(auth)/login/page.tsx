@@ -1,17 +1,19 @@
 'use client';
 
 import { useEffect } from 'react';
+
+import { AUTH_CONFIG } from '@configs/auth/auth.config';
+
 import { useRouter } from 'next/navigation';
-import { LoginForm } from '../../../components/auth/LoginForm';
-import { useAuth } from '../../../hooks/use-auth';
-import { AUTH_CONFIG } from '../../../configs/auth/auth.config';
+
+import LoginForm from '@components/auth/LoginForm';
+import { useAuth } from '@hooks/use-auth';
 
 export default function LoginPage() {
   const { isAuthenticated, isCheckingAuth } = useAuth();
   const router = useRouter();
 
   useEffect(() => {
-    // If user is already authenticated, redirect to dashboard
     if (!isCheckingAuth && isAuthenticated) {
       router.replace(AUTH_CONFIG.DASHBOARD_ROUTE);
     }
@@ -21,7 +23,6 @@ export default function LoginPage() {
     router.push(AUTH_CONFIG.DASHBOARD_ROUTE);
   };
 
-  // Don't render the login form if we're checking auth or already authenticated
   if (isCheckingAuth || isAuthenticated) {
     return (
       <div className="flex items-center justify-center min-h-screen">
@@ -34,7 +35,7 @@ export default function LoginPage() {
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold">Quick Flayer Admin</h1>
+          <h1 className="text-3xl font-bold text-black">Quick Flayer Admin</h1>
           <p className="text-gray-600 mt-2">
             Sign in to access the admin dashboard
           </p>

@@ -1,7 +1,8 @@
-import { AuthProvider } from '../../components/auth/AuthProvider';
-import { ProtectedRoute } from '../../components/auth/ProtectedRoute';
-import { Header } from '../../components/layout/header';
-import { Sidebar } from '../../components/layout/sidebar';
+import { Header } from '@core/layout/header';
+import { Sidebar } from '@core/layout/sidebar';
+
+import AuthProvider from '@components/auth/AuthProvider';
+import { ProtectedRoute } from '@components/auth/ProtectedRoute';
 
 export default function ProtectedLayout({
   children,
@@ -15,9 +16,7 @@ export default function ProtectedLayout({
           <Header />
           <div className="flex flex-1">
             <Sidebar />
-            <main className="flex-1 overflow-y-auto">
-              {children}
-            </main>
+            <main className="flex-1 overflow-y-auto">{children}</main>
           </div>
         </div>
       </ProtectedRoute>

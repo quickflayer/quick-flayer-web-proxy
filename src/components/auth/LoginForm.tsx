@@ -1,15 +1,11 @@
-// React imports (first)
 import React, { useState } from 'react';
 
-// External dependencies (alphabetical)
 import { useForm } from 'react-hook-form';
 
-// @/** imports
-import { useAuth } from '@/hooks/use-auth';
+import { useAuth } from '@hooks/use-auth';
 
-// Relative imports
-import { Button } from '../../core/ui/button';
-import { Input } from '../../core/ui/input';
+import Button from '@core/ui/button';
+import Input from '@core/ui/input';
 
 interface LoginFormProps {
   onSuccess?: () => void;
