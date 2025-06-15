@@ -8,9 +8,9 @@ import {
 import http from '@lib/http';
 import { store } from '@lib/store';
 import { logout, setCredentials } from '@redux/auth/auth.slice';
-import { logger } from '@utils/common';
 
 import { Any } from '@/types';
+import { logger } from '@/utils/logger';
 
 /**
  * Initializes the authentication state by verifying the stored token.

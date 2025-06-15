@@ -13,9 +13,8 @@ import axios, {
   AxiosError,
 } from 'axios';
 
-import { logger } from '@utils/common';
-
 import { Any } from '@/types';
+import { logger } from '@/utils/logger';
 
 const http: AxiosInstance = axios.create({
   baseURL: API_CONFIG.BASE_URL,

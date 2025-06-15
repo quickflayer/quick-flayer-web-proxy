@@ -4,7 +4,7 @@ import { AUTH_CONFIG } from '@configs/auth/auth.config';
 import { NextRequest, NextResponse } from 'next/server';
 
 // @/** imports
-import { logger } from '@utils/common';
+import { logger } from '@/utils/logger';
 
 // Helper function to check if token is expired
 function isTokenExpired(token: string): boolean {

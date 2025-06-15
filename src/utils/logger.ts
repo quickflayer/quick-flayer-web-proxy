@@ -17,3 +17,4 @@ export const logger = {
     console.warn(`[LOGGER] ${message}`, ...optionalParams);
   },
 };
+

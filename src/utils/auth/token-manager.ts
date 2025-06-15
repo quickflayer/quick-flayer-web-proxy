@@ -1,4 +1,4 @@
-import { logger } from '@utils/common';
+import { logger } from '@/utils/logger';
 
 /**
  * Stores an authentication token in both localStorage and a cookie.

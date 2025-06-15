@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { authApi } from './auth.api';
+import authApi from './auth.api';
 
 interface User {
   id: string;
@@ -32,7 +32,10 @@ export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    setCredentials: (state, action: PayloadAction<{ user: User; accessToken: string }>) => {
+    setCredentials: (
+      state,
+      action: PayloadAction<{ user: AuthState['user']; accessToken: string }>
+    ) => {
       state.user = action.payload.user;
       state.token = action.payload.accessToken;
       state.isAuthenticated = true;
@@ -66,11 +69,15 @@ export const authSlice = createSlice({
         state.isLoading = false;
         state.error = action.error.message || 'Authentication failed';
       })
-      .addMatcher(authApi.endpoints.getProfile.matchFulfilled, (state, action) => {
-        state.user = action.payload;
-      });
+      .addMatcher(
+        authApi.endpoints.getProfile.matchFulfilled,
+        (state, action) => {
+          state.user = action.payload;
+        }
+      );
   },
 });
 
-export const { setCredentials, logout, setError, clearError } = authSlice.actions;
+export const { setCredentials, logout, setError, clearError } =
+  authSlice.actions;
 export default authSlice.reducer;
