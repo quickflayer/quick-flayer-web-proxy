@@ -55,6 +55,7 @@ export const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      // Login matchers
       .addMatcher(authApi.endpoints.login.matchPending, (state) => {
         state.isLoading = true;
         state.error = null;
@@ -69,6 +70,25 @@ export const authSlice = createSlice({
         state.isLoading = false;
         state.error = action.error.message || 'Authentication failed';
       })
+      // Register matchers
+      .addMatcher(authApi.endpoints.register.matchPending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addMatcher(
+        authApi.endpoints.register.matchFulfilled,
+        (state, action) => {
+          state.isLoading = false;
+          state.user = action.payload.user;
+          state.token = action.payload.accessToken;
+          state.isAuthenticated = true;
+        }
+      )
+      .addMatcher(authApi.endpoints.register.matchRejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.error.message || 'Registration failed';
+      })
+      // Profile matchers
       .addMatcher(
         authApi.endpoints.getProfile.matchFulfilled,
         (state, action) => {

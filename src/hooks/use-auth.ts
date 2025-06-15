@@ -16,13 +16,18 @@ import { setCredentials, logout, setError } from '@redux/auth/auth.slice';
 import { logger } from '@utils/logger';
 import { tryCatch } from '@utils/try-catch';
 
-import { useLoginMutation, useProfileQuery } from './use-auth-queries';
+import {
+  useLoginMutation,
+  useRegisterMutation,
+  useProfileQuery,
+} from './use-auth-queries';
 
 export const useAuth = () => {
   const dispatch = useDispatch();
   const router = useRouter();
 
   const loginMutation = useLoginMutation();
+  const registerMutation = useRegisterMutation();
   const { user, isAuthenticated, error } = useSelector(
     (state: RootState) => state.auth
   );
@@ -114,6 +119,40 @@ export const useAuth = () => {
   };
 
   /**
+   * Registers a new user with the given data and redirects to the
+   * dashboard route if successful.
+   *
+   * @param {object} userData - The user registration data
+   * @returns {boolean} Whether the registration was successful
+   */
+  const handleRegister = async (userData: {
+    email: string;
+    password: string;
+    firstName?: string;
+    lastName?: string;
+  }) => {
+    const result = await tryCatch({
+      fn: async () => {
+        const registerResult = await registerMutation.mutateAsync(userData);
+        storeToken(registerResult.accessToken);
+        dispatch(setCredentials(registerResult));
+        logger.log('Registration successful, redirecting to dashboard');
+        router.push(AUTH_CONFIG.DASHBOARD_ROUTE);
+        return true;
+      },
+      logger: logger.error,
+      fallbackError: 'Registration failed',
+    });
+
+    if (result.success) {
+      return result.data;
+    } else {
+      dispatch(setError(result.error.message));
+      return false;
+    }
+  };
+
+  /**
    * Logs out the user by removing the token from both localStorage and cookies,
    * clearing the Redux state, and redirecting to the login route.
    */
@@ -133,10 +172,11 @@ export const useAuth = () => {
     user,
     isAuthenticated,
     isCheckingAuth,
-    isLoading: loginMutation.isLoading,
+    isLoading: loginMutation.isLoading || registerMutation.isLoading,
     isProfileLoading,
     error,
     login: handleLogin,
+    register: handleRegister,
     logout: handleLogout,
     isAdmin,
     refetch,

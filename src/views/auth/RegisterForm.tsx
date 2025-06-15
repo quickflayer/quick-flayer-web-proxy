@@ -5,10 +5,7 @@ import { z } from 'zod';
 
 import { Box, Card, CardContent, Typography, Link, Grid } from '@mui/material';
 
-import { useRegisterMutation } from '@redux/auth/auth.api';
-import { storeToken } from '@utils/auth/token-manager';
-import { useDispatch } from 'react-redux';
-import { setCredentials } from '@redux/auth/auth.slice';
+import { useAuth } from '@hooks/use-auth';
 import { useToast } from '@hooks/use-toast';
 import { TextFieldController } from '@/components/field-controller';
 import resolver from '@/utils/resolver';
@@ -59,8 +56,7 @@ const registerSchema = z
 type RegisterFormValues = z.infer<typeof registerSchema>;
 
 const RegisterForm = ({ onSuccess, onSwitchToLogin }: RegisterFormProps) => {
-  const dispatch = useDispatch();
-  const [register, { isLoading }] = useRegisterMutation();
+  const { register, isLoading } = useAuth();
   const { showError, showSuccess } = useToast();
 
   const {
@@ -114,7 +110,7 @@ const RegisterForm = ({ onSuccess, onSwitchToLogin }: RegisterFormProps) => {
         showError(errorMessage);
       }
     },
-    [register, dispatch, onSuccess, showError, showSuccess]
+    [register, onSuccess, showError, showSuccess]
   );
 
   return (
