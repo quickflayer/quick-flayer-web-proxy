@@ -9,6 +9,7 @@ import { setCredentials } from '@redux/auth/auth.slice';
 
 import Button from '@core/ui/button';
 import Input from '@core/ui/input';
+import PasswordStrength from '@core/ui/password-strength';
 
 interface RegisterFormProps {
   onSuccess?: () => void;
@@ -50,18 +51,26 @@ const RegisterForm = ({ onSuccess, onSwitchToLogin }: RegisterFormProps) => {
 
       storeToken(result.accessToken);
       dispatch(
-        setCredentials({ user: result.user, token: result.accessToken })
+        setCredentials({ user: result.user, accessToken: result.accessToken })
       );
 
       if (onSuccess) {
         onSuccess();
       }
     } catch (error: any) {
-      setRegisterError(
-        error.data?.message ||
-          error.message ||
-          'Registration failed. Please try again.'
-      );
+      let errorMessage = 'Registration failed. Please try again.';
+
+      if (error.data?.message) {
+        if (Array.isArray(error.data.message)) {
+          errorMessage = error.data.message.join(', ');
+        } else {
+          errorMessage = error.data.message;
+        }
+      } else if (error.message) {
+        errorMessage = error.message;
+      }
+
+      setRegisterError(errorMessage);
     }
   };
 
@@ -84,12 +93,11 @@ const RegisterForm = ({ onSuccess, onSwitchToLogin }: RegisterFormProps) => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <Input
             id="firstName"
-            label="First Name"
+            label="First Name (Optional)"
             type="text"
             placeholder="John"
             error={errors.firstName?.message}
             {...register('firstName', {
-              required: 'First name is required',
               minLength: {
                 value: 2,
                 message: 'First name must be at least 2 characters',
@@ -99,12 +107,11 @@ const RegisterForm = ({ onSuccess, onSwitchToLogin }: RegisterFormProps) => {
 
           <Input
             id="lastName"
-            label="Last Name"
+            label="Last Name (Optional)"
             type="text"
             placeholder="Doe"
             error={errors.lastName?.message}
             {...register('lastName', {
-              required: 'Last name is required',
               minLength: {
                 value: 2,
                 message: 'Last name must be at least 2 characters',
@@ -123,30 +130,33 @@ const RegisterForm = ({ onSuccess, onSwitchToLogin }: RegisterFormProps) => {
             required: 'Email is required',
             pattern: {
               value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-              message: 'Invalid email address',
+              message: 'Please provide a valid email address',
             },
           })}
         />
 
-        <Input
-          id="password"
-          label="Password"
-          type="password"
-          placeholder="••••••••"
-          error={errors.password?.message}
-          {...register('password', {
-            required: 'Password is required',
-            minLength: {
-              value: 8,
-              message: 'Password must be at least 8 characters',
-            },
-            pattern: {
-              value: /((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/,
-              message:
-                'Password must contain uppercase, lowercase, and number/special character',
-            },
-          })}
-        />
+        <div>
+          <Input
+            id="password"
+            label="Password"
+            type="password"
+            placeholder="••••••••"
+            error={errors.password?.message}
+            {...register('password', {
+              required: 'Password is required',
+              minLength: {
+                value: 8,
+                message: 'Password must be at least 8 characters long',
+              },
+              pattern: {
+                value: /((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/,
+                message:
+                  'Password must contain at least 1 uppercase letter, 1 lowercase letter, and 1 number or special character',
+              },
+            })}
+          />
+          <PasswordStrength password={password} />
+        </div>
 
         <Input
           id="confirmPassword"

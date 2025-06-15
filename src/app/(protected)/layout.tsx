@@ -1,8 +1,8 @@
 import { Header } from '@core/layout/header';
 import { Sidebar } from '@core/layout/sidebar';
 
-import AuthProvider from '@components/auth/AuthProvider';
-import { ProtectedRoute } from '@components/auth/ProtectedRoute';
+import AuthProvider from '@/views/auth/AuthProvider';
+import { ProtectedRoute } from '@/views/auth/ProtectedRoute';
 
 export default function ProtectedLayout({
   children,

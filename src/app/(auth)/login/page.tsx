@@ -6,7 +6,7 @@ import { AUTH_CONFIG } from '@configs/auth/auth.config';
 
 import { useRouter } from 'next/navigation';
 
-import LoginForm from '@components/auth/LoginForm';
+import LoginForm from '@/views/auth/LoginForm';
 import { useAuth } from '@hooks/use-auth';
 
 export default function LoginPage() {

@@ -6,7 +6,7 @@ import { AUTH_CONFIG } from '@configs/auth/auth.config';
 
 import { useRouter } from 'next/navigation';
 
-import RegisterForm from '@components/auth/RegisterForm';
+import RegisterForm from '@/views/auth/RegisterForm';
 import { useAuth } from '@hooks/use-auth';
 
 export default function RegisterPage() {
@@ -42,11 +42,9 @@ export default function RegisterPage() {
           <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-2">
             Quick Flayer
           </h1>
-          <p className="text-gray-600">
-            Create your account to get started
-          </p>
+          <p className="text-gray-600">Create your account to get started</p>
         </div>
-        <RegisterForm 
+        <RegisterForm
           onSuccess={handleRegisterSuccess}
           onSwitchToLogin={handleSwitchToLogin}
         />
