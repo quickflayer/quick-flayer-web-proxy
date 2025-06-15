@@ -6,10 +6,10 @@ import { AUTH_CONFIG } from '@configs/auth/auth.config';
 
 import { useRouter } from 'next/navigation';
 
-import LoginForm from '@components/auth/LoginForm';
+import RegisterForm from '@components/auth/RegisterForm';
 import { useAuth } from '@hooks/use-auth';
 
-export default function LoginPage() {
+export default function RegisterPage() {
   const { isAuthenticated, isCheckingAuth } = useAuth();
   const router = useRouter();
 
@@ -19,12 +19,12 @@ export default function LoginPage() {
     }
   }, [isAuthenticated, isCheckingAuth, router]);
 
-  const handleLoginSuccess = () => {
+  const handleRegisterSuccess = () => {
     router.push(AUTH_CONFIG.DASHBOARD_ROUTE);
   };
 
-  const handleSwitchToRegister = () => {
-    router.push('/register');
+  const handleSwitchToLogin = () => {
+    router.push(AUTH_CONFIG.LOGIN_ROUTE);
   };
 
   if (isCheckingAuth || isAuthenticated) {
@@ -43,12 +43,12 @@ export default function LoginPage() {
             Quick Flayer
           </h1>
           <p className="text-gray-600">
-            Welcome back! Please sign in to continue
+            Create your account to get started
           </p>
         </div>
-        <LoginForm
-          onSuccess={handleLoginSuccess}
-          onSwitchToRegister={handleSwitchToRegister}
+        <RegisterForm 
+          onSuccess={handleRegisterSuccess}
+          onSwitchToLogin={handleSwitchToLogin}
         />
       </div>
     </div>

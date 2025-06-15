@@ -9,6 +9,7 @@ import Input from '@core/ui/input';
 
 interface LoginFormProps {
   onSuccess?: () => void;
+  onSwitchToRegister?: () => void;
 }
 
 interface LoginFormValues {
@@ -16,7 +17,7 @@ interface LoginFormValues {
   password: string;
 }
 
-const LoginForm = ({ onSuccess }: LoginFormProps) => {
+const LoginForm = ({ onSuccess, onSwitchToRegister }: LoginFormProps) => {
   const { login, isLoading, error } = useAuth();
   const [loginError, setLoginError] = useState<string | null>(null);
 
@@ -37,14 +38,15 @@ const LoginForm = ({ onSuccess }: LoginFormProps) => {
   };
 
   return (
-    <div className="w-full max-w-md p-6 bg-white rounded-lg shadow-md">
-      <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">
-        Admin Login
-      </h2>
+    <div className="bg-white p-8 rounded-2xl shadow-xl border border-gray-100">
+      <div className="text-center mb-8">
+        <h2 className="text-2xl font-bold text-gray-900 mb-2">Welcome Back</h2>
+        <p className="text-gray-600">Sign in to your account</p>
+      </div>
 
       {(loginError || error) && (
-        <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
-          {loginError || error}
+        <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
+          <p className="text-red-600 text-sm">{loginError || error}</p>
         </div>
       )}
 
@@ -85,9 +87,22 @@ const LoginForm = ({ onSuccess }: LoginFormProps) => {
           isLoading={isLoading}
           className="w-full"
         >
-          Log In
+          Sign In
         </Button>
       </form>
+
+      <div className="mt-6 text-center">
+        <p className="text-gray-600">
+          Don't have an account?{' '}
+          <button
+            type="button"
+            onClick={onSwitchToRegister}
+            className="text-blue-600 hover:text-blue-700 font-medium transition-colors"
+          >
+            Create one
+          </button>
+        </p>
+      </div>
     </div>
   );
 };

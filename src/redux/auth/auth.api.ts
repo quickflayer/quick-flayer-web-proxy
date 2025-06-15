@@ -7,6 +7,13 @@ interface LoginRequest {
   password: string;
 }
 
+interface RegisterRequest {
+  email: string;
+  password: string;
+  firstName?: string;
+  lastName?: string;
+}
+
 interface User {
   id: string;
   email: string;
@@ -34,6 +41,13 @@ const authApi = createApi({
         body: credentials,
       }),
     }),
+    register: builder.mutation<AuthResponse, RegisterRequest>({
+      query: (userData) => ({
+        url: '/auth/register',
+        method: 'POST',
+        body: userData,
+      }),
+    }),
     getProfile: builder.query<User, void>({
       query: () => ({ url: '/auth/profile', method: 'GET' }),
     }),
@@ -47,7 +61,11 @@ const authApi = createApi({
   }),
 });
 
-export const { useLoginMutation, useGetProfileQuery, useVerifyTokenMutation } =
-  authApi;
+export const {
+  useLoginMutation,
+  useRegisterMutation,
+  useGetProfileQuery,
+  useVerifyTokenMutation,
+} = authApi;
 
 export default authApi;
