@@ -1,5 +1,6 @@
-import { Box, Chip, Theme } from '@mui/material';
 import React, { FC, memo, ReactElement, useCallback } from 'react';
+
+import { Box, Chip, Theme } from '@mui/material';
 
 import Image from 'next/image';
 

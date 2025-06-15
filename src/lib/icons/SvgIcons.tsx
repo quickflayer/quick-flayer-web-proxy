@@ -1346,3 +1346,160 @@ export function TablerCards(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
+
+export function LineMdMenuFoldLeft(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={24}
+      height={24}
+      viewBox="0 0 24 24"
+      {...props}
+    >
+      <path
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        d="M12 5L19 5L19 19L12 19M12 12L19 12"
+      ></path>
+    </svg>
+  );
+}
+
+export function LineMdMenuUnfoldLeft(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={24}
+      height={24}
+      viewBox="0 0 24 24"
+      {...props}
+    >
+      <path
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        d="M12 5L19 5L19 19L12 19M12 12L19 12M12 12L5 12"
+      ></path>
+    </svg>
+  );
+}
+
+export function LineMdMenuFoldRight(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={24}
+      height={24}
+      viewBox="0 0 24 24"
+      {...props}
+    >
+      <path
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        d="M12 5L5 5L5 19L12 19M12 12L5 12"
+      ></path>
+    </svg>
+  );
+}
+
+export function LineMdMenuUnfoldRight(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={24}
+      height={24}
+      viewBox="0 0 24 24"
+      {...props}
+    >
+      <path
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        d="M12 5L5 5L5 19L12 19M12 12L5 12M12 12L19 12"
+      ></path>
+    </svg>
+  );
+}
+
+export function IcOutlinePerson(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={24}
+      height={24}
+      viewBox="0 0 24 24"
+      {...props}
+    >
+      <path
+        fill="currentColor"
+        d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2m0 5c1.66 0 3 1.34 3 3s-1.34 
+        3-3 3s-3-1.34-3-3s1.34-3 3-3"
+      ></path>
+    </svg>
+  );
+}
+
+export function IcOutlineSettings(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={24}
+      height={24}
+      viewBox="0 0 24 24"
+      {...props}
+    >
+      <path
+        fill="currentColor"
+        d="M19.43 12.98c.04-.32.07-.64.07-.98c0-.34-.03-.66-.07-1c-.2-.92-1.13-1.64-2.09-1.64H8.98v3.88h5.45c.32 0
+        .64.14.88.4.24.24.37.56.37.91s-.13.67-.37.91c-.24.24-.56.37-.91.37H6.73c-1.24 0-2.26-1.02-2.26-2.26V6
+        c0-1.24 1.02-2.26 2.26-2.26h3.88c.32 0 .64.14.88.4.24.24.37.56.37.91s-.13.67-.37.91c-.24.24-.56.37-.91
+        .37H4.82C3.89 6 3.07 6.92 3.07 8v4c0 1.08.89 2 2.03 2h5.45v3.88h3.88z"
+      ></path>
+    </svg>
+  );
+}
+
+export function IcOutlinePeople(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={24}
+      height={24}
+      viewBox="0 0 24 24"
+      {...props}
+    >
+      <path
+        fill="currentColor"
+        d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2m0 5c1.66 0 3 1.34 3 3s-1.34 
+        3-3 3s-3-1.34-3-3s1.34-3 3-3m0 10c-2.67 0-8 1.34-8 4v3h16v-3c0-2.66-5.33-4-8-4z"
+      ></path>
+    </svg>
+  );
+}
+
+export function IcOutlineLogout(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={24}
+      height={24}
+      viewBox="0 0 24 24"
+      {...props}
+    >
+      <path
+        fill="currentColor"
+        d="M10.09 15.59L11.5 17l5-5-5-5-1.41 1.41L12.67 11H3v2h9.67l-2.58 2.59z"
+      ></path>
+    </svg>
+  );
+}

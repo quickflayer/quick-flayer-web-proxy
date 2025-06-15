@@ -8,7 +8,6 @@ export { default as Checkbox } from './checkbox';
 export { default as Select } from './select';
 export { default as Textarea } from './textarea';
 export { default as LoadingSpinner } from './loading-spinner';
-export { default as ErrorMessage } from './error-message';
 export { default as PasswordStrength } from './password-strength';
 
 // Type exports for better TypeScript support
@@ -19,4 +18,3 @@ export type { default as CheckboxProps } from './checkbox';
 export type { default as SelectProps } from './select';
 export type { default as TextareaProps } from './textarea';
 export type { default as LoadingSpinnerProps } from './loading-spinner';
-export type { default as ErrorMessageProps } from './error-message';

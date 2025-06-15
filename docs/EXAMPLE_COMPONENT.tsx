@@ -1,6 +1,3 @@
-// Example Component demonstrating all patterns from BASE_PROMPT.md
-// This file serves as a reference implementation
-
 import React, { useState, useCallback, useMemo, useEffect } from 'react';
 
 import { useForm } from 'react-hook-form';
@@ -14,10 +11,9 @@ import Checkbox from '@core/ui/checkbox';
 import Radio from '@core/ui/radio';
 import Textarea from '@core/ui/textarea';
 import LoadingSpinner from '@core/ui/loading-spinner';
-import ErrorMessage from '@core/ui/error-message';
 
 import { useAuth } from '@hooks/use-auth';
-import { API_ENDPOINTS, ERROR_MESSAGES, VALIDATION } from '@constants/index';
+import { API_ENDPOINTS, ERROR_MESSAGES, VALIDATION } from '@/constants';
 import { logger } from '@utils/logger';
 import { tryCatch } from '@utils/try-catch';
 
@@ -42,11 +38,11 @@ interface FormData {
 }
 
 // Component following all patterns from BASE_PROMPT.md
-const ExampleForm = ({ 
-  initialData, 
-  onSubmit, 
-  onCancel, 
-  isReadOnly = false 
+const ExampleForm = ({
+  initialData,
+  onSubmit,
+  onCancel,
+  isReadOnly = false,
 }: ExampleFormProps) => {
   // State hooks
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -64,7 +60,7 @@ const ExampleForm = ({
     formState: { errors },
     watch,
     setValue,
-    reset
+    reset,
   } = useForm<FormData>({
     defaultValues: initialData || {
       firstName: '',
@@ -74,8 +70,8 @@ const ExampleForm = ({
       department: '',
       bio: '',
       notifications: false,
-      terms: false
-    }
+      terms: false,
+    },
   });
 
   // Watch form values for dependent logic
@@ -88,46 +84,53 @@ const ExampleForm = ({
       { value: 'engineering', label: 'Engineering' },
       { value: 'design', label: 'Design' },
       { value: 'marketing', label: 'Marketing' },
-      { value: 'sales', label: 'Sales' }
+      { value: 'sales', label: 'Sales' },
     ];
 
     // Filter departments based on role
     if (watchedRole === 'admin') {
-      return [
-        ...baseDepartments,
-        { value: 'management', label: 'Management' }
-      ];
+      return [...baseDepartments, { value: 'management', label: 'Management' }];
     }
 
     return baseDepartments;
   }, [watchedRole]);
 
   const isFormValid = useMemo(() => {
-    return watchedEmail && 
-           VALIDATION.EMAIL_REGEX.test(watchedEmail) && 
-           Object.keys(errors).length === 0;
+    return (
+      watchedEmail &&
+      VALIDATION.EMAIL_REGEX.test(watchedEmail) &&
+      Object.keys(errors).length === 0
+    );
   }, [watchedEmail, errors]);
 
   // Callbacks - event handlers
-  const handleFormSubmit = useCallback(async (data: FormData) => {
-    setIsSubmitting(true);
-    setSubmitError(null);
+  const handleFormSubmit = useCallback(
+    async (data: FormData) => {
+      setIsSubmitting(true);
+      setSubmitError(null);
 
-    const result = await tryCatch(async () => {
-      logger.log('Submitting form data:', data);
-      await onSubmit(data);
-    });
+      const result = await tryCatch({
+        fn: async () => {
+          logger.log('Submitting form data:', data);
+          await onSubmit(data);
+        },
+        logger: logger.error,
+        fallbackError: 'Form submission failed',
+        finally: () => setIsSubmitting(false),
+      });
 
-    if (result.success) {
-      logger.log('Form submitted successfully');
-      reset();
-    } else {
-      logger.error('Form submission failed:', result.error);
-      setSubmitError(result.error.message || ERROR_MESSAGES.UNKNOWN_ERROR);
-    }
+      if (result.success) {
+        logger.log('Form submitted successfully');
+        reset();
+      } else {
+        logger.error('Form submission failed:', result.error);
+        setSubmitError(result.error.message || ERROR_MESSAGES.UNKNOWN_ERROR);
+      }
 
-    setIsSubmitting(false);
-  }, [onSubmit, reset]);
+      setIsSubmitting(false);
+    },
+    [onSubmit, reset]
+  );
 
   const handleCancel = useCallback(() => {
     logger.log('Form cancelled');
@@ -138,15 +141,18 @@ const ExampleForm = ({
     }
   }, [onCancel, router]);
 
-  const handleRoleChange = useCallback((value: string) => {
-    setSelectedRole(value);
-    setValue('role', value);
-    
-    // Reset department when role changes
-    setValue('department', '');
-    
-    logger.log('Role changed to:', value);
-  }, [setValue]);
+  const handleRoleChange = useCallback(
+    (value: string) => {
+      setSelectedRole(value);
+      setValue('role', value);
+
+      // Reset department when role changes
+      setValue('department', '');
+
+      logger.log('Role changed to:', value);
+    },
+    [setValue]
+  );
 
   // Effects
   useEffect(() => {
@@ -176,21 +182,11 @@ const ExampleForm = ({
           {isReadOnly ? 'View Profile' : 'Edit Profile'}
         </h1>
         <p className="text-gray-600">
-          {isReadOnly 
-            ? 'View your profile information' 
-            : 'Update your profile information below'
-          }
+          {isReadOnly
+            ? 'View your profile information'
+            : 'Update your profile information below'}
         </p>
       </div>
-
-      {submitError && (
-        <ErrorMessage 
-          error={submitError} 
-          variant="card" 
-          className="mb-6"
-          onRetry={() => setSubmitError(null)}
-        />
-      )}
 
       <form onSubmit={handleSubmit(handleFormSubmit)} className="space-y-6">
         {/* Name fields */}
@@ -206,8 +202,8 @@ const ExampleForm = ({
               required: 'First name is required',
               minLength: {
                 value: VALIDATION.NAME_MIN_LENGTH,
-                message: `First name must be at least ${VALIDATION.NAME_MIN_LENGTH} characters`
-              }
+                message: `First name must be at least ${VALIDATION.NAME_MIN_LENGTH} characters`,
+              },
             })}
           />
 
@@ -222,8 +218,8 @@ const ExampleForm = ({
               required: 'Last name is required',
               minLength: {
                 value: VALIDATION.NAME_MIN_LENGTH,
-                message: `Last name must be at least ${VALIDATION.NAME_MIN_LENGTH} characters`
-              }
+                message: `Last name must be at least ${VALIDATION.NAME_MIN_LENGTH} characters`,
+              },
             })}
           />
         </div>
@@ -240,8 +236,8 @@ const ExampleForm = ({
             required: 'Email is required',
             pattern: {
               value: VALIDATION.EMAIL_REGEX,
-              message: 'Please enter a valid email address'
-            }
+              message: 'Please enter a valid email address',
+            },
           })}
         />
 
@@ -283,7 +279,7 @@ const ExampleForm = ({
           error={errors.department?.message}
           disabled={isReadOnly}
           {...register('department', {
-            required: 'Department is required'
+            required: 'Department is required',
           })}
         />
 
@@ -298,8 +294,8 @@ const ExampleForm = ({
           {...register('bio', {
             maxLength: {
               value: 500,
-              message: 'Bio must be less than 500 characters'
-            }
+              message: 'Bio must be less than 500 characters',
+            },
           })}
         />
 
@@ -320,7 +316,7 @@ const ExampleForm = ({
             error={errors.terms?.message}
             disabled={isReadOnly}
             {...register('terms', {
-              required: 'You must agree to the terms and conditions'
+              required: 'You must agree to the terms and conditions',
             })}
           />
         </div>
@@ -355,12 +351,16 @@ const ExampleForm = ({
             Debug Info
           </h3>
           <pre className="text-xs text-gray-600">
-            {JSON.stringify({ 
-              user: user?.email, 
-              isFormValid, 
-              selectedRole,
-              departmentOptions: departmentOptions.length 
-            }, null, 2)}
+            {JSON.stringify(
+              {
+                user: user?.email,
+                isFormValid,
+                selectedRole,
+                departmentOptions: departmentOptions.length,
+              },
+              null,
+              2
+            )}
           </pre>
         </div>
       )}

@@ -17,15 +17,15 @@ import {
   TextField,
 } from '@mui/material';
 
-import Icon from '@/lib/icons';
-import { ICONS } from '@/lib/icons/icons-const';
 import { useAuth } from '@/hooks/use-auth';
 import { useToast } from '@/hooks/use-toast';
+import Icon from '@/lib/icons';
+import { ICONS } from '@/lib/icons/icons-const';
 
 export default function SettingsPage() {
   const { user } = useAuth();
   const { showSuccess } = useToast();
-  
+
   // Settings state
   const [settings, setSettings] = useState({
     notifications: true,
@@ -41,18 +41,20 @@ export default function SettingsPage() {
   });
 
   const handleSettingChange = (setting: keyof typeof settings) => {
-    setSettings(prev => ({
+    setSettings((prev) => ({
       ...prev,
       [setting]: !prev[setting],
     }));
   };
 
-  const handleProfileChange = (field: keyof typeof profile) => (event: React.ChangeEvent<HTMLInputElement>) => {
-    setProfile(prev => ({
-      ...prev,
-      [field]: event.target.value,
-    }));
-  };
+  const handleProfileChange =
+    (field: keyof typeof profile) =>
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      setProfile((prev) => ({
+        ...prev,
+        [field]: event.target.value,
+      }));
+    };
 
   const handleSaveSettings = () => {
     showSuccess('Settings saved successfully!');
@@ -81,7 +83,7 @@ export default function SettingsPage() {
 
       <Grid container spacing={3}>
         {/* Profile Settings */}
-        <Grid item xs={12} md={6}>
+        <Grid size={{ xs: 12, md: 6 }}>
           <Card
             sx={{
               borderRadius: 3,
@@ -136,7 +138,8 @@ export default function SettingsPage() {
                   startIcon={<Icon icon={ICONS.SUCCESS_ANIMATED} />}
                   sx={{
                     borderRadius: 2,
-                    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                    background:
+                      'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
                   }}
                 >
                   Save Profile
@@ -147,7 +150,7 @@ export default function SettingsPage() {
         </Grid>
 
         {/* Application Settings */}
-        <Grid item xs={12} md={6}>
+        <Grid size={{ xs: 12, md: 6 }}>
           <Card
             sx={{
               borderRadius: 3,
@@ -268,7 +271,8 @@ export default function SettingsPage() {
                     fullWidth
                     sx={{
                       borderRadius: 2,
-                      background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                      background:
+                        'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
                     }}
                   >
                     Save Settings

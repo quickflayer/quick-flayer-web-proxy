@@ -2,7 +2,7 @@
 
 import { Box, styled, Typography } from '@mui/material';
 
-import styles from '@/styles/common';
+import styles from '@const/styles';
 
 export const StyledTitle = styled(Typography)(({ theme }) => ({
   color: theme.palette.common.black,

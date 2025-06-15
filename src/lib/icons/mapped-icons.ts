@@ -30,6 +30,12 @@ import {
   IcOutlineMale,
   IcOutlineFemale,
   TablerCards,
+  LineMdMenuFoldLeft,
+  LineMdMenuUnfoldLeft,
+  IcOutlinePerson,
+  IcOutlineSettings,
+  IcOutlinePeople,
+  IcOutlineLogout,
 } from './SvgIcons';
 import { MappedIcons } from './types';
 
@@ -66,6 +72,12 @@ const mappedIcons: MappedIcons = {
     LineMdSunnyOutlineToMoonAltLoopTransition,
   ['line-md:circle-twotone-to-confirm-circle-transition']:
     LineMdCircleTwotoneToConfirmCircleTransition,
+  ['line-md:menu-fold-left']: LineMdMenuFoldLeft,
+  ['line-md:menu-unfold-left']: LineMdMenuUnfoldLeft,
+  ['ic:outline-person']: IcOutlinePerson,
+  ['ic:outline-settings']: IcOutlineSettings,
+  ['ic:outline-people']: IcOutlinePeople,
+  ['ic:outline-logout']: IcOutlineLogout,
 };
 
 export default mappedIcons;

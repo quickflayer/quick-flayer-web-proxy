@@ -21,3 +21,10 @@ export type TryCatchResult<T> =
 export type BaseOption = { id?: string | number; name?: string } | null;
 
 export type NumStr = number | string;
+
+export type Nullable<T> = T | null;
+
+export type DeleteItem = {
+  id: number;
+  name: string;
+};

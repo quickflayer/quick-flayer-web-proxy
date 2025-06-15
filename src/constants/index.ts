@@ -155,6 +155,7 @@ export const TIMEOUTS = {
   RETRY_DELAY: 1000,
   DEBOUNCE_DELAY: 300,
   TOAST_DURATION: 5000,
+  API_REQUEST: 10000,
 } as const;
 
 // ** Common Regex Patterns
