@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { Box, CssBaseline } from '@mui/material';
 
 import { Header } from '@core/layout/header';
+import { MobileBottomNav } from '@core/layout/MobileBottomNav';
 import { Sidebar } from '@core/layout/sidebar';
 
 import { ProtectedRoute } from '@/core/guard/ProtectedRoute';
@@ -61,18 +62,41 @@ export default function ProtectedLayout({
               ml: { sm: isMobile ? 0 : '280px' },
               mt: { xs: '56px', sm: '64px' },
               minHeight: 'calc(100vh - 64px)',
-              background: 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)',
+              background: 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%)',
               position: 'relative',
+              overflow: 'auto',
             }}
           >
+            {/* Content Container */}
             <Box
               sx={{
-                p: { xs: 2, sm: 3, md: 4 },
-                maxWidth: '100%',
+                p: { xs: 1, sm: 2, md: 3 },
+                pb: { xs: 10, sm: 2, md: 3 }, // Extra bottom padding for mobile nav
+                maxWidth: { xs: '100%', lg: '1400px' },
                 mx: 'auto',
+                minHeight: 'calc(100vh - 64px)',
               }}
             >
-              {children}
+              {/* Content Wrapper */}
+              <Box
+                sx={{
+                  background: 'rgba(255, 255, 255, 0.8)',
+                  backdropFilter: 'blur(10px)',
+                  borderRadius: { xs: 0, sm: 2 },
+                  boxShadow: {
+                    xs: 'none',
+                    sm: '0 4px 20px rgba(0, 0, 0, 0.08)',
+                  },
+                  border: '1px solid rgba(255, 255, 255, 0.2)',
+                  minHeight: {
+                    xs: 'calc(100vh - 72px)',
+                    sm: 'calc(100vh - 96px)',
+                  },
+                  overflow: 'hidden',
+                }}
+              >
+                {children}
+              </Box>
             </Box>
           </Box>
 
@@ -91,6 +115,9 @@ export default function ProtectedLayout({
               onClick={handleMobileMenuClose}
             />
           )}
+
+          {/* Mobile Bottom Navigation */}
+          <MobileBottomNav />
         </Box>
       </ProtectedRoute>
     </AuthProvider>

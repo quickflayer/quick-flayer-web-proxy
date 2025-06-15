@@ -55,6 +55,8 @@ export function Sidebar({ mobileOpen = false, onMobileClose }: SidebarProps) {
         color: 'white',
         display: 'flex',
         flexDirection: 'column',
+        backdropFilter: 'blur(10px)',
+        borderRight: '1px solid rgba(255, 255, 255, 0.1)',
       }}
     >
       {/* Sidebar Header */}
