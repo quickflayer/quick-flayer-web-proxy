@@ -2,6 +2,8 @@
 
 import { useEffect } from 'react';
 
+import { Box, CircularProgress } from '@mui/material';
+
 import { AUTH_CONFIG } from '@configs/auth/auth.config';
 
 import { useRouter } from 'next/navigation';
@@ -29,26 +31,24 @@ export default function RegisterPage() {
 
   if (isCheckingAuth || isAuthenticated) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
-      </div>
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          minHeight: '100vh',
+          background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+        }}
+      >
+        <CircularProgress size={48} sx={{ color: 'white' }} />
+      </Box>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 flex items-center justify-center p-4">
-      <div className="w-full max-w-md">
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-2">
-            Quick Flayer
-          </h1>
-          <p className="text-gray-600">Create your account to get started</p>
-        </div>
-        <RegisterForm
-          onSuccess={handleRegisterSuccess}
-          onSwitchToLogin={handleSwitchToLogin}
-        />
-      </div>
-    </div>
+    <RegisterForm
+      onSuccess={handleRegisterSuccess}
+      onSwitchToLogin={handleSwitchToLogin}
+    />
   );
 }

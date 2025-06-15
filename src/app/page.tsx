@@ -2,6 +2,8 @@
 
 import { useEffect } from 'react';
 
+import { Box, CircularProgress, Typography } from '@mui/material';
+
 import { AUTH_CONFIG } from '@configs/auth/auth.config';
 
 import { useRouter } from 'next/navigation';
@@ -23,14 +25,27 @@ export default function Home() {
   }, [isAuthenticated, isCheckingAuth, router]);
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
-      <div className="text-center">
-        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-600 mx-auto mb-4"></div>
-        <h2 className="text-xl font-semibold text-gray-700 mb-2">
+    <Box
+      sx={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        minHeight: '100vh',
+        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+      }}
+    >
+      <Box sx={{ textAlign: 'center' }}>
+        <CircularProgress size={64} sx={{ color: 'white', mb: 3 }} />
+        <Typography
+          variant="h5"
+          sx={{ fontWeight: 600, color: 'white', mb: 1 }}
+        >
           Quick Flayer
-        </h2>
-        <p className="text-gray-500">Loading your experience...</p>
-      </div>
-    </div>
+        </Typography>
+        <Typography variant="body1" sx={{ color: 'rgba(255, 255, 255, 0.8)' }}>
+          Loading your experience...
+        </Typography>
+      </Box>
+    </Box>
   );
 }

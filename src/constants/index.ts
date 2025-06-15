@@ -107,7 +107,11 @@ export const VALIDATION = {
 export const FILE_UPLOAD = {
   MAX_SIZE: 5 * 1024 * 1024, // 5MB
   ALLOWED_IMAGE_TYPES: ['image/jpeg', 'image/png', 'image/gif', 'image/webp'],
-  ALLOWED_DOCUMENT_TYPES: ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'],
+  ALLOWED_DOCUMENT_TYPES: [
+    'application/pdf',
+    'application/msword',
+    'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+  ],
 } as const;
 
 // ** Pagination
@@ -151,6 +155,14 @@ export const ANIMATION = {
   NORMAL: 300,
   SLOW: 500,
   EXTRA_SLOW: 1000,
+} as const;
+
+// ** Timeouts (in milliseconds)
+export const TIMEOUTS = {
+  REQUEST_TIMEOUT: 30000,
+  RETRY_DELAY: 1000,
+  DEBOUNCE_DELAY: 300,
+  TOAST_DURATION: 5000,
 } as const;
 
 // ** Common Regex Patterns
@@ -227,13 +239,15 @@ export const FEATURE_FLAGS = {
 } as const;
 
 // Type exports for better TypeScript support
-export type HttpStatus = typeof HTTP_STATUS[keyof typeof HTTP_STATUS];
-export type ErrorMessage = typeof ERROR_MESSAGES[keyof typeof ERROR_MESSAGES];
-export type SuccessMessage = typeof SUCCESS_MESSAGES[keyof typeof SUCCESS_MESSAGES];
-export type LoadingMessage = typeof LOADING_MESSAGES[keyof typeof LOADING_MESSAGES];
-export type UserActivityEvent = typeof USER_ACTIVITY_EVENTS[number];
-export type StorageKey = typeof STORAGE_KEYS[keyof typeof STORAGE_KEYS];
-export type CookieName = typeof COOKIE_NAMES[keyof typeof COOKIE_NAMES];
-export type ThemeMode = typeof THEME[keyof typeof THEME];
-export type Environment = typeof ENVIRONMENTS[keyof typeof ENVIRONMENTS];
-export type LogLevel = typeof LOG_LEVELS[keyof typeof LOG_LEVELS];
+export type HttpStatus = (typeof HTTP_STATUS)[keyof typeof HTTP_STATUS];
+export type ErrorMessage = (typeof ERROR_MESSAGES)[keyof typeof ERROR_MESSAGES];
+export type SuccessMessage =
+  (typeof SUCCESS_MESSAGES)[keyof typeof SUCCESS_MESSAGES];
+export type LoadingMessage =
+  (typeof LOADING_MESSAGES)[keyof typeof LOADING_MESSAGES];
+export type UserActivityEvent = (typeof USER_ACTIVITY_EVENTS)[number];
+export type StorageKey = (typeof STORAGE_KEYS)[keyof typeof STORAGE_KEYS];
+export type CookieName = (typeof COOKIE_NAMES)[keyof typeof COOKIE_NAMES];
+export type ThemeMode = (typeof THEME)[keyof typeof THEME];
+export type Environment = (typeof ENVIRONMENTS)[keyof typeof ENVIRONMENTS];
+export type LogLevel = (typeof LOG_LEVELS)[keyof typeof LOG_LEVELS];
