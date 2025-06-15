@@ -19,8 +19,11 @@ interface LoginFormProps {
 
 // Login Schema
 const loginSchema = z.object({
-  email: z.string().email('Please provide a valid email address'),
-  password: z.string().min(8, 'Password must be at least 8 characters long'),
+  email: z
+    .string()
+    .min(1, 'Email is required')
+    .email('Please provide a valid email address'),
+  password: z.string().min(1, 'Password is required'),
 });
 
 type LoginFormValues = z.infer<typeof loginSchema>;

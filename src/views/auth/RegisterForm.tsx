@@ -35,17 +35,21 @@ const registerSchema = z
       .min(2, 'Last name must be at least 2 characters')
       .optional()
       .or(z.literal('')),
-    email: z.string().email('Please provide a valid email address'),
+    email: z
+      .string()
+      .min(1, 'Email is required')
+      .email('Please provide a valid email address'),
     password: z
       .string()
+      .min(1, 'Password is required')
       .min(8, 'Password must be at least 8 characters long')
-      .regex(/[A-Z]/, 'Password must contain at least one uppercase letter')
-      .regex(/[a-z]/, 'Password must contain at least one lowercase letter')
+      .regex(/[A-Z]/, 'Password must contain at least 1 uppercase letter')
+      .regex(/[a-z]/, 'Password must contain at least 1 lowercase letter')
       .regex(
         /((?=.*\d)|(?=.*\W+))/,
-        'Password must contain at least one number or special character'
+        'Password must contain at least 1 number or special character'
       ),
-    confirmPassword: z.string(),
+    confirmPassword: z.string().min(1, 'Please confirm your password'),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Passwords don't match",
@@ -82,17 +86,12 @@ const RegisterForm = ({ onSuccess, onSwitchToLogin }: RegisterFormProps) => {
       try {
         logger.log('Registering user:', data);
 
-        const result = await register({
+        await register({
           email: data.email,
           password: data.password,
           firstName: data.firstName?.trim() || undefined,
           lastName: data.lastName?.trim() || undefined,
-        }).unwrap();
-
-        storeToken(result.accessToken);
-        dispatch(
-          setCredentials({ user: result.user, accessToken: result.accessToken })
-        );
+        });
 
         showSuccess('Account created successfully! Welcome to Quick Flayer.');
 
