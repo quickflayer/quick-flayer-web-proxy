@@ -133,7 +133,7 @@ const RegisterForm = ({ onSuccess, onSwitchToLogin }: RegisterFormProps) => {
             sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}
           >
             <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
+              <Grid size={{ xs: 12, sm: 6 }}>
                 <AppTextField
                   label="First Name (Optional)"
                   type="text"
@@ -150,7 +150,7 @@ const RegisterForm = ({ onSuccess, onSwitchToLogin }: RegisterFormProps) => {
                   })}
                 />
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid size={{ xs: 12, sm: 6 }}>
                 <AppTextField
                   label="Last Name (Optional)"
                   type="text"

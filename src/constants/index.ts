@@ -69,14 +69,6 @@ export const CACHE_SETTINGS = {
   DEFAULT_RETRY_DELAY: 1000, // 1 second
 } as const;
 
-// ** Timeouts
-export const TIMEOUTS = {
-  API_REQUEST: 10000, // 10 seconds
-  DEBOUNCE_SEARCH: 300, // 300ms
-  TOAST_DURATION: 5000, // 5 seconds
-  LOADING_DELAY: 200, // 200ms before showing loading
-} as const;
-
 // ** Local Storage Keys
 export const STORAGE_KEYS = {
   AUTH_TOKEN: 'auth_token',

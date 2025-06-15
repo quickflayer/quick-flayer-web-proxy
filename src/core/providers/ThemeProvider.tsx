@@ -2,7 +2,10 @@
 
 import React from 'react';
 
-import { createTheme, ThemeProvider as MuiThemeProvider } from '@mui/material/styles';
+import {
+  createTheme,
+  ThemeProvider as MuiThemeProvider,
+} from '@mui/material/styles';
 import { CssBaseline } from '@mui/material';
 
 interface ThemeProviderProps {
@@ -112,7 +115,8 @@ const theme = createTheme({
           textTransform: 'none',
           boxShadow: 'none',
           '&:hover': {
-            boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+            boxShadow:
+              '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
           },
         },
         sizeLarge: {
@@ -148,7 +152,8 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           borderRadius: 16,
-          boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+          boxShadow:
+            '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
           border: '1px solid #f3f4f6',
         },
       },

@@ -1,6 +1,13 @@
 import React, { useMemo } from 'react';
 
-import { Box, Typography, LinearProgress, Chip, Stack } from '@mui/material';
+import {
+  Box,
+  Typography,
+  LinearProgress,
+  Chip,
+  Stack,
+  LinearProgressProps,
+} from '@mui/material';
 import { CheckCircle, RadioButtonUnchecked } from '@mui/icons-material';
 
 interface PasswordStrengthProps {
@@ -13,35 +20,42 @@ interface PasswordRequirement {
 }
 
 const PasswordStrength = ({ password }: PasswordStrengthProps) => {
-  const requirements: PasswordRequirement[] = useMemo(() => [
-    {
-      label: 'At least 8 characters',
-      test: (pwd) => pwd.length >= 8,
-    },
-    {
-      label: 'Contains uppercase letter',
-      test: (pwd) => /[A-Z]/.test(pwd),
-    },
-    {
-      label: 'Contains lowercase letter',
-      test: (pwd) => /[a-z]/.test(pwd),
-    },
-    {
-      label: 'Contains number or special character',
-      test: (pwd) => /((?=.*\d)|(?=.*\W+))/.test(pwd),
-    },
-  ], []);
+  const requirements: PasswordRequirement[] = useMemo(
+    () => [
+      {
+        label: 'At least 8 characters',
+        test: (pwd) => pwd.length >= 8,
+      },
+      {
+        label: 'Contains uppercase letter',
+        test: (pwd) => /[A-Z]/.test(pwd),
+      },
+      {
+        label: 'Contains lowercase letter',
+        test: (pwd) => /[a-z]/.test(pwd),
+      },
+      {
+        label: 'Contains number or special character',
+        test: (pwd) => /((?=.*\d)|(?=.*\W+))/.test(pwd),
+      },
+    ],
+    []
+  );
 
   const passedRequirements = useMemo(() => {
-    return requirements.filter(req => req.test(password));
+    return requirements.filter((req) => req.test(password));
   }, [requirements, password]);
 
   const strength = useMemo(() => {
     const score = passedRequirements.length;
-    if (score === 0) return { label: '', color: 'default' as const, progress: 0 };
-    if (score <= 1) return { label: 'Weak', color: 'error' as const, progress: 25 };
-    if (score <= 2) return { label: 'Fair', color: 'warning' as const, progress: 50 };
-    if (score <= 3) return { label: 'Good', color: 'info' as const, progress: 75 };
+    if (score === 0)
+      return { label: '', color: 'default' as const, progress: 0 };
+    if (score <= 1)
+      return { label: 'Weak', color: 'error' as const, progress: 25 };
+    if (score <= 2)
+      return { label: 'Fair', color: 'warning' as const, progress: 50 };
+    if (score <= 3)
+      return { label: 'Good', color: 'info' as const, progress: 75 };
     return { label: 'Strong', color: 'success' as const, progress: 100 };
   }, [passedRequirements.length]);
 
@@ -51,7 +65,14 @@ const PasswordStrength = ({ password }: PasswordStrengthProps) => {
     <Box sx={{ mt: 2 }}>
       {/* Strength indicator */}
       <Box sx={{ mb: 2 }}>
-        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 1 }}>
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            mb: 1,
+          }}
+        >
           <Typography variant="caption" color="text.secondary">
             Password strength:
           </Typography>
@@ -68,7 +89,7 @@ const PasswordStrength = ({ password }: PasswordStrengthProps) => {
         <LinearProgress
           variant="determinate"
           value={strength.progress}
-          color={strength.color}
+          color={strength.color as LinearProgressProps['color']}
           sx={{
             height: 6,
             borderRadius: 3,

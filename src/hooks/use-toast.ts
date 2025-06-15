@@ -2,11 +2,17 @@ import { useCallback } from 'react';
 
 import { toast } from 'sonner';
 
-import { TIMEOUTS } from '@constants/index';
+import { TIMEOUTS } from '@/constants';
 
 interface ToastOptions {
   duration?: number;
-  position?: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right' | 'top-center' | 'bottom-center';
+  position?:
+    | 'top-left'
+    | 'top-right'
+    | 'bottom-left'
+    | 'bottom-right'
+    | 'top-center'
+    | 'bottom-center';
 }
 
 interface UseToastReturn {
