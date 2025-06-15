@@ -1,14 +1,17 @@
 'use client';
 
-import { InputAdornment, Stack } from '@mui/material';
 import { FC, memo, useCallback, useState } from 'react';
+
+import { InputAdornment, Stack } from '@mui/material';
 
 import { ICONS } from '@/lib/icons/icons-const';
 import { Any } from '@/types';
 
-import { AppNumberFieldProps } from '.';
-import { NumberInput } from './styled-component';
 import IconButton from '../icon-button';
+
+import { NumberInput } from './styled-component';
+
+import { AppNumberFieldProps } from '.';
 
 const { UP_FILL_ROUNDED, DOWN_FILL_ROUNDED } = ICONS;
 
@@ -43,7 +46,7 @@ const NumberField: FC<AppNumberFieldProps> = ({
         onChange(parseInt(numericValue, 10));
       }
     },
-    [onChange],
+    [onChange]
   );
 
   const handleDecrement = useCallback(() => {
@@ -59,7 +62,7 @@ const NumberField: FC<AppNumberFieldProps> = ({
       setShowAdornment(true);
       if (onMouseEnter) onMouseEnter(e);
     },
-    [onMouseEnter],
+    [onMouseEnter]
   );
 
   const handleMouseLeave = useCallback(
@@ -67,7 +70,7 @@ const NumberField: FC<AppNumberFieldProps> = ({
       setShowAdornment(false);
       if (onMouseLeave) onMouseLeave(e);
     },
-    [onMouseLeave],
+    [onMouseLeave]
   );
 
   const renderAdornment = useCallback(() => {

@@ -2,10 +2,11 @@
 
 import React, { memo, useCallback } from 'react';
 
-import useDebounce from '@core/hooks/use-debounce';
+import useDebounce from '@hooks/use-debounce';
+
+import { AppTextField } from '../app-inputs';
 
 import { AppSearchIcon, AppSearchProps } from '.';
-import { AppTextField } from '../app-inputs';
 
 const Search: React.FC<AppSearchProps> = ({ query = '', onChange }) => {
   const debouncedChange = useDebounce((newValue: string) => {
@@ -19,7 +20,7 @@ const Search: React.FC<AppSearchProps> = ({ query = '', onChange }) => {
       const newQuery = e.target.value;
       debouncedChange(newQuery);
     },
-    [debouncedChange],
+    [debouncedChange]
   );
 
   const handleClear = useCallback(() => {

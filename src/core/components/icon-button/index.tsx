@@ -1,7 +1,8 @@
-import { Tooltip } from '@mui/material';
 import { memo } from 'react';
 
-import Icon from '@/lib/icons';
+import { Tooltip } from '@mui/material';
+
+import Icon from '@lib/icons';
 
 import { ModdedIconButton } from './styled-component';
 import { IconButtonProps } from './type';

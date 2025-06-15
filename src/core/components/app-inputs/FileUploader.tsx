@@ -1,14 +1,17 @@
-import { Slider, Button, Box, Typography } from '@mui/material';
 import React, { useState, useCallback, FC, memo, useEffect } from 'react';
 
-import Image from 'next/image';
+import { Slider, Button, Box, Typography } from '@mui/material';
 import { useDropzone } from 'react-dropzone';
 import Cropper, { Area } from 'react-easy-crop';
 import { useController } from 'react-hook-form';
 
+import Image from 'next/image';
+
 import { Any } from '@/types';
 import { isValidUrl } from '@/utils/common';
 import getCroppedImg from '@/utils/get-cropped-img';
+
+import { AppButton } from '../app-button';
 
 import {
   CropperContainer,
@@ -16,7 +19,6 @@ import {
   ImagePreviewContainer,
 } from './styled-component';
 import { FileUploaderProps } from './types';
-import { AppButton } from '../app-button';
 
 const FileUploader: FC<FileUploaderProps> = ({
   control,
@@ -35,7 +37,7 @@ const FileUploader: FC<FileUploaderProps> = ({
   });
 
   const [imageSrc, setImageSrc] = useState<string | ArrayBuffer | null>(
-    imageUrl,
+    imageUrl
   );
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
@@ -115,7 +117,7 @@ const FileUploader: FC<FileUploaderProps> = ({
         </Typography>
       </DropZoneInputContainer>
     ),
-    [getRootProps, getInputProps],
+    [getRootProps, getInputProps]
   );
 
   const renderCropper = useCallback(
@@ -146,7 +148,7 @@ const FileUploader: FC<FileUploaderProps> = ({
         </Box>
       </CropperContainer>
     ),
-    [imageSrc, crop, zoom, cropWidth, cropHeight, onCropComplete, handleCrop],
+    [imageSrc, crop, zoom, cropWidth, cropHeight, onCropComplete, handleCrop]
   );
 
   const renderSavedImage = useCallback(() => {

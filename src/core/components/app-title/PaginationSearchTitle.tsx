@@ -1,9 +1,11 @@
-import { Grid2 } from '@mui/material';
 import React, { FC, memo } from 'react';
 
-import { ActionTitle, PaginationSearchTitleProps } from '.';
+import { Grid } from '@mui/material';
+
 import { AppSearch } from '../app-search';
 import { AppPagination } from '../pagination';
+
+import { ActionTitle, PaginationSearchTitleProps } from '.';
 
 const PaginationSearchTitle: FC<PaginationSearchTitleProps> = ({
   paginationProps,
@@ -14,14 +16,14 @@ const PaginationSearchTitle: FC<PaginationSearchTitleProps> = ({
     <ActionTitle
       {...rest}
       renderButtonStart={() => (
-        <Grid2 container alignItems="center">
-          <Grid2>
+        <Grid container alignItems="center">
+          <Grid>
             <AppSearch {...searchProps} />
-          </Grid2>
-          <Grid2>
+          </Grid>
+          <Grid>
             <AppPagination {...paginationProps} />
-          </Grid2>
-        </Grid2>
+          </Grid>
+        </Grid>
       )}
     />
   );

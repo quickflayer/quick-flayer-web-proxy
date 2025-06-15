@@ -1,10 +1,13 @@
-import { Box, Grid2 } from '@mui/material';
 import React, { FC, memo } from 'react';
 
-import { Title } from '.';
+import { Box, Grid } from '@mui/material';
+
+import { AppButtonGroup } from '../app-button';
+
 import { ActionTitleContainer } from './styled-components';
 import { ActionTitleProps } from './types';
-import { AppButtonGroup } from '../app-button';
+
+import { Title } from '.';
 
 const ActionTitle: FC<ActionTitleProps> = ({
   buttonGroupProps,
@@ -15,12 +18,12 @@ const ActionTitle: FC<ActionTitleProps> = ({
   return (
     <ActionTitleContainer {...containerProps}>
       <Title {...props} />
-      <Grid2 container alignItems="center" spacing={3}>
+      <Grid container alignItems="center" spacing={3}>
         {renderButtonStart && renderButtonStart()}
         <Box>
           <AppButtonGroup {...buttonGroupProps} />
         </Box>
-      </Grid2>
+      </Grid>
     </ActionTitleContainer>
   );
 };

@@ -1,7 +1,7 @@
 import { Header } from '@core/layout/header';
 import { Sidebar } from '@core/layout/sidebar';
 
-import AuthProvider from '@/views/auth/AuthProvider';
+import AuthProvider from '@/core/providers/AuthProvider';
 import { ProtectedRoute } from '@/views/auth/ProtectedRoute';
 
 export default function ProtectedLayout({
@@ -11,7 +11,7 @@ export default function ProtectedLayout({
 }) {
   return (
     <AuthProvider>
-      <ProtectedRoute adminOnly>
+      <ProtectedRoute>
         <div className="min-h-screen bg-gray-100 flex flex-col">
           <Header />
           <div className="flex flex-1">

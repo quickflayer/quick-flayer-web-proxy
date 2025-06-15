@@ -1,7 +1,8 @@
 import { FC, memo } from 'react';
 
-import { AppTextFieldProps } from '.';
 import { CustomTextField } from './styled-component';
+
+import { AppTextFieldProps } from '.';
 
 const AppTextField: FC<AppTextFieldProps> = ({
   size = 'small',

@@ -1,18 +1,20 @@
 'use client';
 
-import { Grid2 } from '@mui/material';
+import * as React from 'react';
+import { useCallback } from 'react';
+
+import { Grid } from '@mui/material';
 import Box from '@mui/material/Box';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
-import * as React from 'react';
-import { useCallback } from 'react';
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
+import Icon from '@/lib/icons';
+
 import { HorizontalWrapper } from './styled-components';
 import { AppTabProps } from './types';
-import Icon from '../../../lib/icons';
 
 export default function AppTab({
   tabs,
@@ -29,10 +31,10 @@ export default function AppTab({
 
   const renderTitle = useCallback((title: string, icon?: string) => {
     return (
-      <Grid2 container alignItems="center" gap={1} color="primary.main">
+      <Grid container alignItems="center" gap={1} color="primary.main">
         {icon && <Icon icon={icon} />}
         {title}
-      </Grid2>
+      </Grid>
     );
   }, []);
 

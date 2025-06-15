@@ -51,7 +51,7 @@ export const CustomTextField = styled(TextField)(
         transition: 'background-color 5000s ease-in-out 0s',
       },
     },
-  }),
+  })
 );
 
 export const NumberInput = styled(CustomTextField)({

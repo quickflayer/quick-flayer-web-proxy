@@ -1,5 +1,6 @@
-import Grid2 from '@mui/material/Grid2';
 import { memo } from 'react';
+
+import Grid from '@mui/material/Grid';
 
 import { AppFormRowProps } from '.';
 
@@ -12,7 +13,7 @@ function FormHelperRow({
   const columnWidth = Math.floor(12 / fields?.length);
 
   return (
-    <Grid2
+    <Grid
       container
       spacing={spacing}
       alignItems={alignItems}
@@ -21,7 +22,7 @@ function FormHelperRow({
     >
       {fields.map(({ ...field }, index) => {
         return (
-          <Grid2
+          <Grid
             key={index}
             size={
               field.size
@@ -32,10 +33,10 @@ function FormHelperRow({
             }
           >
             {field.component}
-          </Grid2>
+          </Grid>
         );
       })}
-    </Grid2>
+    </Grid>
   );
 }
 

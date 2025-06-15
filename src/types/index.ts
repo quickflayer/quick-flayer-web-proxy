@@ -17,3 +17,7 @@ export type TryCatchOptions = {
 export type TryCatchResult<T> =
   | { success: true; data: T }
   | { success: false; error: TError };
+
+export type BaseOption = { id?: string | number; name?: string } | null;
+
+export type NumStr = number | string;

@@ -1,5 +1,6 @@
-import MuiPagination from '@mui/material/Pagination';
 import React, { FC, memo, useCallback, useMemo } from 'react';
+
+import MuiPagination from '@mui/material/Pagination';
 
 import { getTotalPage } from '@/utils/pagination';
 
@@ -18,7 +19,7 @@ const Pagination: FC<AppPaginationProps> = ({
       if (onPageChange) onPageChange(page);
       if (onChange) onChange(event, page);
     },
-    [onChange, onPageChange],
+    [onChange, onPageChange]
   );
 
   const isHidden = useMemo(() => count <= 1, [count]);

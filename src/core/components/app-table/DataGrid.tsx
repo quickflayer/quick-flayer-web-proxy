@@ -1,6 +1,7 @@
+import React, { FC, memo, useCallback, useMemo } from 'react';
+
 import { Box } from '@mui/material';
 import { GridSortModel } from '@mui/x-data-grid';
-import React, { FC, memo, useCallback, useMemo } from 'react';
 
 import { StyledDataGrid } from './styled-component';
 import { DataGridProps } from './types';
@@ -31,7 +32,7 @@ const DataGrid: FC<DataGridProps> = ({
           ...c,
         };
       }),
-    [columns],
+    [columns]
   );
 
   const onSortModelChange = useCallback(
@@ -45,7 +46,7 @@ const DataGrid: FC<DataGridProps> = ({
         }
       }
     },
-    [onSortChange],
+    [onSortChange]
   );
 
   return (

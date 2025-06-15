@@ -1,14 +1,15 @@
-import { Grid2Props } from '@mui/material';
 import { JSX } from 'react';
+
+import { GridProps } from '@mui/material';
 
 export type FormField = {
   component: JSX.Element;
-  size?: Grid2Props['size'];
+  size?: GridProps['size'];
 };
 
 export type AppFormRowProps = {
   fields: FormField[];
   spacing?: number;
-  alignItems?: Grid2Props['alignItems'];
-  justifyContent?: Grid2Props['justifyContent'];
+  alignItems?: GridProps['alignItems'];
+  justifyContent?: GridProps['justifyContent'];
 };

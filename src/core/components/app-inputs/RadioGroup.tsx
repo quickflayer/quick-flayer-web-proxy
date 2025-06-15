@@ -1,8 +1,9 @@
+import React, { memo } from 'react';
+
 import { FormControl, FormLabel } from '@mui/material';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
-import React, { memo } from 'react';
 
 import { AppRadioProps } from './types';
 

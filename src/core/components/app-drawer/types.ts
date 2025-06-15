@@ -1,6 +1,7 @@
+import { ElementType, JSX } from 'react';
+
 import { BoxProps } from '@mui/material/Box';
 import { PaperProps } from '@mui/material/Paper';
-import { ElementType, JSX } from 'react';
 
 import { AppButtonGroupProps, AppGroupButtonItem } from '../app-button';
 

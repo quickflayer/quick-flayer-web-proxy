@@ -1,12 +1,15 @@
-import { InputAdornment } from '@mui/material';
 import React from 'react';
 
+import { InputAdornment } from '@mui/material';
+
+import IconButton from '@core/components/icon-button';
+
+import Icon from '@/lib/icons';
 import { ICONS } from '@/lib/icons/icons-const';
 
-import { AppSearchIconProps } from '.';
 import { IconWrapper } from './styled-components';
-import Icon from '../../../lib/icons';
-import IconButton from '../icon-button';
+
+import { AppSearchIconProps } from '.';
 
 const { CLOSE, SEARCH } = ICONS;
 

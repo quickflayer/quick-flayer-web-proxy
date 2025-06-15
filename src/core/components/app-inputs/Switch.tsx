@@ -1,5 +1,6 @@
-import { FormControlLabel } from '@mui/material';
 import React, { memo } from 'react';
+
+import { FormControlLabel } from '@mui/material';
 
 import { CustomSwitch } from './styled-component';
 import { AppSwitchProps } from './types';

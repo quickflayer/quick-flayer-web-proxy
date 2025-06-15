@@ -1,16 +1,18 @@
+import React, { memo } from 'react';
+
 import { Box } from '@mui/material';
 import Divider from '@mui/material/Divider';
 import MuiDrawer from '@mui/material/Drawer';
 import Typography from '@mui/material/Typography';
-import React, { memo } from 'react';
 
 import { AppButtonGroup } from '@/core/components/app-button';
 import IconButton from '@/core/components/icon-button';
+import Icon from '@/lib/icons';
 import { ICONS } from '@/lib/icons/icons-const';
 
-import { AppDrawerProps } from '.';
 import { Content, DrawerFooter, DrawerHeader } from './styled-components';
-import Icon from '../../../lib/icons';
+
+import { AppDrawerProps } from '.';
 
 const { CLOSE_ROUNDED_ANIMATED, SQUARE_SHUFFLE } = ICONS;
 

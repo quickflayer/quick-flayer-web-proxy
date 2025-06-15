@@ -2,7 +2,6 @@
 
 import { FormControlProps } from '@mui/material';
 import { Theme as MuiTheme } from '@mui/material/styles';
-
 import { GroupBase, StylesConfig, Theme } from 'react-select';
 
 import { BaseOption } from '@/types';
@@ -14,7 +13,7 @@ type ColorOption = BaseOption & { color?: string };
 export const getBaseStyles = <T extends BaseOption>(
   theme: MuiTheme,
   error?: boolean,
-  color?: FormControlProps['color'],
+  color?: FormControlProps['color']
 ): StylesConfig<T, boolean, GroupBase<T>> => {
   const palette = getColorPaletteColor(color, theme);
 
@@ -29,7 +28,7 @@ export const getBaseStyles = <T extends BaseOption>(
       ':hover': {
         backgroundColor: hexToRGBA(
           theme.palette.common.black,
-          +theme.palette.action.hover,
+          +theme.palette.action.hover
         ),
       },
     }),

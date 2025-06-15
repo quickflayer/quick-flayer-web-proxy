@@ -1,8 +1,10 @@
 import React, { FC, memo, useMemo } from 'react';
 
-import { AppButtonGroupProps, AppGroupButtonItem, AppButton } from '.';
+import IconButton from '@core/components/icon-button';
+
 import { ButtonGroupContainer } from './styled-components';
-import IconButton from '../icon-button';
+
+import { AppButtonGroupProps, AppGroupButtonItem, AppButton } from '.';
 
 const ButtonGroup: FC<AppButtonGroupProps> = ({
   containedButtonProps,
@@ -25,7 +27,7 @@ const ButtonGroup: FC<AppButtonGroupProps> = ({
       },
       ...rest,
     }),
-    [containedButtonProps, outlinedButtonProps, rest],
+    [containedButtonProps, outlinedButtonProps, rest]
   );
 
   return (

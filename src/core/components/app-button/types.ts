@@ -1,13 +1,11 @@
-import { ButtonProps } from '@mui/material';
 import { ReactNode } from 'react';
 
-import { KeyActionEnum } from '@/enum/key-actions';
+import { ButtonProps } from '@mui/material';
 
 import { IconButtonProps } from '../icon-button/type';
 
 export type AppButtonProps = ButtonProps & {
   loading?: boolean;
-  keyFor?: KeyActionEnum;
   minWidth?: number;
 };
 

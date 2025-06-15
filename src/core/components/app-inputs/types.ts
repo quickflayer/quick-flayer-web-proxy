@@ -1,3 +1,5 @@
+import { ReactNode } from 'react';
+
 import {
   FormControlLabelProps,
   FormControlProps,
@@ -7,8 +9,6 @@ import {
   SwitchProps,
   TextFieldProps,
 } from '@mui/material';
-import { ReactNode } from 'react';
-
 import { Control } from 'react-hook-form';
 import { ActionMeta, Props as ReactSelectProps } from 'react-select';
 
@@ -81,7 +81,7 @@ export type AppRadioProps = RadioGroupProps & {
   radioProps?: RadioProps;
   onChange?: (
     event: React.ChangeEvent<HTMLInputElement>,
-    value: string,
+    value: string
   ) => void;
 };
 
