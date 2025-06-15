@@ -8,40 +8,16 @@ import {
   Stack,
   LinearProgressProps,
 } from '@mui/material';
-import { CheckCircle, RadioButtonUnchecked } from '@mui/icons-material';
+
+import Icon from '@lib/icons';
+import { ICONS } from '@lib/icons/icons-const';
+import requirements from '@utils/auth/password-strength';
 
 interface PasswordStrengthProps {
   password: string;
 }
 
-interface PasswordRequirement {
-  label: string;
-  test: (password: string) => boolean;
-}
-
 const PasswordStrength = ({ password }: PasswordStrengthProps) => {
-  const requirements: PasswordRequirement[] = useMemo(
-    () => [
-      {
-        label: 'At least 8 characters',
-        test: (pwd) => pwd.length >= 8,
-      },
-      {
-        label: 'Contains uppercase letter',
-        test: (pwd) => /[A-Z]/.test(pwd),
-      },
-      {
-        label: 'Contains lowercase letter',
-        test: (pwd) => /[a-z]/.test(pwd),
-      },
-      {
-        label: 'Contains number or special character',
-        test: (pwd) => /((?=.*\d)|(?=.*\W+))/.test(pwd),
-      },
-    ],
-    []
-  );
-
   const passedRequirements = useMemo(() => {
     return requirements.filter((req) => req.test(password));
   }, [requirements, password]);
@@ -115,14 +91,16 @@ const PasswordStrength = ({ password }: PasswordStrengthProps) => {
               }}
             >
               {isPassed ? (
-                <CheckCircle
+                <Icon
+                  icon={ICONS.SUCCESS_ANIMATED}
                   sx={{
                     fontSize: 16,
                     color: 'success.main',
                   }}
                 />
               ) : (
-                <RadioButtonUnchecked
+                <Icon
+                  icon={ICONS.CIRCLE_OUTLINE}
                   sx={{
                     fontSize: 16,
                     color: 'grey.400',

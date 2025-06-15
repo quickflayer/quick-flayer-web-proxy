@@ -27,4 +27,5 @@ export const ICONS = {
   MALE_ICON: 'ic:outline-male',
   FEMALE_ICON: 'ic:outline-female',
   CARDS_ICON: 'tabler:cards',
+  CIRCLE_OUTLINE: 'mdi:circle-outline',
 } as const;

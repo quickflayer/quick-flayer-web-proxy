@@ -4,12 +4,11 @@ import { useEffect } from 'react';
 
 import { AUTH_CONFIG } from '@configs/auth/auth.config';
 import { Box, CircularProgress } from '@mui/material';
+import RegisterForm from '@views/auth/RegisterForm';
 
 import { useRouter } from 'next/navigation';
 
 import { useAuth } from '@hooks/use-auth';
-
-import RegisterForm from '@/views/auth/RegisterForm';
 
 export default function RegisterPage() {
   const { isAuthenticated, isCheckingAuth } = useAuth();

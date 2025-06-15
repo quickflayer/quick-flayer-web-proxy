@@ -17,6 +17,7 @@ import {
   LineMdSunnyLoop,
   LineMdSunnyOutlineToMoonAltLoopTransition,
   MdiClose,
+  MdiCircleOutline,
   MynauiComponents,
   MageSettings,
   PajamasStageAll,
@@ -34,6 +35,7 @@ import { MappedIcons } from './types';
 
 const mappedIcons: MappedIcons = {
   ['mdi:close']: MdiClose,
+  ['mdi:circle-outline']: MdiCircleOutline,
   ['line-md:menu']: LineMdMenu,
   ['line-md:edit']: LineMdEdit,
   ['mdi:pokeball']: MdiPokeball,
@@ -58,9 +60,12 @@ const mappedIcons: MappedIcons = {
   ['svg-spinners:3-dots-move']: SvgSpinners3DotsMove,
   ['svg-spinners:blocks-shuffle-3']: SvgSpinnersBlocksShuffle3,
   ['line-md:menu-to-close-transition']: LineMdMenuToCloseTransition,
-  ['line-md:pause-to-play-filled-transition']: LineMdPauseToPlayFilledTransition,
-  ['line-md:sunny-outline-to-moon-alt-loop-transition']: LineMdSunnyOutlineToMoonAltLoopTransition,
-  ['line-md:circle-twotone-to-confirm-circle-transition']: LineMdCircleTwotoneToConfirmCircleTransition,
+  ['line-md:pause-to-play-filled-transition']:
+    LineMdPauseToPlayFilledTransition,
+  ['line-md:sunny-outline-to-moon-alt-loop-transition']:
+    LineMdSunnyOutlineToMoonAltLoopTransition,
+  ['line-md:circle-twotone-to-confirm-circle-transition']:
+    LineMdCircleTwotoneToConfirmCircleTransition,
 };
 
 export default mappedIcons;

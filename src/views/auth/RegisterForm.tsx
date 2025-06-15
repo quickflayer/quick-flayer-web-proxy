@@ -12,7 +12,7 @@ import { useToast } from '@hooks/use-toast';
 
 import AppButton from '@core/components/app-button/Button';
 import AppTextField from '@core/components/app-inputs/TextField';
-import PasswordStrength from '@core/components/PasswordStrength';
+import PasswordStrength from '@/components/password-strength';
 
 interface RegisterFormProps {
   onSuccess?: () => void;
