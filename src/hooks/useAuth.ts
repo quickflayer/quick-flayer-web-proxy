@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import { RootState } from '../lib/store/store';
 import { useLoginMutation, useGetProfileQuery } from '../lib/api/auth-api';
 import { setCredentials, logout, setError } from '../lib/store/slices/auth-slice';
-import { storeToken, removeToken, isTokenExpired } from '../lib/auth/token-manager';
+import { storeToken, removeToken, getToken, isTokenExpired } from '../lib/auth/token-manager';
 import { AUTH_CONFIG } from '../lib/auth/auth-config';
 
 export const useAuth = () => {
@@ -23,21 +23,27 @@ export const useAuth = () => {
   useEffect(() => {
     const initAuth = async () => {
       try {
-        const token = localStorage.getItem('auth_token');
+        // Use the enhanced getToken function that checks both localStorage and cookies
+        const token = getToken();
+
         if (token && !isTokenExpired(token)) {
+          console.log('Valid token found, initializing auth state');
+
           // Token exists and is valid, dispatch credentials before fetch
           // This avoids dependency cycle with profileData
           dispatch(setCredentials({ user: null, accessToken: token }));
-          
+
           try {
-            // Now fetch the profile
+            // Now fetch the profile to get user data
             await refetch();
+            console.log('Profile fetched successfully');
           } catch (profileError) {
             console.error('Error fetching profile:', profileError);
             removeToken();
             dispatch(logout());
           }
         } else {
+          console.log('No valid token found, clearing auth state');
           // No valid token found
           removeToken();
           dispatch(logout());
@@ -59,11 +65,18 @@ export const useAuth = () => {
   const handleLogin = async (email: string, password: string) => {
     try {
       const result = await login({ email, password }).unwrap();
-      dispatch(setCredentials(result));
+
+      // Store token in both localStorage and cookies
       storeToken(result.accessToken);
+
+      // Update Redux state
+      dispatch(setCredentials(result));
+
+      console.log('Login successful, redirecting to dashboard');
       router.push(AUTH_CONFIG.DASHBOARD_ROUTE);
       return true;
     } catch (error:unknown) {
+      console.error('Login failed:', error);
       dispatch(setError(((error as { data: { message: string } })?.data?.message || 'Login failed')));
       return false;
     }
@@ -71,8 +84,15 @@ export const useAuth = () => {
 
   // Handle logout
   const handleLogout = () => {
+    console.log('Logging out user');
+
+    // Remove token from both localStorage and cookies
     removeToken();
+
+    // Clear Redux state
     dispatch(logout());
+
+    // Redirect to login
     router.push(AUTH_CONFIG.LOGIN_ROUTE);
   };
 
