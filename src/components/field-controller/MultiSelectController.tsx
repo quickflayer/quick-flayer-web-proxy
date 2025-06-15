@@ -1,8 +1,9 @@
 import { Controller } from 'react-hook-form';
 
+import { AppSelectField } from '@core/components/app-inputs';
+
 import { BaseOption } from '@/types';
 import gMemo from '@/utils/memo';
-import { AppSelectField } from '@core/components/app-inputs';
 
 import { MultiSelectControllerProps } from '.';
 
@@ -10,7 +11,7 @@ const MultiSelectController = <
   T extends Record<string, unknown> = Record<string, unknown>,
   S extends BaseOption = BaseOption,
 >(
-  props: MultiSelectControllerProps<T, S>,
+  props: MultiSelectControllerProps<T, S>
 ) => {
   const { control, name, ...rest } = props;
   return (

@@ -2,14 +2,17 @@ import React from 'react';
 
 import { Controller } from 'react-hook-form';
 
+import { AppNumberField } from '@core/components/app-inputs';
+
 import { NumStr } from '@/types';
 import gMemo from '@/utils/memo';
-import { AppNumberField } from '@core/components/app-inputs';
 
 import { NumberFieldControllerProps } from '.';
 
-const NumberFieldController = <T extends Record<string, unknown> = Record<string, unknown>  >(
-  props: NumberFieldControllerProps<T>,
+const NumberFieldController = <
+  T extends Record<string, unknown> = Record<string, unknown>,
+>(
+  props: NumberFieldControllerProps<T>
 ) => {
   const { control, name, ...rest } = props;
 

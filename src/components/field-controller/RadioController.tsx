@@ -9,7 +9,7 @@ import { RadioControllerProps } from '.';
 const RadioController = <
   T extends Record<string, unknown> = Record<string, unknown>,
 >(
-  props: RadioControllerProps<T>,
+  props: RadioControllerProps<T>
 ) => {
   const { control, name, ...rest } = props;
 

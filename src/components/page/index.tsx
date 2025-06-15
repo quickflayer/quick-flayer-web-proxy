@@ -1,5 +1,6 @@
-import { Stack, StackProps } from '@mui/material';
 import React from 'react';
+
+import { Stack, StackProps } from '@mui/material';
 
 type Props = StackProps & {
   children: React.ReactNode;

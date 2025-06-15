@@ -2,13 +2,16 @@ import React from 'react';
 
 import { Controller } from 'react-hook-form';
 
-import gMemo from '@/utils/memo';
 import { AppTextField } from '@core/components/app-inputs';
+
+import gMemo from '@/utils/memo';
 
 import { TextFieldControllerProps } from '.';
 
-const TextFieldController = <T extends Record<string, unknown> = Record<string, unknown>>(
-  props: TextFieldControllerProps<T>,
+const TextFieldController = <
+  T extends Record<string, unknown> = Record<string, unknown>,
+>(
+  props: TextFieldControllerProps<T>
 ) => {
   const { control, name, ...rest } = props;
 

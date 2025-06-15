@@ -9,7 +9,7 @@ import { SwitchControllerProps } from '.';
 const SwitchController = <
   T extends Record<string, unknown> = Record<string, unknown>,
 >(
-  props: SwitchControllerProps<T>,
+  props: SwitchControllerProps<T>
 ) => {
   const { control, name, ...rest } = props;
 

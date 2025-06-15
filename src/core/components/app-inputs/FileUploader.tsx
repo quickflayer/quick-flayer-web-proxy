@@ -7,9 +7,11 @@ import { useController } from 'react-hook-form';
 
 import Image from 'next/image';
 
+import { isValidUrl } from '@utils/common';
+import getCroppedImg from '@utils/get-cropped-img';
+import { logger } from '@utils/logger';
+
 import { Any } from '@/types';
-import { isValidUrl } from '@/utils/common';
-import getCroppedImg from '@/utils/get-cropped-img';
 
 import { AppButton } from '../app-button';
 
@@ -99,7 +101,7 @@ const FileUploader: FC<FileUploaderProps> = ({
       onChange(file);
       setImageSrc(url);
     } catch (error) {
-      console.error('Cropping failed:', error);
+      logger.error('Cropping failed:', error);
     }
   }, [imageSrc, croppedAreaPixels, onChange, name]);
 
