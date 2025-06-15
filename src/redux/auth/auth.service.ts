@@ -1,5 +1,5 @@
 import http from '../../lib/http';
-import { AUTH_CONFIG } from '../../lib/auth/auth-config';
+import { AUTH_CONFIG } from '../../configs/auth/auth.config';
 
 // Types for API requests and responses
 export interface LoginRequest {
@@ -142,7 +142,10 @@ export class AuthService {
   /**
    * Change password
    */
-  static async changePassword(currentPassword: string, newPassword: string): Promise<void> {
+  static async changePassword(
+    currentPassword: string,
+    newPassword: string
+  ): Promise<void> {
     try {
       await http.post('/auth/change-password', {
         currentPassword,
@@ -169,7 +172,10 @@ export class AuthService {
   /**
    * Reset password with token
    */
-  static async resetPassword(token: string, newPassword: string): Promise<void> {
+  static async resetPassword(
+    token: string,
+    newPassword: string
+  ): Promise<void> {
     try {
       await http.post('/auth/reset-password', {
         token,

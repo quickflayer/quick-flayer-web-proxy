@@ -1,40 +1,51 @@
-// Token storage and management utilities
+import { logger } from '@utils/common';
 
-// Store token in both localStorage and cookies for SSR compatibility
+/**
+ * Stores an authentication token in both localStorage and a cookie.
+ *
+ * This ensures that the token is accessible to both the client-side and
+ * middleware code. The token is stored for 24 hours to match the default
+ * expiration time of the token.
+ *
+ * @param token The authentication token to store.
+ */
 export const storeToken = (token: string): void => {
   if (typeof window !== 'undefined') {
-    // Store in localStorage for client-side access
     localStorage.setItem('auth_token', token);
 
-    // Store in cookie for middleware access
     const expires = new Date();
-    expires.setTime(expires.getTime() + (24 * 60 * 60 * 1000)); // 24 hours
+    expires.setTime(expires.getTime() + 24 * 60 * 60 * 1000);
 
     document.cookie = `auth_token=${token}; expires=${expires.toUTCString()}; path=/; SameSite=Lax; Secure=${window.location.protocol === 'https:'}`;
   }
 };
 
-// Retrieve token from localStorage with cookie fallback
+/**
+ * Retrieves the authentication token from either the client-side localStorage
+ * or a cookie. The value from localStorage is given priority.
+ *
+ * @returns The authentication token, or null if not found.
+ */
 export const getToken = (): string | null => {
   if (typeof window !== 'undefined') {
-    // Try localStorage first
     const localToken = localStorage.getItem('auth_token');
     if (localToken) {
       return localToken;
     }
 
-    // Fallback to cookie
     const cookieToken = getCookieToken();
     if (cookieToken) {
-      // Sync back to localStorage if found in cookie
-      localStorage.setItem('auth_token', cookieToken);
       return cookieToken;
     }
   }
   return null;
 };
 
-// Get token from cookie (for client-side cookie reading)
+/**
+ * Retrieves the authentication token from a cookie.
+ *
+ * @returns The authentication token, or null if not found.
+ */
 export const getCookieToken = (): string | null => {
   if (typeof window !== 'undefined') {
     const cookies = document.cookie.split(';');
@@ -48,42 +59,52 @@ export const getCookieToken = (): string | null => {
   return null;
 };
 
-// Remove token from both localStorage and cookies
+/**
+ * Removes the authentication token from both the client-side localStorage
+ * and the cookie. This will cause the user to be logged out.
+ */
 export const removeToken = (): void => {
   if (typeof window !== 'undefined') {
-    // Remove from localStorage
     localStorage.removeItem('auth_token');
 
-    // Remove from cookie by setting expired date
-    document.cookie = 'auth_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; SameSite=Lax';
+    document.cookie =
+      'auth_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; SameSite=Lax';
   }
 };
 
-// Check if token is expired
+/**
+ * Checks if an authentication token has expired.
+ *
+ * @param token The authentication token to check.
+ * @returns true if the token has expired, false otherwise.
+ */
 export const isTokenExpired = (token: string): boolean => {
   if (!token) return true;
-  
+
   try {
-    // Get the payload part of the JWT token
     const payload = JSON.parse(atob(token.split('.')[1]));
-    // Check if the token has expired
+
     return payload.exp * 1000 < Date.now();
   } catch (error) {
-    console.error('Error parsing token:', error);
+    logger.error('Error parsing token:', error);
     return true;
   }
 };
 
-// Extract user role from token
+/**
+ * Extracts the user role from an authentication token.
+ *
+ * @param token The authentication token to extract the role from.
+ * @returns The user role, or null if not found.
+ */
 export const getUserRoleFromToken = (token: string): string | null => {
   if (!token) return null;
-  
+
   try {
-    // Get the payload part of the JWT token
     const payload = JSON.parse(atob(token.split('.')[1]));
     return payload.role || null;
   } catch (error) {
-    console.error('Error extracting user role from token:', error);
+    logger.error('Error extracting user role from token:', error);
     return null;
   }
 };

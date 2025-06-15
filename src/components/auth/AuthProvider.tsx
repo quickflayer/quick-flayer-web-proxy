@@ -1,12 +1,23 @@
 "use client";
 
+// React imports (first)
 import React from 'react';
-import { Provider } from 'react-redux';
-import { store } from '../../lib/store';
-import { useAuth } from '../../hooks/useAuth';
-import { useAuthTimer } from '../../hooks/useAuthTimer';
 
-const AuthStateManager: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+// External dependencies (alphabetical)
+import { Provider } from 'react-redux';
+
+// @/** imports
+import { useAuth } from '@/hooks/useAuth';
+import { useAuthTimer } from '@/hooks/useAuthTimer';
+
+// Relative imports
+import { store } from '../../lib/store';
+
+interface AuthStateManagerProps {
+  children: React.ReactNode;
+}
+
+const AuthStateManager = ({ children }: AuthStateManagerProps) => {
   const { isCheckingAuth } = useAuth();
   useAuthTimer(); // Set up the inactivity timer
 
@@ -22,10 +33,16 @@ const AuthStateManager: React.FC<{ children: React.ReactNode }> = ({ children })
   return <>{children}</>;
 };
 
-export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+interface AuthProviderProps {
+  children: React.ReactNode;
+}
+
+const AuthProvider = ({ children }: AuthProviderProps) => {
   return (
     <Provider store={store}>
       <AuthStateManager>{children}</AuthStateManager>
     </Provider>
   );
 };
+
+export default React.memo(AuthProvider);

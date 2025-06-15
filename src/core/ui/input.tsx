@@ -1,3 +1,4 @@
+// React imports (first)
 import React, { forwardRef } from 'react';
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -6,7 +7,7 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   id: string;
 }
 
-export const Input = forwardRef<HTMLInputElement, InputProps>((
+const Input = forwardRef<HTMLInputElement, InputProps>((
   { label, error, id, className, ...props },
   ref
 ) => {
@@ -39,3 +40,5 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((
 });
 
 Input.displayName = 'Input';
+
+export default React.memo(Input);

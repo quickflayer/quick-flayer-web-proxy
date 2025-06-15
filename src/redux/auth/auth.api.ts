@@ -1,4 +1,5 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
+
 import query from '@lib/http/query';
 
 interface LoginRequest {
@@ -22,7 +23,7 @@ interface AuthResponse {
   user: User;
 }
 
-export const authApi = createApi({
+const authApi = createApi({
   reducerPath: 'authApi',
   baseQuery: query(),
   endpoints: (builder) => ({
@@ -34,7 +35,7 @@ export const authApi = createApi({
       }),
     }),
     getProfile: builder.query<User, void>({
-      query: () => ({url:'/auth/profile', method: 'GET'}),
+      query: () => ({ url: '/auth/profile', method: 'GET' }),
     }),
     verifyToken: builder.mutation<{ valid: boolean }, { token: string }>({
       query: (tokenData) => ({
@@ -46,4 +47,7 @@ export const authApi = createApi({
   }),
 });
 
-export const { useLoginMutation, useGetProfileQuery, useVerifyTokenMutation } = authApi;
+export const { useLoginMutation, useGetProfileQuery, useVerifyTokenMutation } =
+  authApi;
+
+export default authApi;

@@ -1,9 +1,12 @@
-import { useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
+
 import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '../lib/store';
-import { logout } from '../redux/auth/auth.slice';
-import { removeToken } from '../lib/auth/token-manager';
-import { AUTH_CONFIG } from '../lib/auth/auth-config';
+
+import { RootState } from '@lib/store';
+import { logout } from '@redux/auth/auth.slice';
+
+import { AUTH_CONFIG } from '@/configs/auth/auth.config';
+import { removeToken } from '@/utils/auth/token-manager';
 
 export const useAuthTimer = () => {
   const dispatch = useDispatch();
@@ -11,53 +14,56 @@ export const useAuthTimer = () => {
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   // Function to handle user inactivity logout
-  const handleInactivityLogout = () => {
+  const handleInactivityLogout = useCallback(() => {
     removeToken();
     dispatch(logout());
     window.location.href = AUTH_CONFIG.LOGIN_ROUTE;
-  };
+  }, [dispatch]);
 
-  // Reset the timer
-  const resetTimer = () => {
+  const resetTimer = useCallback(() => {
     if (timerRef.current) {
       clearTimeout(timerRef.current);
     }
 
     if (isAuthenticated) {
-      timerRef.current = setTimeout(handleInactivityLogout, AUTH_CONFIG.SESSION_TIMEOUT);
+      timerRef.current = setTimeout(
+        handleInactivityLogout,
+        AUTH_CONFIG.SESSION_TIMEOUT
+      );
     }
-  };
+  }, [handleInactivityLogout, isAuthenticated]);
 
-  // Setup event listeners for user activity
   useEffect(() => {
     if (!isAuthenticated) return;
 
-    // Set initial timer
     resetTimer();
 
-    // Add event listeners to reset timer on user activity
-    const activityEvents = ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart'];
-    
+    const activityEvents = [
+      'mousedown',
+      'mousemove',
+      'keypress',
+      'scroll',
+      'touchstart',
+    ];
+
     const handleUserActivity = () => {
       resetTimer();
     };
 
-    // Add event listeners
-    activityEvents.forEach(event => {
+    activityEvents.forEach((event) => {
       window.addEventListener(event, handleUserActivity);
     });
 
-    // Cleanup
     return () => {
       if (timerRef.current) {
         clearTimeout(timerRef.current);
       }
 
-      activityEvents.forEach(event => {
+      activityEvents.forEach((event) => {
         window.removeEventListener(event, handleUserActivity);
       });
     };
-  }, [isAuthenticated]);
+  }, [isAuthenticated, resetTimer]);
 
   return {
     resetTimer,

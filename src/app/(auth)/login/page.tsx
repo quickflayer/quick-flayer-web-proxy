@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { LoginForm } from '../../../components/auth/LoginForm';
 import { useAuth } from '../../../hooks/useAuth';
-import { AUTH_CONFIG } from '../../../lib/auth/auth-config';
+import { AUTH_CONFIG } from '../../../configs/auth/auth.config';
 
 export default function LoginPage() {
   const { isAuthenticated, isCheckingAuth } = useAuth();
@@ -35,7 +35,9 @@ export default function LoginPage() {
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold">Quick Flayer Admin</h1>
-          <p className="text-gray-600 mt-2">Sign in to access the admin dashboard</p>
+          <p className="text-gray-600 mt-2">
+            Sign in to access the admin dashboard
+          </p>
         </div>
         <LoginForm onSuccess={handleLoginSuccess} />
       </div>

@@ -1,5 +1,10 @@
+// Next.js imports
+import { AUTH_CONFIG } from '@configs/auth/auth.config';
+
 import { NextRequest, NextResponse } from 'next/server';
-import { AUTH_CONFIG } from './lib/auth/auth-config';
+
+// @/** imports
+import { logger } from '@utils/common';
 
 // Helper function to check if token is expired
 function isTokenExpired(token: string): boolean {
@@ -11,7 +16,7 @@ function isTokenExpired(token: string): boolean {
     // Check if the token has expired
     return payload.exp * 1000 < Date.now();
   } catch (error) {
-    console.error('Error parsing token in middleware:', error);
+    logger.error('Error parsing token in middleware:', error);
     return true;
   }
 }
@@ -33,18 +38,19 @@ export function middleware(request: NextRequest) {
   const token = request.cookies.get('auth_token')?.value;
 
   // Check if the path is protected
-  const isProtectedRoute = [
-    '/dashboard',
-    '/users',
-    '/settings',
-  ].some(route => pathname.startsWith(route));
+  const isProtectedRoute = ['/dashboard', '/users', '/settings'].some((route) =>
+    pathname.startsWith(route)
+  );
 
   // Validate token if it exists
-  const isValidToken = token && isValidTokenFormat(token) && !isTokenExpired(token);
+  const isValidToken =
+    token && isValidTokenFormat(token) && !isTokenExpired(token);
 
   // If it's a protected route and no valid token exists, redirect to login
   if (isProtectedRoute && !isValidToken) {
-    console.log(`Redirecting to login: ${pathname} - Token valid: ${!!isValidToken}`);
+    logger.log(
+      `Redirecting to login: ${pathname} - Token valid: ${!!isValidToken}`
+    );
     const url = new URL(AUTH_CONFIG.LOGIN_ROUTE, request.url);
 
     // Clear invalid token cookie

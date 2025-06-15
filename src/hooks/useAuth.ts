@@ -3,11 +3,19 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useRouter } from 'next/navigation';
 import { RootState } from '../lib/store';
 // Import both RTK Query and Axios-based hooks for comparison
-import { useLoginMutation as useRTKLoginMutation, useGetProfileQuery } from '../redux/auth/auth.api';
+import {
+  useLoginMutation as useRTKLoginMutation,
+  useGetProfileQuery,
+} from '../redux/auth/auth.api';
 import { useLoginMutation, useProfileQuery } from './useAuthQueries';
 import { setCredentials, logout, setError } from '../redux/auth/auth.slice';
-import { storeToken, removeToken, getToken, isTokenExpired } from '../lib/auth/token-manager';
-import { AUTH_CONFIG } from '../lib/auth/auth-config';
+import {
+  storeToken,
+  removeToken,
+  getToken,
+  isTokenExpired,
+} from '../utils/auth/token-manager';
+import { AUTH_CONFIG } from '../configs/auth/auth.config';
 import AuthService from '../redux/auth/auth.service';
 
 export const useAuth = () => {
@@ -16,11 +24,17 @@ export const useAuth = () => {
 
   // Use Axios-based hooks instead of RTK Query
   const loginMutation = useLoginMutation();
-  const { user, isAuthenticated, error } = useSelector((state: RootState) => state.auth);
+  const { user, isAuthenticated, error } = useSelector(
+    (state: RootState) => state.auth
+  );
   const [isCheckingAuth, setIsCheckingAuth] = useState(true);
 
   // Auto-fetch profile when authenticated using Axios
-  const { data: profileData, refetch, isLoading: isProfileLoading } = useProfileQuery(isAuthenticated);
+  const {
+    data: profileData,
+    refetch,
+    isLoading: isProfileLoading,
+  } = useProfileQuery(isAuthenticated);
 
   // Initialize auth state from token
   useEffect(() => {

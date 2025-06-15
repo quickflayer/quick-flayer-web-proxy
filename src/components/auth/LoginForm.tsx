@@ -1,6 +1,13 @@
+// React imports (first)
 import React, { useState } from 'react';
+
+// External dependencies (alphabetical)
 import { useForm } from 'react-hook-form';
-import { useAuth } from '../../hooks/useAuth';
+
+// @/** imports
+import { useAuth } from '@/hooks/useAuth';
+
+// Relative imports
 import { Button } from '../../core/ui/button';
 import { Input } from '../../core/ui/input';
 
@@ -13,7 +20,7 @@ interface LoginFormValues {
   password: string;
 }
 
-export const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
+const LoginForm = ({ onSuccess }: LoginFormProps) => {
   const { login, isLoading, error } = useAuth();
   const [loginError, setLoginError] = useState<string | null>(null);
 
@@ -86,3 +93,5 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
     </div>
   );
 };
+
+export default React.memo(LoginForm);
