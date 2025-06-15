@@ -1,4 +1,12 @@
+// React imports (first)
 import { useState, useEffect, useCallback, useRef } from 'react';
+
+// @/** imports
+import { CACHE_SETTINGS } from '@/constants';
+import { logger } from '@/utils/logger';
+import { tryCatch } from '@/utils/try-catch';
+
+// Relative imports
 import http, { AxiosResponse, AxiosError } from '../lib/http';
 
 // Generic query options
@@ -30,7 +38,11 @@ export interface QueryResult<T> {
 export interface MutationOptions<TData, TVariables> {
   onSuccess?: (data: TData, variables: TVariables) => void;
   onError?: (error: AxiosError, variables: TVariables) => void;
-  onSettled?: (data: TData | null, error: AxiosError | null, variables: TVariables) => void;
+  onSettled?: (
+    data: TData | null,
+    error: AxiosError | null,
+    variables: TVariables
+  ) => void;
 }
 
 // Mutation result interface
@@ -46,7 +58,10 @@ export interface MutationResult<TData, TVariables> {
 }
 
 // Simple cache implementation
-const queryCache = new Map<string, { data: any; timestamp: number; staleTime: number }>();
+const queryCache = new Map<
+  string,
+  { data: any; timestamp: number; staleTime: number }
+>();
 
 // Custom hook for GET requests (similar to useQuery)
 export function useAxiosQuery<T>(
@@ -58,12 +73,12 @@ export function useAxiosQuery<T>(
     enabled = true,
     refetchOnWindowFocus = false,
     refetchInterval,
-    retry = 3,
-    retryDelay = 1000,
+    retry = CACHE_SETTINGS.DEFAULT_RETRY_COUNT,
+    retryDelay = CACHE_SETTINGS.DEFAULT_RETRY_DELAY,
     onSuccess,
     onError,
-    staleTime = 5 * 60 * 1000, // 5 minutes
-    cacheTime = 10 * 60 * 1000, // 10 minutes
+    staleTime = CACHE_SETTINGS.DEFAULT_STALE_TIME,
+    cacheTime = CACHE_SETTINGS.DEFAULT_CACHE_TIME,
   } = options;
 
   const [data, setData] = useState<T | null>(null);
@@ -86,64 +101,88 @@ export function useAxiosQuery<T>(
   }, [cacheKey]);
 
   // Fetch function with retry logic
-  const fetchData = useCallback(async (showLoading = true) => {
-    if (!enabled) return;
+  const fetchData = useCallback(
+    async (showLoading = true) => {
+      if (!enabled) return;
 
-    // Check cache first
-    const cached = queryCache.get(cacheKey);
-    if (cached && !isStale()) {
-      setData(cached.data);
-      setIsError(false);
-      setError(null);
-      return;
-    }
-
-    if (showLoading) {
-      setIsLoading(true);
-    }
-    setIsFetching(true);
-    setIsError(false);
-    setError(null);
-
-    try {
-      const response = await queryFn();
-      const responseData = response.data;
-
-      // Cache the data
-      queryCache.set(cacheKey, {
-        data: responseData,
-        timestamp: Date.now(),
-        staleTime,
-      });
-
-      setData(responseData);
-      setIsError(false);
-      setError(null);
-      retryCountRef.current = 0;
-
-      onSuccess?.(responseData);
-    } catch (err) {
-      const axiosError = err as AxiosError;
-      console.error(`Query failed for ${cacheKey}:`, axiosError);
-
-      if (retryCountRef.current < retry) {
-        retryCountRef.current++;
-        console.log(`Retrying query ${cacheKey} (${retryCountRef.current}/${retry})`);
-        
-        setTimeout(() => {
-          fetchData(false);
-        }, retryDelay * retryCountRef.current);
+      // Check cache first
+      const cached = queryCache.get(cacheKey);
+      if (cached && !isStale()) {
+        setData(cached.data);
+        setIsError(false);
+        setError(null);
         return;
       }
 
-      setIsError(true);
-      setError(axiosError);
-      onError?.(axiosError);
-    } finally {
-      setIsLoading(false);
-      setIsFetching(false);
-    }
-  }, [enabled, queryFn, cacheKey, retry, retryDelay, onSuccess, onError, staleTime, isStale]);
+      if (showLoading) {
+        setIsLoading(true);
+      }
+      setIsFetching(true);
+      setIsError(false);
+      setError(null);
+
+      const result = await tryCatch({
+        fn: async () => {
+          const response = await queryFn();
+          const responseData = response.data;
+
+          // Cache the data
+          queryCache.set(cacheKey, {
+            data: responseData,
+            timestamp: Date.now(),
+            staleTime,
+          });
+
+          setData(responseData);
+          setIsError(false);
+          setError(null);
+          retryCountRef.current = 0;
+
+          onSuccess?.(responseData);
+          return responseData;
+        },
+        logger: (message: string, ...args: any[]) => {
+          logger.error(`Query failed for ${cacheKey}:`, ...args);
+        },
+        fallbackError: `Query failed for ${cacheKey}`,
+        finally: () => {
+          setIsLoading(false);
+          setIsFetching(false);
+        },
+      });
+
+      if (!result.success) {
+        const axiosError = result.error.data as AxiosError;
+
+        if (retryCountRef.current < retry) {
+          retryCountRef.current++;
+          logger.log(
+            `Retrying query ${cacheKey} (${retryCountRef.current}/${retry})`
+          );
+
+          setTimeout(() => {
+            fetchData(false);
+          }, retryDelay * retryCountRef.current);
+          return;
+        }
+
+        setIsError(true);
+        setError(axiosError);
+        onError?.(axiosError);
+      }
+    },
+    [
+      enabled,
+      queryFn,
+      cacheKey,
+      retry,
+      retryDelay,
+      onSuccess,
+      onError,
+      staleTime,
+      isStale,
+    ]
+  );
 
   // Refetch function
   const refetch = useCallback(async () => {
@@ -227,47 +266,66 @@ export function useAxiosMutation<TData, TVariables>(
   const [isError, setIsError] = useState(false);
   const [error, setError] = useState<AxiosError | null>(null);
 
-  const mutateAsync = useCallback(async (variables: TVariables): Promise<TData> => {
-    setIsLoading(true);
-    setIsError(false);
-    setError(null);
-
-    try {
-      const response = await mutationFn(variables);
-      const responseData = response.data;
-
-      setData(responseData);
+  const mutateAsync = useCallback(
+    async (variables: TVariables): Promise<TData> => {
+      setIsLoading(true);
       setIsError(false);
       setError(null);
 
-      onSuccess?.(responseData, variables);
-      onSettled?.(responseData, null, variables);
+      const result = await tryCatch({
+        fn: async () => {
+          const response = await mutationFn(variables);
+          const responseData = response.data;
 
-      return responseData;
-    } catch (err) {
-      const axiosError = err as AxiosError;
-      console.error('Mutation failed:', axiosError);
+          setData(responseData);
+          setIsError(false);
+          setError(null);
 
-      setIsError(true);
-      setError(axiosError);
+          onSuccess?.(responseData, variables);
+          onSettled?.(responseData, null, variables);
 
-      onError?.(axiosError, variables);
-      onSettled?.(null, axiosError, variables);
+          return responseData;
+        },
+        logger: logger.error,
+        fallbackError: 'Mutation failed',
+        finally: () => setIsLoading(false),
+      });
 
-      throw axiosError;
-    } finally {
-      setIsLoading(false);
-    }
-  }, [mutationFn, onSuccess, onError, onSettled]);
+      if (result.success) {
+        return result.data as TData;
+      } else {
+        const axiosError = result.error.data as AxiosError;
 
-  const mutate = useCallback(async (variables: TVariables): Promise<TData> => {
-    try {
-      return await mutateAsync(variables);
-    } catch (error) {
-      // Error is already handled in mutateAsync
-      throw error;
-    }
-  }, [mutateAsync]);
+        setIsError(true);
+        setError(axiosError);
+
+        onError?.(axiosError, variables);
+        onSettled?.(null, axiosError, variables);
+
+        throw axiosError;
+      }
+    },
+    [mutationFn, onSuccess, onError, onSettled]
+  );
+
+  const mutate = useCallback(
+    async (variables: TVariables): Promise<TData> => {
+      const result = await tryCatch({
+        fn: async () => {
+          return await mutateAsync(variables);
+        },
+        fallbackError: 'Mutation execution failed',
+      });
+
+      if (result.success) {
+        return result.data as TData;
+      } else {
+        // Error is already handled in mutateAsync
+        throw result.error.data;
+      }
+    },
+    [mutateAsync]
+  );
 
   const reset = useCallback(() => {
     setData(null);

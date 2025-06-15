@@ -1,9 +1,8 @@
 // Next.js imports
-import { AUTH_CONFIG } from '@configs/auth/auth.config';
-
 import { NextRequest, NextResponse } from 'next/server';
 
 // @/** imports
+import { AUTH_CONFIG } from '@/configs/auth/auth.config';
 import { logger } from '@/utils/logger';
 
 // Helper function to check if token is expired
@@ -66,7 +65,7 @@ export function middleware(request: NextRequest) {
 
   // If user has valid token and trying to access login page, redirect to dashboard
   if (pathname === AUTH_CONFIG.LOGIN_ROUTE && isValidToken) {
-    console.log('Redirecting authenticated user from login to dashboard');
+    logger.log('Redirecting authenticated user from login to dashboard');
     const url = new URL(AUTH_CONFIG.DASHBOARD_ROUTE, request.url);
     return NextResponse.redirect(url);
   }

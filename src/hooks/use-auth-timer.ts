@@ -2,10 +2,10 @@ import { useCallback, useEffect, useRef } from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
 
-import { RootState } from '@lib/store';
-import { logout } from '@redux/auth/auth.slice';
-
 import { AUTH_CONFIG } from '@/configs/auth/auth.config';
+import { USER_ACTIVITY_EVENTS } from '@/constants';
+import { RootState } from '@/lib/store';
+import { logout } from '@/redux/auth/auth.slice';
 import { removeToken } from '@/utils/auth/token-manager';
 
 export const useAuthTimer = () => {
@@ -13,7 +13,6 @@ export const useAuthTimer = () => {
   const { isAuthenticated } = useSelector((state: RootState) => state.auth);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Function to handle user inactivity logout
   const handleInactivityLogout = useCallback(() => {
     removeToken();
     dispatch(logout());
@@ -38,13 +37,7 @@ export const useAuthTimer = () => {
 
     resetTimer();
 
-    const activityEvents = [
-      'mousedown',
-      'mousemove',
-      'keypress',
-      'scroll',
-      'touchstart',
-    ];
+    const activityEvents = USER_ACTIVITY_EVENTS;
 
     const handleUserActivity = () => {
       resetTimer();

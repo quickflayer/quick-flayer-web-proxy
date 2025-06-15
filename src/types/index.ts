@@ -7,6 +7,13 @@ export type TError = {
   data: Any;
 };
 
+export type TryCatchOptions = {
+  fn: () => Promise<Any>;
+  logger?: (message: string, ...optionalParams: Any[]) => void;
+  fallbackError?: string;
+  finally?: () => void;
+};
+
 export type TryCatchResult<T> =
   | { success: true; data: T }
   | { success: false; error: TError };

@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 // @/** imports
-import { useAuth } from '@/hooks/useAuth';
+import { useAuth } from '@/hooks/use-auth';
 
 // Relative imports
 import { Button } from '../../core/ui/button';
@@ -42,14 +42,16 @@ const LoginForm = ({ onSuccess }: LoginFormProps) => {
 
   return (
     <div className="w-full max-w-md p-6 bg-white rounded-lg shadow-md">
-      <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">Admin Login</h2>
-      
+      <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">
+        Admin Login
+      </h2>
+
       {(loginError || error) && (
         <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
           {loginError || error}
         </div>
       )}
-      
+
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <Input
           id="email"
@@ -65,7 +67,7 @@ const LoginForm = ({ onSuccess }: LoginFormProps) => {
             },
           })}
         />
-        
+
         <Input
           id="password"
           label="Password"
@@ -80,7 +82,7 @@ const LoginForm = ({ onSuccess }: LoginFormProps) => {
             },
           })}
         />
-        
+
         <Button
           type="submit"
           variant="primary"

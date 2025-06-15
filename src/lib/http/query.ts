@@ -1,9 +1,11 @@
 import { BaseQueryFn } from '@reduxjs/toolkit/query/react';
 import { AxiosError, AxiosRequestConfig } from 'axios';
 
+import { tryCatch } from '@/utils/try-catch';
+
 import http from '.';
 
- const query =
+const query =
   (): BaseQueryFn<
     {
       url: string;
@@ -15,11 +17,18 @@ import http from '.';
     unknown
   > =>
   async ({ url, method, data, params }) => {
-    try {
-      const result = await http({ url, method, data, params });
-      return { data: result.data };
-    } catch (axiosError) {
-      const err = axiosError as AxiosError;
+    const result = await tryCatch({
+      fn: async () => {
+        const response = await http({ url, method, data, params });
+        return { data: response.data };
+      },
+      fallbackError: 'HTTP request failed',
+    });
+
+    if (result.success) {
+      return result.data as { data: unknown };
+    } else {
+      const err = result.error.data as AxiosError;
       return {
         error: {
           status: err.response?.status,
@@ -29,6 +38,4 @@ import http from '.';
     }
   };
 
-
-
-  export default query;
+export default query;

@@ -1,12 +1,16 @@
+import { API_ENDPOINTS, COOKIE_NAMES, STORAGE_KEYS } from '@/constants';
+
 export const AUTH_CONFIG = {
-  LOGIN_ENDPOINT: '/auth/login',
-  REGISTER_ENDPOINT: '/auth/register',
-  PROFILE_ENDPOINT: '/auth/profile',
-  VERIFY_ENDPOINT: '/auth/verify',
+  // ** API Endpoints
+  LOGIN_ENDPOINT: API_ENDPOINTS.AUTH.LOGIN,
+  REGISTER_ENDPOINT: API_ENDPOINTS.AUTH.REGISTER,
+  PROFILE_ENDPOINT: API_ENDPOINTS.AUTH.PROFILE,
+  VERIFY_ENDPOINT: API_ENDPOINTS.AUTH.VERIFY,
+  REFRESH_ENDPOINT: API_ENDPOINTS.AUTH.REFRESH,
 
   // ** Token settings
-  TOKEN_EXPIRY: 24 * 60 * 60 * 1000,
-  REFRESH_BEFORE_EXPIRY: 5 * 60 * 1000,
+  TOKEN_EXPIRY: 24 * 60 * 60 * 1000, // 24 hours
+  REFRESH_BEFORE_EXPIRY: 5 * 60 * 1000, // 5 minutes
 
   // ** Routes
   LOGIN_ROUTE: '/login',
@@ -18,12 +22,12 @@ export const AUTH_CONFIG = {
   USER_ROLE: 'user',
 
   // ** Session
-  SESSION_TIMEOUT: 24 * 60 * 60 * 1000,
+  SESSION_TIMEOUT: 24 * 60 * 60 * 1000, // 24 hours
 
   // ** Cookie names
-  TOKEN_COOKIE_NAME: 'auth_token',
-  REFRESH_TOKEN_COOKIE_NAME: 'refresh_token',
+  TOKEN_COOKIE_NAME: COOKIE_NAMES.AUTH_TOKEN,
+  REFRESH_TOKEN_COOKIE_NAME: COOKIE_NAMES.REFRESH_TOKEN,
 
   // ** Local storage keys
-  TOKEN_STORAGE_KEY: 'auth_token',
-};
+  TOKEN_STORAGE_KEY: STORAGE_KEYS.AUTH_TOKEN,
+} as const;

@@ -3,7 +3,7 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { LoginForm } from '../../../components/auth/LoginForm';
-import { useAuth } from '../../../hooks/useAuth';
+import { useAuth } from '../../../hooks/use-auth';
 import { AUTH_CONFIG } from '../../../configs/auth/auth.config';
 
 export default function LoginPage() {

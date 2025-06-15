@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
 import React, { useState } from 'react';
-import { useAuthAxios } from '../../hooks/useAuthAxios';
-import { 
-  useProfileQuery, 
-  useLoginMutation, 
+import { useAuthAxios } from '../../hooks/use-auth-axios';
+import {
+  useProfileQuery,
+  useLoginMutation,
   useUpdateProfileMutation,
   useChangePasswordMutation,
-  useUsersQuery 
-} from '../../hooks/useAuthQueries';
+  useUsersQuery,
+} from '../../hooks/use-auth-queries';
 
 export const AxiosAuthDemo: React.FC = () => {
   const {
@@ -24,7 +24,11 @@ export const AxiosAuthDemo: React.FC = () => {
   } = useAuthAxios();
 
   // Query hooks
-  const { data: profileData, isLoading: profileLoading, refetch: refetchProfile } = useProfileQuery(isAuthenticated);
+  const {
+    data: profileData,
+    isLoading: profileLoading,
+    refetch: refetchProfile,
+  } = useProfileQuery(isAuthenticated);
   const { data: usersData, isLoading: usersLoading } = useUsersQuery(isAdmin());
 
   // Mutation hooks
@@ -33,8 +37,14 @@ export const AxiosAuthDemo: React.FC = () => {
 
   // Form states
   const [loginForm, setLoginForm] = useState({ email: '', password: '' });
-  const [profileForm, setProfileForm] = useState({ firstName: '', lastName: '' });
-  const [passwordForm, setPasswordForm] = useState({ currentPassword: '', newPassword: '' });
+  const [profileForm, setProfileForm] = useState({
+    firstName: '',
+    lastName: '',
+  });
+  const [passwordForm, setPasswordForm] = useState({
+    currentPassword: '',
+    newPassword: '',
+  });
 
   // Handle login
   const handleLogin = async (e: React.FormEvent) => {
@@ -78,12 +88,14 @@ export const AxiosAuthDemo: React.FC = () => {
   if (!isAuthenticated) {
     return (
       <div className="max-w-md mx-auto mt-8 p-6 bg-white rounded-lg shadow-md">
-        <h2 className="text-2xl font-bold mb-6 text-center">Login with Axios</h2>
-        
+        <h2 className="text-2xl font-bold mb-6 text-center">
+          Login with Axios
+        </h2>
+
         {error && (
           <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
             {error}
-            <button 
+            <button
               onClick={clearError}
               className="ml-2 text-red-500 hover:text-red-700"
             >
@@ -94,27 +106,35 @@ export const AxiosAuthDemo: React.FC = () => {
 
         <form onSubmit={handleLogin} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700">Email</label>
+            <label className="block text-sm font-medium text-gray-700">
+              Email
+            </label>
             <input
               type="email"
               value={loginForm.email}
-              onChange={(e) => setLoginForm({ ...loginForm, email: e.target.value })}
+              onChange={(e) =>
+                setLoginForm({ ...loginForm, email: e.target.value })
+              }
               className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
               required
             />
           </div>
-          
+
           <div>
-            <label className="block text-sm font-medium text-gray-700">Password</label>
+            <label className="block text-sm font-medium text-gray-700">
+              Password
+            </label>
             <input
               type="password"
               value={loginForm.password}
-              onChange={(e) => setLoginForm({ ...loginForm, password: e.target.value })}
+              onChange={(e) =>
+                setLoginForm({ ...loginForm, password: e.target.value })
+              }
               className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
               required
             />
           </div>
-          
+
           <button
             type="submit"
             disabled={isLoginLoading}
@@ -147,12 +167,24 @@ export const AxiosAuthDemo: React.FC = () => {
             <p>Loading profile...</p>
           ) : (
             <div className="grid grid-cols-2 gap-4">
-              <div><strong>Email:</strong> {user?.email}</div>
-              <div><strong>Role:</strong> {user?.role}</div>
-              <div><strong>First Name:</strong> {user?.firstName || 'Not set'}</div>
-              <div><strong>Last Name:</strong> {user?.lastName || 'Not set'}</div>
-              <div><strong>Active:</strong> {user?.isActive ? 'Yes' : 'No'}</div>
-              <div><strong>Admin:</strong> {isAdmin() ? 'Yes' : 'No'}</div>
+              <div>
+                <strong>Email:</strong> {user?.email}
+              </div>
+              <div>
+                <strong>Role:</strong> {user?.role}
+              </div>
+              <div>
+                <strong>First Name:</strong> {user?.firstName || 'Not set'}
+              </div>
+              <div>
+                <strong>Last Name:</strong> {user?.lastName || 'Not set'}
+              </div>
+              <div>
+                <strong>Active:</strong> {user?.isActive ? 'Yes' : 'No'}
+              </div>
+              <div>
+                <strong>Admin:</strong> {isAdmin() ? 'Yes' : 'No'}
+              </div>
             </div>
           )}
         </div>
@@ -163,20 +195,31 @@ export const AxiosAuthDemo: React.FC = () => {
           <form onSubmit={handleUpdateProfile} className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700">First Name</label>
+                <label className="block text-sm font-medium text-gray-700">
+                  First Name
+                </label>
                 <input
                   type="text"
                   value={profileForm.firstName}
-                  onChange={(e) => setProfileForm({ ...profileForm, firstName: e.target.value })}
+                  onChange={(e) =>
+                    setProfileForm({
+                      ...profileForm,
+                      firstName: e.target.value,
+                    })
+                  }
                   className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700">Last Name</label>
+                <label className="block text-sm font-medium text-gray-700">
+                  Last Name
+                </label>
                 <input
                   type="text"
                   value={profileForm.lastName}
-                  onChange={(e) => setProfileForm({ ...profileForm, lastName: e.target.value })}
+                  onChange={(e) =>
+                    setProfileForm({ ...profileForm, lastName: e.target.value })
+                  }
                   className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
                 />
               </div>
@@ -186,7 +229,9 @@ export const AxiosAuthDemo: React.FC = () => {
               disabled={updateProfileMutation.isLoading}
               className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:opacity-50"
             >
-              {updateProfileMutation.isLoading ? 'Updating...' : 'Update Profile'}
+              {updateProfileMutation.isLoading
+                ? 'Updating...'
+                : 'Update Profile'}
             </button>
           </form>
         </div>
@@ -196,20 +241,34 @@ export const AxiosAuthDemo: React.FC = () => {
           <h3 className="text-lg font-semibold mb-4">Change Password</h3>
           <form onSubmit={handleChangePassword} className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700">Current Password</label>
+              <label className="block text-sm font-medium text-gray-700">
+                Current Password
+              </label>
               <input
                 type="password"
                 value={passwordForm.currentPassword}
-                onChange={(e) => setPasswordForm({ ...passwordForm, currentPassword: e.target.value })}
+                onChange={(e) =>
+                  setPasswordForm({
+                    ...passwordForm,
+                    currentPassword: e.target.value,
+                  })
+                }
                 className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700">New Password</label>
+              <label className="block text-sm font-medium text-gray-700">
+                New Password
+              </label>
               <input
                 type="password"
                 value={passwordForm.newPassword}
-                onChange={(e) => setPasswordForm({ ...passwordForm, newPassword: e.target.value })}
+                onChange={(e) =>
+                  setPasswordForm({
+                    ...passwordForm,
+                    newPassword: e.target.value,
+                  })
+                }
                 className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
               />
             </div>
@@ -218,7 +277,9 @@ export const AxiosAuthDemo: React.FC = () => {
               disabled={changePasswordMutation.isLoading}
               className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 disabled:opacity-50"
             >
-              {changePasswordMutation.isLoading ? 'Changing...' : 'Change Password'}
+              {changePasswordMutation.isLoading
+                ? 'Changing...'
+                : 'Change Password'}
             </button>
           </form>
         </div>
@@ -231,13 +292,17 @@ export const AxiosAuthDemo: React.FC = () => {
               <p>Loading users...</p>
             ) : (
               <div>
-                <h4 className="font-medium mb-2">All Users ({usersData?.length || 0})</h4>
+                <h4 className="font-medium mb-2">
+                  All Users ({usersData?.length || 0})
+                </h4>
                 <div className="space-y-2">
                   {usersData?.map((user) => (
                     <div key={user.id} className="p-2 bg-white rounded border">
                       <div className="flex justify-between">
                         <span>{user.email}</span>
-                        <span className="text-sm text-gray-500">{user.role}</span>
+                        <span className="text-sm text-gray-500">
+                          {user.role}
+                        </span>
                       </div>
                     </div>
                   ))}

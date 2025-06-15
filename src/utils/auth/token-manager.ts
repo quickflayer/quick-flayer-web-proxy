@@ -1,3 +1,5 @@
+import { AUTH_CONFIG } from '@/configs/auth/auth.config';
+import { STORAGE_KEYS, COOKIE_NAMES } from '@/constants';
 import { logger } from '@/utils/logger';
 
 /**
@@ -11,12 +13,12 @@ import { logger } from '@/utils/logger';
  */
 export const storeToken = (token: string): void => {
   if (typeof window !== 'undefined') {
-    localStorage.setItem('auth_token', token);
+    localStorage.setItem(STORAGE_KEYS.AUTH_TOKEN, token);
 
     const expires = new Date();
-    expires.setTime(expires.getTime() + 24 * 60 * 60 * 1000);
+    expires.setTime(expires.getTime() + AUTH_CONFIG.TOKEN_EXPIRY);
 
-    document.cookie = `auth_token=${token}; expires=${expires.toUTCString()}; path=/; SameSite=Lax; Secure=${window.location.protocol === 'https:'}`;
+    document.cookie = `${COOKIE_NAMES.AUTH_TOKEN}=${token}; expires=${expires.toUTCString()}; path=/; SameSite=Lax; Secure=${window.location.protocol === 'https:'}`;
   }
 };
 
@@ -28,7 +30,7 @@ export const storeToken = (token: string): void => {
  */
 export const getToken = (): string | null => {
   if (typeof window !== 'undefined') {
-    const localToken = localStorage.getItem('auth_token');
+    const localToken = localStorage.getItem(STORAGE_KEYS.AUTH_TOKEN);
     if (localToken) {
       return localToken;
     }
@@ -51,7 +53,7 @@ export const getCookieToken = (): string | null => {
     const cookies = document.cookie.split(';');
     for (let cookie of cookies) {
       const [name, value] = cookie.trim().split('=');
-      if (name === 'auth_token') {
+      if (name === COOKIE_NAMES.AUTH_TOKEN) {
         return value;
       }
     }
@@ -65,10 +67,9 @@ export const getCookieToken = (): string | null => {
  */
 export const removeToken = (): void => {
   if (typeof window !== 'undefined') {
-    localStorage.removeItem('auth_token');
+    localStorage.removeItem(STORAGE_KEYS.AUTH_TOKEN);
 
-    document.cookie =
-      'auth_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; SameSite=Lax';
+    document.cookie = `${COOKIE_NAMES.AUTH_TOKEN}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; SameSite=Lax`;
   }
 };
 
@@ -83,7 +84,6 @@ export const isTokenExpired = (token: string): boolean => {
 
   try {
     const payload = JSON.parse(atob(token.split('.')[1]));
-
     return payload.exp * 1000 < Date.now();
   } catch (error) {
     logger.error('Error parsing token:', error);

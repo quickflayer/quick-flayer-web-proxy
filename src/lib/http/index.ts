@@ -1,11 +1,4 @@
-import { API_CONFIG } from '@configs/api.config';
-import { AUTH_CONFIG } from '@configs/auth/auth.config';
-import {
-  getToken,
-  storeToken,
-  removeToken,
-  isTokenExpired,
-} from '@utils/auth/token-manager';
+// External dependencies (alphabetical)
 import axios, {
   AxiosInstance,
   AxiosRequestConfig,
@@ -13,7 +6,16 @@ import axios, {
   AxiosError,
 } from 'axios';
 
-import { Any } from '@/types';
+// @/** imports
+import { API_CONFIG } from '@/configs/api.config';
+import { AUTH_CONFIG } from '@/configs/auth/auth.config';
+import {
+  getToken,
+  storeToken,
+  removeToken,
+  isTokenExpired,
+} from '@/utils/auth/token-manager';
+import { getErrorMessage as getApiErrorMessage } from '@/utils/error-handler';
 import { logger } from '@/utils/logger';
 
 const http: AxiosInstance = axios.create({
@@ -134,52 +136,13 @@ http.interceptors.response.use(
       }
     }
 
-    const errorMessage = getErrorMessage(error);
+    const errorMessage = getApiErrorMessage(error);
     return Promise.reject({
       ...error,
       message: errorMessage,
     });
   }
 );
-
-/**
- * Extracts a user-friendly error message from an AxiosError object.
- *
- * This function attempts to parse the error response data to provide a more
- * detailed message. It handles various error formats, including string and
- * object-based messages. If specific message details are available, they are
- * returned. In the absence of such details, it falls back to the Axios error
- * message or a default message.
- *
- * @param error - The AxiosError object from which to extract the message.
- * @returns A string containing the user-friendly error message.
- */
-
-function getErrorMessage(error: AxiosError): string {
-  if (error.response?.data) {
-    const data = error.response.data as Any;
-
-    if (typeof data === 'string') {
-      return data;
-    }
-
-    if (data.message) {
-      return Array.isArray(data.message)
-        ? data.message.join(', ')
-        : data.message;
-    }
-
-    if (data.error) {
-      return data.error;
-    }
-  }
-
-  if (error.message) {
-    return error.message;
-  }
-
-  return 'An unexpected error occurred';
-}
 
 export default http;
 

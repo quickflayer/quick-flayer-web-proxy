@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 // React imports (first)
 import React from 'react';
@@ -7,8 +7,8 @@ import React from 'react';
 import { Provider } from 'react-redux';
 
 // @/** imports
-import { useAuth } from '@/hooks/useAuth';
-import { useAuthTimer } from '@/hooks/useAuthTimer';
+import { useAuth } from '@/hooks/use-auth';
+import { useAuthTimer } from '@/hooks/use-auth-timer';
 
 // Relative imports
 import { store } from '../../lib/store';

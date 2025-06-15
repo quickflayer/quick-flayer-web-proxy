@@ -1,10 +1,11 @@
-import { Any, TError, TryCatchResult } from '@/types';
+import { TError, TryCatchOptions, TryCatchResult } from '@/types';
 
-export async function tryCatch<T>(
-  fn: () => Promise<T>,
-  logger?: (message: string, ...optionalParams: Any[]) => void,
-  fallbackError?: string
-): Promise<TryCatchResult<T>> {
+export async function tryCatch<T>({
+  fn,
+  logger,
+  fallbackError,
+  finally: finallyFn,
+}: TryCatchOptions): Promise<TryCatchResult<T>> {
   try {
     const data = await fn();
     return { success: true, data };
@@ -12,6 +13,8 @@ export async function tryCatch<T>(
     const error: TError = parseError(err, fallbackError);
     logger?.(error.message, error.data);
     return { success: false, error };
+  } finally {
+    finallyFn?.();
   }
 }
 
