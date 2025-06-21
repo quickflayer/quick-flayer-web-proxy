@@ -20,7 +20,6 @@ export const MainContent = styled(Box, {
 })<{ sidebarWidth: number }>(({ theme, sidebarWidth }) => ({
   flexGrow: 1,
   width: `calc(100% - ${sidebarWidth}px)`,
-  marginLeft: `${sidebarWidth}px`,
   marginTop: '64px',
   minHeight: 'calc(100vh - 64px)',
   background: 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%)',
