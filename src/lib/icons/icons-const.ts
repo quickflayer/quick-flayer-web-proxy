@@ -62,4 +62,7 @@ export const ICONS = {
   SAVE: 'ic:outline-save',
   CANCEL: 'ic:outline-close',
   CREATE: 'ic:outline-add',
+  // View Mode Icons
+  TABLE_VIEW: 'ic:outline-table-rows',
+  GRID_VIEW: 'ic:outline-grid-view',
 } as const;
