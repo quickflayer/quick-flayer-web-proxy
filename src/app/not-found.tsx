@@ -3,7 +3,14 @@
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
-import { Box, Button, Card, CardContent, Container, Typography } from '@mui/material';
+import {
+  Box,
+  Button,
+  Card,
+  CardContent,
+  Container,
+  Typography,
+} from '@mui/material';
 
 import Icon from '@lib/icons';
 import { ICONS } from '@lib/icons/icons-const';
@@ -106,8 +113,8 @@ export default function NotFoundPage() {
                 mx: 'auto',
               }}
             >
-              The page you&apos;re looking for doesn&apos;t exist or has been moved. 
-              Let&apos;s get you back on track!
+              The page you&apos;re looking for doesn&apos;t exist or has been
+              moved. Let&apos;s get you back on track!
             </Typography>
 
             {/* Suggestions */}
@@ -165,7 +172,7 @@ export default function NotFoundPage() {
                     Settings
                   </Typography>
                 </Link>
-                <Link href="/users" style={{ textDecoration: 'none' }}>
+                <Link href="/masters/users" style={{ textDecoration: 'none' }}>
                   <Typography
                     variant="body2"
                     sx={{
@@ -203,9 +210,11 @@ export default function NotFoundPage() {
                   py: 1.5,
                   fontSize: '1rem',
                   fontWeight: 600,
-                  background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                  background:
+                    'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
                   '&:hover': {
-                    background: 'linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%)',
+                    background:
+                      'linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%)',
                   },
                 }}
               >

@@ -51,4 +51,15 @@ export const ICONS = {
   LOADING_PULSE: 'svg-spinners:pulse-3',
   SERVER_ERROR: 'line-md:cloud-off-outline-loop',
   NETWORK_ERROR: 'line-md:wifi-off-outline',
+  // User Management Icons
+  MORE_VERTICAL: 'ic:outline-more-vert',
+  EDIT_USER: 'ic:outline-edit',
+  DELETE_USER: 'ic:outline-delete',
+  ADD_USER: 'ic:outline-person-add',
+  USER_ACTIVE: 'ic:outline-check-circle',
+  USER_INACTIVE: 'ic:outline-cancel',
+  TOGGLE_STATUS: 'ic:outline-toggle-on',
+  SAVE: 'ic:outline-save',
+  CANCEL: 'ic:outline-close',
+  CREATE: 'ic:outline-add',
 } as const;

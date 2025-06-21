@@ -23,15 +23,14 @@ export function NavigationMenu({ onNavClick }: NavigationMenuProps) {
       icon: ICONS.DASHBOARD_ICON,
     },
     {
-      name: 'Management',
+      name: 'Masters',
       icon: 'ic:outline-business',
       children: [
         {
           name: 'Users',
-          path: '/users',
+          path: '/masters/users',
           icon: ICONS.USERS_ICON,
           adminOnly: true,
-          badge: '12',
         },
         {
           name: 'Roles',

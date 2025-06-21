@@ -7,7 +7,6 @@ import { useAuth } from '@/hooks/use-auth';
 import Icon from '@/lib/icons';
 import { ICONS } from '@/lib/icons/icons-const';
 
-
 import {
   MobileNavContainer,
   MobileNavigation,
@@ -21,7 +20,12 @@ export function MobileBottomNav() {
 
   const navItems = [
     { name: 'Dashboard', path: '/dashboard', icon: ICONS.DASHBOARD_ICON },
-    { name: 'Users', path: '/users', icon: ICONS.USERS_ICON, adminOnly: true },
+    {
+      name: 'Users',
+      path: '/masters/users',
+      icon: ICONS.USERS_ICON,
+      adminOnly: true,
+    },
     { name: 'Reports', path: '/reports', icon: ICONS.MOBILE_REPORTS_ICON },
     { name: 'Settings', path: '/settings', icon: ICONS.SETTINGS_ICON },
   ];

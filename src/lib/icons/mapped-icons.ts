@@ -47,6 +47,16 @@ import {
   SvgSpinnersPulse3,
   LineMdCloudOffOutlineLoop,
   LineMdWifiOffOutline,
+  IcOutlineMoreVert,
+  IcOutlineEdit,
+  IcOutlineDelete,
+  IcOutlinePersonAdd,
+  IcOutlineCheckCircle,
+  IcOutlineCancel,
+  IcOutlineToggleOn,
+  IcOutlineSave,
+  IcOutlineClose,
+  IcOutlineAdd,
 } from './svg-icons';
 import { MappedIcons } from './types';
 
@@ -101,6 +111,17 @@ const mappedIcons: MappedIcons = {
   ['svg-spinners:pulse-3']: SvgSpinnersPulse3,
   ['line-md:cloud-off-outline-loop']: LineMdCloudOffOutlineLoop,
   ['line-md:wifi-off-outline']: LineMdWifiOffOutline,
+  // User Management Icons
+  ['ic:outline-more-vert']: IcOutlineMoreVert,
+  ['ic:outline-edit']: IcOutlineEdit,
+  ['ic:outline-delete']: IcOutlineDelete,
+  ['ic:outline-person-add']: IcOutlinePersonAdd,
+  ['ic:outline-check-circle']: IcOutlineCheckCircle,
+  ['ic:outline-cancel']: IcOutlineCancel,
+  ['ic:outline-toggle-on']: IcOutlineToggleOn,
+  ['ic:outline-save']: IcOutlineSave,
+  ['ic:outline-close']: IcOutlineClose,
+  ['ic:outline-add']: IcOutlineAdd,
 };
 
 export default mappedIcons;

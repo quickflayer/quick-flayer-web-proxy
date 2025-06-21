@@ -7,6 +7,8 @@ import { IconButtonProps } from '../icon-button/type';
 export type AppButtonProps = ButtonProps & {
   loading?: boolean;
   minWidth?: number;
+  gradient?: boolean;
+  theme?: 'primary' | 'secondary' | 'success' | 'error' | 'warning' | 'info';
 };
 
 export type AppGroupButtonItem = AppButtonProps & {

@@ -46,6 +46,16 @@ export {
   IcOutlineHome,
   IcOutlineArrowBack,
   IcBaselineSearch,
+  IcOutlineMoreVert,
+  IcOutlineEdit,
+  IcOutlineDelete,
+  IcOutlinePersonAdd,
+  IcOutlineCheckCircle,
+  IcOutlineCancel,
+  IcOutlineToggleOn,
+  IcOutlineSave,
+  IcOutlineClose,
+  IcOutlineAdd,
 } from './ic-outline-icons';
 
 // SVG Spinners
