@@ -1521,3 +1521,461 @@ export function IcOutlineAssessment(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
+
+export function LineMdAlertTriangle(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={24}
+      height={24}
+      viewBox="0 0 24 24"
+      {...props}
+    >
+      <g
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+      >
+        <path strokeDasharray={64} strokeDashoffset={64} d="M12 3l9 17H3z">
+          <animate
+            fill="freeze"
+            attributeName="stroke-dashoffset"
+            dur="0.6s"
+            values="64;0"
+          ></animate>
+        </path>
+        <path strokeDasharray={6} strokeDashoffset={6} d="M12 10v4">
+          <animate
+            fill="freeze"
+            attributeName="stroke-dashoffset"
+            begin="0.6s"
+            dur="0.2s"
+            values="6;0"
+          ></animate>
+        </path>
+        <path strokeDasharray={2} strokeDashoffset={2} d="M12 17v0.01">
+          <animate
+            fill="freeze"
+            attributeName="stroke-dashoffset"
+            begin="0.8s"
+            dur="0.2s"
+            values="2;0"
+          ></animate>
+        </path>
+      </g>
+    </svg>
+  );
+}
+
+export function LineMdDocumentRemove(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={24}
+      height={24}
+      viewBox="0 0 24 24"
+      {...props}
+    >
+      <g
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+      >
+        <path
+          strokeDasharray={64}
+          strokeDashoffset={64}
+          d="M13 3L19 9V21H5V3H13"
+        >
+          <animate
+            fill="freeze"
+            attributeName="stroke-dashoffset"
+            dur="0.6s"
+            values="64;0"
+          ></animate>
+        </path>
+        <path strokeDasharray={14} strokeDashoffset={14} d="M12.5 3V8.5H19">
+          <animate
+            fill="freeze"
+            attributeName="stroke-dashoffset"
+            begin="0.7s"
+            dur="0.2s"
+            values="14;0"
+          ></animate>
+        </path>
+        <path strokeDasharray={8} strokeDashoffset={8} d="M9 14h6">
+          <animate
+            fill="freeze"
+            attributeName="stroke-dashoffset"
+            begin="0.9s"
+            dur="0.2s"
+            values="8;0"
+          ></animate>
+        </path>
+      </g>
+    </svg>
+  );
+}
+
+export function LineMdRotate270(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={24}
+      height={24}
+      viewBox="0 0 24 24"
+      {...props}
+    >
+      <g
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+      >
+        <path
+          strokeDasharray={64}
+          strokeDashoffset={64}
+          d="M12 3c4.97 0 9 4.03 9 9c0 4.97 -4.03 9 -9 9c-4.97 0 -9 -4.03 -9 -9c0 -4.97 4.03 -9 9 -9Z"
+        >
+          <animate
+            fill="freeze"
+            attributeName="stroke-dashoffset"
+            dur="0.6s"
+            values="64;0"
+          ></animate>
+        </path>
+        <path strokeDasharray={8} strokeDashoffset={8} d="M12 8v8">
+          <animate
+            fill="freeze"
+            attributeName="stroke-dashoffset"
+            begin="0.6s"
+            dur="0.2s"
+            values="8;0"
+          ></animate>
+        </path>
+        <path strokeDasharray={6} strokeDashoffset={6} d="M15 13l-3 3l-3 -3">
+          <animate
+            fill="freeze"
+            attributeName="stroke-dashoffset"
+            begin="0.8s"
+            dur="0.2s"
+            values="6;0"
+          ></animate>
+        </path>
+      </g>
+    </svg>
+  );
+}
+
+export function IcOutlineHome(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={24}
+      height={24}
+      viewBox="0 0 24 24"
+      {...props}
+    >
+      <path
+        fill="currentColor"
+        d="M12 5.69l5 4.5V18h-2v-6H9v6H7v-7.81zM12 3L2 12h3v8h6v-6h2v6h6v-8h3z"
+      ></path>
+    </svg>
+  );
+}
+
+export function IcOutlineArrowBack(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={24}
+      height={24}
+      viewBox="0 0 24 24"
+      {...props}
+    >
+      <path
+        fill="currentColor"
+        d="M20 11H7.83l5.59-5.59L12 4l-8 8l8 8l1.41-1.41L7.83 13H20z"
+      ></path>
+    </svg>
+  );
+}
+
+export function SvgSpinnersRingResize(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={24}
+      height={24}
+      viewBox="0 0 24 24"
+      {...props}
+    >
+      <path
+        fill="currentColor"
+        d="M12 1a11 11 0 1 0 11 11A11 11 0 0 0 12 1Zm0 19a8 8 0 1 1 8-8a8 8 0 0 1-8 8Z"
+        opacity={0.25}
+      ></path>
+      <path
+        fill="currentColor"
+        d="M12 4a8 8 0 0 1 7.89 6.7a1.53 1.53 0 0 0 1.49 1.3a1.5 1.5 0 0 0 1.48-1.75a11 11 0 0 0-21.72 0A1.5 1.5 0 0 0 2.62 12a1.53 1.53 0 0 0 1.49-1.3A8 8 0 0 1 12 4Z"
+      >
+        <animateTransform
+          attributeName="transform"
+          dur="0.75s"
+          repeatCount="indefinite"
+          type="rotate"
+          values="0 12 12;360 12 12"
+        ></animateTransform>
+      </path>
+    </svg>
+  );
+}
+
+export function SvgSpinners3DotsBounce(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={24}
+      height={24}
+      viewBox="0 0 24 24"
+      {...props}
+    >
+      <circle cx={4} cy={12} r={3} fill="currentColor">
+        <animate
+          id="svgSpinners3DotsBounce0"
+          attributeName="cy"
+          begin="0;svgSpinners3DotsBounce1.end+0.25s"
+          calcMode="spline"
+          dur="0.6s"
+          keySplines=".33,.66,.66,1;.33,0,.66,.33"
+          keyTimes="0;.5;1"
+          values="12;6;12"
+        ></animate>
+      </circle>
+      <circle cx={12} cy={12} r={3} fill="currentColor">
+        <animate
+          attributeName="cy"
+          begin="svgSpinners3DotsBounce0.begin+0.1s"
+          calcMode="spline"
+          dur="0.6s"
+          keySplines=".33,.66,.66,1;.33,0,.66,.33"
+          keyTimes="0;.5;1"
+          values="12;6;12"
+        ></animate>
+      </circle>
+      <circle cx={20} cy={12} r={3} fill="currentColor">
+        <animate
+          id="svgSpinners3DotsBounce1"
+          attributeName="cy"
+          begin="svgSpinners3DotsBounce0.begin+0.2s"
+          calcMode="spline"
+          dur="0.6s"
+          keySplines=".33,.66,.66,1;.33,0,.66,.33"
+          keyTimes="0;.5;1"
+          values="12;6;12"
+        ></animate>
+      </circle>
+    </svg>
+  );
+}
+
+export function SvgSpinnersPulse3(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={24}
+      height={24}
+      viewBox="0 0 24 24"
+      {...props}
+    >
+      <circle cx={12} cy={12} r={0} fill="currentColor">
+        <animate
+          attributeName="r"
+          begin="0;svgSpinnersPulse30.end-0.5s"
+          calcMode="spline"
+          dur="2s"
+          keySplines="0,0.2,0.8,1"
+          keyTimes="0;1"
+          values="0;11"
+        ></animate>
+        <animate
+          attributeName="opacity"
+          begin="0;svgSpinnersPulse30.end-0.5s"
+          calcMode="spline"
+          dur="2s"
+          keySplines="0,0.2,0.8,1"
+          keyTimes="0;1"
+          values="1;0"
+        ></animate>
+      </circle>
+      <circle cx={12} cy={12} r={0} fill="currentColor">
+        <animate
+          attributeName="r"
+          begin="svgSpinnersPulse30.begin+0.4s"
+          calcMode="spline"
+          dur="2s"
+          keySplines="0,0.2,0.8,1"
+          keyTimes="0;1"
+          values="0;11"
+        ></animate>
+        <animate
+          attributeName="opacity"
+          begin="svgSpinnersPulse30.begin+0.4s"
+          calcMode="spline"
+          dur="2s"
+          keySplines="0,0.2,0.8,1"
+          keyTimes="0;1"
+          values="1;0"
+        ></animate>
+      </circle>
+      <circle cx={12} cy={12} r={0} fill="currentColor">
+        <animate
+          id="svgSpinnersPulse30"
+          attributeName="r"
+          begin="svgSpinnersPulse30.begin+0.8s"
+          calcMode="spline"
+          dur="2s"
+          keySplines="0,0.2,0.8,1"
+          keyTimes="0;1"
+          values="0;11"
+        ></animate>
+        <animate
+          attributeName="opacity"
+          begin="svgSpinnersPulse30.begin+0.8s"
+          calcMode="spline"
+          dur="2s"
+          keySplines="0,0.2,0.8,1"
+          keyTimes="0;1"
+          values="1;0"
+        ></animate>
+      </circle>
+    </svg>
+  );
+}
+
+export function LineMdCloudOffOutlineLoop(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={24}
+      height={24}
+      viewBox="0 0 24 24"
+      {...props}
+    >
+      <g
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+      >
+        <path
+          strokeDasharray={20}
+          strokeDashoffset={20}
+          d="M12 17.5c-6.6 0 -6.6 -6 0 -6c6.6 0 6.6 6 0 6Z"
+        >
+          <animate
+            fill="freeze"
+            attributeName="stroke-dashoffset"
+            dur="0.3s"
+            values="20;0"
+          ></animate>
+        </path>
+        <path
+          strokeDasharray={15}
+          strokeDashoffset={15}
+          d="M8 12c0 -3 2.5 -5 5.5 -5c2.6 0 4.8 1.9 5.4 4.5"
+        >
+          <animate
+            fill="freeze"
+            attributeName="stroke-dashoffset"
+            begin="0.3s"
+            dur="0.3s"
+            values="15;0"
+          ></animate>
+        </path>
+        <path strokeDasharray={12} strokeDashoffset={12} d="M3 3l18 18">
+          <animate
+            fill="freeze"
+            attributeName="stroke-dashoffset"
+            begin="0.6s"
+            dur="0.3s"
+            values="12;0"
+          ></animate>
+        </path>
+      </g>
+    </svg>
+  );
+}
+
+export function LineMdWifiOffOutline(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={24}
+      height={24}
+      viewBox="0 0 24 24"
+      {...props}
+    >
+      <g
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+      >
+        <path
+          strokeDasharray={50}
+          strokeDashoffset={50}
+          d="M12 20.5c-8 0 -8 -6 0 -6s8 6 0 6Z"
+        >
+          <animate
+            fill="freeze"
+            attributeName="stroke-dashoffset"
+            dur="0.6s"
+            values="50;0"
+          ></animate>
+        </path>
+        <path
+          strokeDasharray={26}
+          strokeDashoffset={26}
+          d="M12 16.5c-5.5 0 -7.5 -4 0 -4s5.5 4 0 4Z"
+        >
+          <animate
+            fill="freeze"
+            attributeName="stroke-dashoffset"
+            begin="0.1s"
+            dur="0.4s"
+            values="26;0"
+          ></animate>
+        </path>
+        <path
+          strokeDasharray={20}
+          strokeDashoffset={20}
+          d="M12 12.5c-3.5 0 -4.5 -2.5 0 -2.5s3.5 2.5 0 2.5Z"
+        >
+          <animate
+            fill="freeze"
+            attributeName="stroke-dashoffset"
+            begin="0.2s"
+            dur="0.3s"
+            values="20;0"
+          ></animate>
+        </path>
+        <path strokeDasharray={12} strokeDashoffset={12} d="M3 3l18 18">
+          <animate
+            fill="freeze"
+            attributeName="stroke-dashoffset"
+            begin="0.5s"
+            dur="0.3s"
+            values="12;0"
+          ></animate>
+        </path>
+      </g>
+    </svg>
+  );
+}

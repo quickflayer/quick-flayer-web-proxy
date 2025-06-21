@@ -37,6 +37,16 @@ import {
   IcOutlinePeople,
   IcOutlineLogout,
   IcOutlineAssessment,
+  LineMdAlertTriangle,
+  LineMdDocumentRemove,
+  LineMdRotate270,
+  IcOutlineHome,
+  IcOutlineArrowBack,
+  SvgSpinnersRingResize,
+  SvgSpinners3DotsBounce,
+  SvgSpinnersPulse3,
+  LineMdCloudOffOutlineLoop,
+  LineMdWifiOffOutline,
 } from './SvgIcons';
 import { MappedIcons } from './types';
 
@@ -80,6 +90,17 @@ const mappedIcons: MappedIcons = {
   ['ic:outline-people']: IcOutlinePeople,
   ['ic:outline-logout']: IcOutlineLogout,
   ['ic:outline-assessment']: IcOutlineAssessment,
+  // Error and Status Icons
+  ['line-md:alert-triangle']: LineMdAlertTriangle,
+  ['line-md:document-remove']: LineMdDocumentRemove,
+  ['line-md:rotate-270']: LineMdRotate270,
+  ['ic:outline-home']: IcOutlineHome,
+  ['ic:outline-arrow-back']: IcOutlineArrowBack,
+  ['svg-spinners:ring-resize']: SvgSpinnersRingResize,
+  ['svg-spinners:3-dots-bounce']: SvgSpinners3DotsBounce,
+  ['svg-spinners:pulse-3']: SvgSpinnersPulse3,
+  ['line-md:cloud-off-outline-loop']: LineMdCloudOffOutlineLoop,
+  ['line-md:wifi-off-outline']: LineMdWifiOffOutline,
 };
 
 export default mappedIcons;

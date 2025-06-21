@@ -39,4 +39,16 @@ export const ICONS = {
   MOBILE_USERS_ICON: 'ic:outline-people',
   MOBILE_REPORTS_ICON: 'ic:outline-assessment',
   MOBILE_SETTINGS_ICON: 'ic:outline-settings',
+  // Error and Status Icons
+  ERROR_CIRCLE: 'line-md:alert-circle',
+  ERROR_TRIANGLE: 'line-md:alert-triangle',
+  NOT_FOUND: 'line-md:document-remove',
+  REFRESH: 'line-md:rotate-270',
+  HOME: 'ic:outline-home',
+  BACK_ARROW: 'ic:outline-arrow-back',
+  LOADING_SPINNER: 'svg-spinners:ring-resize',
+  LOADING_DOTS: 'svg-spinners:3-dots-bounce',
+  LOADING_PULSE: 'svg-spinners:pulse-3',
+  SERVER_ERROR: 'line-md:cloud-off-outline-loop',
+  NETWORK_ERROR: 'line-md:wifi-off-outline',
 } as const;
