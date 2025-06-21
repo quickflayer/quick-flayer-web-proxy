@@ -1,0 +1,442 @@
+// prettier-ignore
+
+import React from 'react';
+import type { SVGProps } from 'react';
+
+export function SvgSpinners3DotsMove(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={24}
+      height={24}
+      viewBox="0 0 24 24"
+      {...props}
+    >
+      <circle cx={4} cy={12} r={0} fill="currentColor">
+        <animate
+          fill="freeze"
+          attributeName="r"
+          begin="0;svgSpinners3DotsMove1.end"
+          calcMode="spline"
+          dur="0.5s"
+          keySplines=".36,.6,.31,1"
+          values="0;3"
+        ></animate>
+        <animate
+          fill="freeze"
+          attributeName="cx"
+          begin="svgSpinners3DotsMove7.end"
+          calcMode="spline"
+          dur="0.5s"
+          keySplines=".36,.6,.31,1"
+          values="4;12"
+        ></animate>
+        <animate
+          fill="freeze"
+          attributeName="cx"
+          begin="svgSpinners3DotsMove5.end"
+          calcMode="spline"
+          dur="0.5s"
+          keySplines=".36,.6,.31,1"
+          values="12;20"
+        ></animate>
+        <animate
+          id="svgSpinners3DotsMove0"
+          fill="freeze"
+          attributeName="r"
+          begin="svgSpinners3DotsMove3.end"
+          calcMode="spline"
+          dur="0.5s"
+          keySplines=".36,.6,.31,1"
+          values="3;0"
+        ></animate>
+        <animate
+          id="svgSpinners3DotsMove1"
+          fill="freeze"
+          attributeName="cx"
+          begin="svgSpinners3DotsMove0.end"
+          calcMode="spline"
+          dur="0.5s"
+          keySplines=".36,.6,.31,1"
+          values="20;4"
+        ></animate>
+      </circle>
+      <circle cx={4} cy={12} r={3} fill="currentColor">
+        <animate
+          fill="freeze"
+          attributeName="cx"
+          begin="0.1s;svgSpinners3DotsMove1.end+0.1s"
+          calcMode="spline"
+          dur="0.5s"
+          keySplines=".36,.6,.31,1"
+          values="4;12"
+        ></animate>
+        <animate
+          fill="freeze"
+          attributeName="cx"
+          begin="svgSpinners3DotsMove7.end+0.1s"
+          calcMode="spline"
+          dur="0.5s"
+          keySplines=".36,.6,.31,1"
+          values="12;20"
+        ></animate>
+        <animate
+          id="svgSpinners3DotsMove2"
+          fill="freeze"
+          attributeName="r"
+          begin="svgSpinners3DotsMove5.end+0.1s"
+          calcMode="spline"
+          dur="0.5s"
+          keySplines=".36,.6,.31,1"
+          values="3;0"
+        ></animate>
+        <animate
+          id="svgSpinners3DotsMove3"
+          fill="freeze"
+          attributeName="cx"
+          begin="svgSpinners3DotsMove2.end"
+          calcMode="spline"
+          dur="0.5s"
+          keySplines=".36,.6,.31,1"
+          values="20;4"
+        ></animate>
+        <animate
+          fill="freeze"
+          attributeName="r"
+          begin="svgSpinners3DotsMove3.end"
+          calcMode="spline"
+          dur="0.5s"
+          keySplines=".36,.6,.31,1"
+          values="0;3"
+        ></animate>
+      </circle>
+      <circle cx={12} cy={12} r={3} fill="currentColor">
+        <animate
+          fill="freeze"
+          attributeName="cx"
+          begin="0.2s;svgSpinners3DotsMove1.end+0.2s"
+          calcMode="spline"
+          dur="0.5s"
+          keySplines=".36,.6,.31,1"
+          values="12;20"
+        ></animate>
+        <animate
+          id="svgSpinners3DotsMove4"
+          fill="freeze"
+          attributeName="r"
+          begin="svgSpinners3DotsMove7.end+0.2s"
+          calcMode="spline"
+          dur="0.5s"
+          keySplines=".36,.6,.31,1"
+          values="3;0"
+        ></animate>
+        <animate
+          id="svgSpinners3DotsMove5"
+          fill="freeze"
+          attributeName="cx"
+          begin="svgSpinners3DotsMove4.end"
+          calcMode="spline"
+          dur="0.5s"
+          keySplines=".36,.6,.31,1"
+          values="20;4"
+        ></animate>
+        <animate
+          fill="freeze"
+          attributeName="r"
+          begin="svgSpinners3DotsMove5.end"
+          calcMode="spline"
+          dur="0.5s"
+          keySplines=".36,.6,.31,1"
+          values="0;3"
+        ></animate>
+        <animate
+          fill="freeze"
+          attributeName="cx"
+          begin="svgSpinners3DotsMove5.end"
+          calcMode="spline"
+          dur="0.5s"
+          keySplines=".36,.6,.31,1"
+          values="4;12"
+        ></animate>
+      </circle>
+      <circle cx={20} cy={12} r={3} fill="currentColor">
+        <animate
+          id="svgSpinners3DotsMove6"
+          fill="freeze"
+          attributeName="r"
+          begin="0.3s;svgSpinners3DotsMove1.end+0.3s"
+          calcMode="spline"
+          dur="0.5s"
+          keySplines=".36,.6,.31,1"
+          values="3;0"
+        ></animate>
+        <animate
+          id="svgSpinners3DotsMove7"
+          fill="freeze"
+          attributeName="cx"
+          begin="svgSpinners3DotsMove6.end"
+          calcMode="spline"
+          dur="0.5s"
+          keySplines=".36,.6,.31,1"
+          values="20;4"
+        ></animate>
+        <animate
+          fill="freeze"
+          attributeName="r"
+          begin="svgSpinners3DotsMove7.end"
+          calcMode="spline"
+          dur="0.5s"
+          keySplines=".36,.6,.31,1"
+          values="0;3"
+        ></animate>
+        <animate
+          fill="freeze"
+          attributeName="cx"
+          begin="svgSpinners3DotsMove7.end"
+          calcMode="spline"
+          dur="0.5s"
+          keySplines=".36,.6,.31,1"
+          values="4;12"
+        ></animate>
+        <animate
+          fill="freeze"
+          attributeName="cx"
+          begin="svgSpinners3DotsMove7.end"
+          calcMode="spline"
+          dur="0.5s"
+          keySplines=".36,.6,.31,1"
+          values="12;20"
+        ></animate>
+      </circle>
+    </svg>
+  );
+}
+
+export function SvgSpinnersBlocksShuffle3(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={24}
+      height={24}
+      viewBox="0 0 24 24"
+      {...props}
+    >
+      <rect width={10} height={10} x={1} y={1} fill="currentColor" rx={1}>
+        <animate
+          fill="freeze"
+          attributeName="x"
+          dur="0.6s"
+          keyTimes="0;0.25;0.75;1"
+          values="1;1;13;13"
+        ></animate>
+        <animate
+          fill="freeze"
+          attributeName="y"
+          dur="0.6s"
+          keyTimes="0;0.25;0.75;1"
+          values="1;13;13;1"
+        ></animate>
+      </rect>
+      <rect width={10} height={10} x={1} y={13} fill="currentColor" rx={1}>
+        <animate
+          fill="freeze"
+          attributeName="x"
+          dur="0.6s"
+          keyTimes="0;0.25;0.75;1"
+          values="1;13;13;1"
+        ></animate>
+        <animate
+          fill="freeze"
+          attributeName="y"
+          dur="0.6s"
+          keyTimes="0;0.25;0.75;1"
+          values="13;13;1;1"
+        ></animate>
+      </rect>
+      <rect width={10} height={10} x={13} y={13} fill="currentColor" rx={1}>
+        <animate
+          fill="freeze"
+          attributeName="x"
+          dur="0.6s"
+          keyTimes="0;0.25;0.75;1"
+          values="13;13;1;1"
+        ></animate>
+        <animate
+          fill="freeze"
+          attributeName="y"
+          dur="0.6s"
+          keyTimes="0;0.25;0.75;1"
+          values="13;1;1;13"
+        ></animate>
+      </rect>
+      <rect width={10} height={10} x={13} y={1} fill="currentColor" rx={1}>
+        <animate
+          fill="freeze"
+          attributeName="x"
+          dur="0.6s"
+          keyTimes="0;0.25;0.75;1"
+          values="13;1;1;13"
+        ></animate>
+        <animate
+          fill="freeze"
+          attributeName="y"
+          dur="0.6s"
+          keyTimes="0;0.25;0.75;1"
+          values="1;1;13;13"
+        ></animate>
+      </rect>
+    </svg>
+  );
+}
+
+export function SvgSpinnersRingResize(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={24}
+      height={24}
+      viewBox="0 0 24 24"
+      {...props}
+    >
+      <path
+        fill="currentColor"
+        d="M12 1a11 11 0 1 0 11 11A11 11 0 0 0 12 1Zm0 19a8 8 0 1 1 8-8a8 8 0 0 1-8 8Z"
+        opacity={0.25}
+      ></path>
+      <path
+        fill="currentColor"
+        d="M12 4a8 8 0 0 1 7.89 6.7a1.53 1.53 0 0 0 1.49 1.3a1.5 1.5 0 0 0 1.48-1.75a11 11 0 0 0-21.72 0A1.5 1.5 0 0 0 2.62 12a1.53 1.53 0 0 0 1.49-1.3A8 8 0 0 1 12 4Z"
+      >
+        <animateTransform
+          attributeName="transform"
+          dur="0.75s"
+          repeatCount="indefinite"
+          type="rotate"
+          values="0 12 12;360 12 12"
+        ></animateTransform>
+      </path>
+    </svg>
+  );
+}
+
+export function SvgSpinners3DotsBounce(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={24}
+      height={24}
+      viewBox="0 0 24 24"
+      {...props}
+    >
+      <circle cx={4} cy={12} r={3} fill="currentColor">
+        <animate
+          id="svgSpinners3DotsBounce0"
+          attributeName="cy"
+          begin="0;svgSpinners3DotsBounce1.end+0.25s"
+          calcMode="spline"
+          dur="0.6s"
+          keySplines=".33,.66,.66,1;.33,0,.66,.33"
+          keyTimes="0;.5;1"
+          values="12;6;12"
+        ></animate>
+      </circle>
+      <circle cx={12} cy={12} r={3} fill="currentColor">
+        <animate
+          attributeName="cy"
+          begin="svgSpinners3DotsBounce0.begin+0.1s"
+          calcMode="spline"
+          dur="0.6s"
+          keySplines=".33,.66,.66,1;.33,0,.66,.33"
+          keyTimes="0;.5;1"
+          values="12;6;12"
+        ></animate>
+      </circle>
+      <circle cx={20} cy={12} r={3} fill="currentColor">
+        <animate
+          id="svgSpinners3DotsBounce1"
+          attributeName="cy"
+          begin="svgSpinners3DotsBounce0.begin+0.2s"
+          calcMode="spline"
+          dur="0.6s"
+          keySplines=".33,.66,.66,1;.33,0,.66,.33"
+          keyTimes="0;.5;1"
+          values="12;6;12"
+        ></animate>
+      </circle>
+    </svg>
+  );
+}
+
+export function SvgSpinnersPulse3(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={24}
+      height={24}
+      viewBox="0 0 24 24"
+      {...props}
+    >
+      <circle cx={12} cy={12} r={0} fill="currentColor">
+        <animate
+          attributeName="r"
+          begin="0;svgSpinnersPulse30.end-0.5s"
+          calcMode="spline"
+          dur="2s"
+          keySplines="0,0.2,0.8,1"
+          keyTimes="0;1"
+          values="0;11"
+        ></animate>
+        <animate
+          attributeName="opacity"
+          begin="0;svgSpinnersPulse30.end-0.5s"
+          calcMode="spline"
+          dur="2s"
+          keySplines="0,0.2,0.8,1"
+          keyTimes="0;1"
+          values="1;0"
+        ></animate>
+      </circle>
+      <circle cx={12} cy={12} r={0} fill="currentColor">
+        <animate
+          attributeName="r"
+          begin="svgSpinnersPulse30.begin+0.4s"
+          calcMode="spline"
+          dur="2s"
+          keySplines="0,0.2,0.8,1"
+          keyTimes="0;1"
+          values="0;11"
+        ></animate>
+        <animate
+          attributeName="opacity"
+          begin="svgSpinnersPulse30.begin+0.4s"
+          calcMode="spline"
+          dur="2s"
+          keySplines="0,0.2,0.8,1"
+          keyTimes="0;1"
+          values="1;0"
+        ></animate>
+      </circle>
+      <circle cx={12} cy={12} r={0} fill="currentColor">
+        <animate
+          id="svgSpinnersPulse30"
+          attributeName="r"
+          begin="svgSpinnersPulse30.begin+0.8s"
+          calcMode="spline"
+          dur="2s"
+          keySplines="0,0.2,0.8,1"
+          keyTimes="0;1"
+          values="0;11"
+        ></animate>
+        <animate
+          attributeName="opacity"
+          begin="svgSpinnersPulse30.begin+0.8s"
+          calcMode="spline"
+          dur="2s"
+          keySplines="0,0.2,0.8,1"
+          keyTimes="0;1"
+          values="1;0"
+        ></animate>
+      </circle>
+    </svg>
+  );
+}

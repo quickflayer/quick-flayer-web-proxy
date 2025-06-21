@@ -47,7 +47,7 @@ import {
   SvgSpinnersPulse3,
   LineMdCloudOffOutlineLoop,
   LineMdWifiOffOutline,
-} from './SvgIcons';
+} from './svg-icons';
 import { MappedIcons } from './types';
 
 const mappedIcons: MappedIcons = {
