@@ -36,6 +36,7 @@ import {
   IcOutlineSettings,
   IcOutlinePeople,
   IcOutlineLogout,
+  IcOutlineAssessment,
 } from './SvgIcons';
 import { MappedIcons } from './types';
 
@@ -78,6 +79,7 @@ const mappedIcons: MappedIcons = {
   ['ic:outline-settings']: IcOutlineSettings,
   ['ic:outline-people']: IcOutlinePeople,
   ['ic:outline-logout']: IcOutlineLogout,
+  ['ic:outline-assessment']: IcOutlineAssessment,
 };
 
 export default mappedIcons;

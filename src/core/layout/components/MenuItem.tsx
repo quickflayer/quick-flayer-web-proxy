@@ -12,10 +12,9 @@ import {
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-
 import Icon from '@/lib/icons';
 
-import { useAuth } from '../../../hooks/use-auth';
+import { useAuth } from '@hooks/use-auth';
 
 import { BadgeContainer, MenuItemButton } from './sidebar-styled-component';
 
@@ -58,10 +57,13 @@ export function MenuItemComponent({
 
   return (
     <Box>
-      <ListItem disablePadding sx={{ display: 'block' }}>
+      <ListItem
+        component={item.path ? Link : 'div'}
+        href={item.path || undefined}
+        disablePadding
+        sx={{ display: 'block' }}
+      >
         <MenuItemButton
-          component={item.path ? Link : 'div'}
-          href={item.path || undefined}
           onClick={() => {
             if (hasChildren) {
               onExpandToggle(item.name);
