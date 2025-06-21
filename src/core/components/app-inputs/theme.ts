@@ -111,7 +111,7 @@ export const getBaseStyles = <T extends BaseOption>(
 export function getBaseTheme(currentTheme: Theme, theme: MuiTheme): Theme {
   return {
     ...currentTheme,
-    borderRadius: theme.shape.borderRadius,
+    borderRadius: theme.shape.borderRadius as number,
     spacing: { ...currentTheme.spacing, controlHeight: 40 },
     colors: {
       ...currentTheme.colors,
