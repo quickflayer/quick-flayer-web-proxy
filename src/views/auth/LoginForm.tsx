@@ -1,16 +1,16 @@
 import React, { useCallback } from 'react';
 
+import { useAuth } from '@hooks/use-auth';
+import { useToast } from '@hooks/use-toast';
+import { Box, Card, CardContent, Typography, Link } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
-import { Box, Card, CardContent, Typography, Link } from '@mui/material';
-
-import { useAuth } from '@hooks/use-auth';
-import { useToast } from '@hooks/use-toast';
-import { TextFieldController } from '@/components/field-controller';
-import resolver from '@/utils/resolver';
-
 import AppButton from '@core/components/app-button/Button';
+
+import { TextFieldController } from '@/components/field-controller';
+import { unknownError } from '@/utils/error-handler';
+import resolver from '@/utils/resolver';
 
 interface LoginFormProps {
   onSuccess?: () => void;
@@ -35,7 +35,7 @@ const LoginForm = ({ onSuccess, onSwitchToRegister }: LoginFormProps) => {
   const {
     control,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { isSubmitting },
   } = useForm<LoginFormValues>({
     resolver: resolver(loginSchema),
     defaultValues: {
@@ -58,10 +58,8 @@ const LoginForm = ({ onSuccess, onSwitchToRegister }: LoginFormProps) => {
             'Invalid email or password. Please check your credentials and try again.'
           );
         }
-      } catch (error: any) {
-        const errorMessage =
-          error?.message || 'Login failed. Please try again.';
-        showError(errorMessage);
+      } catch (error: unknown) {
+        showError(unknownError(error, 'Login failed. Please try again.'));
       }
     },
     [login, onSuccess, showError, showSuccess]
@@ -164,7 +162,7 @@ const LoginForm = ({ onSuccess, onSwitchToRegister }: LoginFormProps) => {
 
           <Box sx={{ mt: 3, textAlign: 'center' }}>
             <Typography variant="body2" color="text.secondary">
-              Don't have an account?{' '}
+              Don&apos;t have an account?{' '}
               <Link
                 component="button"
                 type="button"

@@ -3,10 +3,11 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
+import { useAuth } from '@/hooks/use-auth';
 import Icon from '@/lib/icons';
 import { ICONS } from '@/lib/icons/icons-const';
 
-import { useAuth } from '../../hooks/use-auth';
+
 import {
   MobileNavContainer,
   MobileNavigation,
@@ -21,7 +22,7 @@ export function MobileBottomNav() {
   const navItems = [
     { name: 'Dashboard', path: '/dashboard', icon: ICONS.DASHBOARD_ICON },
     { name: 'Users', path: '/users', icon: ICONS.USERS_ICON, adminOnly: true },
-    { name: 'Reports', path: '/reports', icon: 'ic:outline-assessment' },
+    { name: 'Reports', path: '/reports', icon: ICONS.MOBILE_REPORTS_ICON },
     { name: 'Settings', path: '/settings', icon: ICONS.SETTINGS_ICON },
   ];
 
@@ -38,14 +39,13 @@ export function MobileBottomNav() {
     <MobileNavContainer>
       <MobileNavPaper>
         <MobileNavigation value={getCurrentValue()}>
-          {filteredNavItems.map((item, index) => (
-            <StyledBottomNavigationAction
-              key={item.path}
-              label={item.name}
-              icon={<Icon icon={item.icon} />}
-              component={Link}
-              href={item.path}
-            />
+          {filteredNavItems.map((item) => (
+            <Link key={item.path} href={item.path} passHref legacyBehavior>
+              <StyledBottomNavigationAction
+                label={item.name}
+                icon={<Icon icon={item.icon} />}
+              />
+            </Link>
           ))}
         </MobileNavigation>
       </MobileNavPaper>

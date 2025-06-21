@@ -6,6 +6,7 @@ import Icon from '@/lib/icons';
 import { ICONS } from '@/lib/icons/icons-const';
 
 import { useAuth } from '../../../hooks/use-auth';
+
 import {
   LogoutIconButton,
   UserAvatar,

@@ -2,11 +2,9 @@
 
 import React from 'react';
 
-import { Provider } from 'react-redux';
 
 import { useAuth } from '@hooks/use-auth';
 import { useAuthTimer } from '@hooks/use-auth-timer';
-import { store } from '@lib/store';
 
 interface AuthStateManagerProps {
   children: React.ReactNode;

@@ -3,11 +3,12 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 
 // @/** imports
 import { CACHE_SETTINGS } from '@/constants';
+import { Any } from '@/types';
 import { logger } from '@/utils/logger';
 import { tryCatch } from '@/utils/try-catch';
 
 // Relative imports
-import http, { AxiosResponse, AxiosError } from '../lib/http';
+import { AxiosResponse, AxiosError } from '../lib/http';
 
 // Generic query options
 export interface QueryOptions<T> {
@@ -60,7 +61,7 @@ export interface MutationResult<TData, TVariables> {
 // Simple cache implementation
 const queryCache = new Map<
   string,
-  { data: any; timestamp: number; staleTime: number }
+  { data: Any; timestamp: number; staleTime: number }
 >();
 
 // Custom hook for GET requests (similar to useQuery)
@@ -78,7 +79,6 @@ export function useAxiosQuery<T>(
     onSuccess,
     onError,
     staleTime = CACHE_SETTINGS.DEFAULT_STALE_TIME,
-    cacheTime = CACHE_SETTINGS.DEFAULT_CACHE_TIME,
   } = options;
 
   const [data, setData] = useState<T | null>(null);
@@ -141,7 +141,7 @@ export function useAxiosQuery<T>(
           onSuccess?.(responseData);
           return responseData;
         },
-        logger: (message: string, ...args: any[]) => {
+        logger: (message: string, ...args: Any[]) => {
           logger.error(`Query failed for ${cacheKey}:`, ...args);
         },
         fallbackError: `Query failed for ${cacheKey}`,

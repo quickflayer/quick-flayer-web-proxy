@@ -2,16 +2,16 @@ import React, { useMemo } from 'react';
 
 import {
   Box,
-  Typography,
-  LinearProgress,
   Chip,
-  Stack,
+  LinearProgress,
   LinearProgressProps,
+  Stack,
+  Typography,
 } from '@mui/material';
 
-import Icon from '@lib/icons';
-import { ICONS } from '@lib/icons/icons-const';
-import requirements from '@utils/auth/password-strength';
+import Icon from '@/lib/icons';
+import { ICONS } from '@/lib/icons/icons-const';
+import requirements from '@/utils/auth/password-strength';
 
 interface PasswordStrengthProps {
   password: string;
@@ -20,7 +20,7 @@ interface PasswordStrengthProps {
 const PasswordStrength = ({ password }: PasswordStrengthProps) => {
   const passedRequirements = useMemo(() => {
     return requirements.filter((req) => req.test(password));
-  }, [requirements, password]);
+  }, [password]);
 
   const strength = useMemo(() => {
     const score = passedRequirements.length;

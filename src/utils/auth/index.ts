@@ -1,13 +1,12 @@
 import { AUTH_CONFIG } from '@configs/auth/auth.config';
+import http from '@lib/http';
+import { store } from '@lib/store';
+import { logout, setCredentials } from '@redux/auth/auth.slice';
 import {
   getToken,
   removeToken,
   isTokenExpired,
 } from '@utils/auth/token-manager';
-
-import http from '@lib/http';
-import { store } from '@lib/store';
-import { logout, setCredentials } from '@redux/auth/auth.slice';
 
 import { Any } from '@/types';
 import { logger } from '@/utils/logger';

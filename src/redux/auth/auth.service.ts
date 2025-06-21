@@ -1,5 +1,7 @@
-import http from '../../lib/http';
-import { AUTH_CONFIG } from '../../configs/auth/auth.config';
+import { AUTH_CONFIG } from '@/configs/auth/auth.config';
+import http from '@/lib/http';
+import { unknownError } from '@/utils/error-handler';
+import { logger } from '@/utils/logger';
 
 // Types for API requests and responses
 export interface LoginRequest {
@@ -47,9 +49,9 @@ export class AuthService {
         credentials
       );
       return response.data;
-    } catch (error: any) {
-      console.error('Login failed:', error);
-      throw new Error(error.message || 'Login failed');
+    } catch (error: unknown) {
+      logger.error('Login failed:', error);
+      throw new Error(unknownError(error, 'Login failed'));
     }
   }
 
@@ -63,9 +65,9 @@ export class AuthService {
         userData
       );
       return response.data;
-    } catch (error: any) {
-      console.error('Registration failed:', error);
-      throw new Error(error.message || 'Registration failed');
+    } catch (error: unknown) {
+      logger.error('Registration failed:', error);
+      throw new Error(unknownError(error, 'Registration failed'));
     }
   }
 
@@ -76,9 +78,9 @@ export class AuthService {
     try {
       const response = await http.get<User>(AUTH_CONFIG.PROFILE_ENDPOINT);
       return response.data;
-    } catch (error: any) {
-      console.error('Failed to fetch profile:', error);
-      throw new Error(error.message || 'Failed to fetch profile');
+    } catch (error: unknown) {
+      logger.error('Failed to fetch profile:', error);
+      throw new Error(unknownError(error, 'Failed to fetch profile'));
     }
   }
 
@@ -92,9 +94,9 @@ export class AuthService {
         { token }
       );
       return response.data;
-    } catch (error: any) {
-      console.error('Token verification failed:', error);
-      throw new Error(error.message || 'Token verification failed');
+    } catch (error: unknown) {
+      logger.error('Token verification failed:', error);
+      throw new Error(unknownError(error, 'Token verification failed'));
     }
   }
 
@@ -105,9 +107,9 @@ export class AuthService {
     try {
       const response = await http.post<AuthResponse>('/auth/refresh');
       return response.data;
-    } catch (error: any) {
-      console.error('Token refresh failed:', error);
-      throw new Error(error.message || 'Token refresh failed');
+    } catch (error: unknown) {
+      logger.error('Token refresh failed:', error);
+      throw new Error(unknownError(error, 'Token refresh failed'));
     }
   }
 
@@ -117,8 +119,8 @@ export class AuthService {
   static async logout(): Promise<void> {
     try {
       await http.post('/auth/logout');
-    } catch (error: any) {
-      console.error('Logout API call failed:', error);
+    } catch (error: unknown) {
+      logger.error('Logout API call failed:', error);
       // Don't throw error for logout as local cleanup is more important
     }
   }
@@ -133,9 +135,9 @@ export class AuthService {
         updates
       );
       return response.data;
-    } catch (error: any) {
-      console.error('Profile update failed:', error);
-      throw new Error(error.message || 'Profile update failed');
+    } catch (error: unknown) {
+      logger.error('Profile update failed:', error);
+      throw new Error(unknownError(error, 'Profile update failed'));
     }
   }
 
@@ -151,9 +153,9 @@ export class AuthService {
         currentPassword,
         newPassword,
       });
-    } catch (error: any) {
-      console.error('Password change failed:', error);
-      throw new Error(error.message || 'Password change failed');
+    } catch (error: unknown) {
+      logger.error('Password change failed:', error);
+      throw new Error(unknownError(error, 'Password change failed'));
     }
   }
 
@@ -163,9 +165,9 @@ export class AuthService {
   static async requestPasswordReset(email: string): Promise<void> {
     try {
       await http.post('/auth/forgot-password', { email });
-    } catch (error: any) {
-      console.error('Password reset request failed:', error);
-      throw new Error(error.message || 'Password reset request failed');
+    } catch (error: unknown) {
+      logger.error('Password reset request failed:', error);
+      throw new Error(unknownError(error, 'Password reset request failed'));
     }
   }
 
@@ -181,9 +183,9 @@ export class AuthService {
         token,
         newPassword,
       });
-    } catch (error: any) {
-      console.error('Password reset failed:', error);
-      throw new Error(error.message || 'Password reset failed');
+    } catch (error: unknown) {
+      logger.error('Password reset failed:', error);
+      throw new Error(unknownError(error, 'Password reset failed'));
     }
   }
 

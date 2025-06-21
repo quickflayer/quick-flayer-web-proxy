@@ -18,6 +18,7 @@ import {
   SwitchController,
 } from '@/components/field-controller';
 import PasswordStrength from '@/components/password-strength';
+import { logger } from '@/utils/logger';
 import resolver from '@/utils/resolver';
 
 // Login Schema
@@ -104,23 +105,21 @@ const AuthFormExample: React.FC = () => {
 
   const onLoginSubmit = async (data: LoginData) => {
     try {
-      console.log('Login data:', data);
-      // Handle login logic here
       await new Promise((resolve) => setTimeout(resolve, 1000));
+      logger.log('Login data:', data);
       alert('Login successful!');
     } catch (error) {
-      console.error('Login error:', error);
+      logger.error('Login error:', error);
     }
   };
 
   const onRegisterSubmit = async (data: RegisterData) => {
     try {
-      console.log('Register data:', data);
-      // Handle registration logic here
       await new Promise((resolve) => setTimeout(resolve, 1000));
+      logger.log('Register data:', data);
       alert('Registration successful!');
     } catch (error) {
-      console.error('Registration error:', error);
+      logger.error('Registration error:', error);
     }
   };
 

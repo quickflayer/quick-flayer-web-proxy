@@ -1,5 +1,6 @@
-import { Box, Paper, Tooltip } from '@mui/material';
 import React, { FC, memo, useState } from 'react';
+
+import { Box, Paper, Tooltip } from '@mui/material';
 
 import Image from 'next/image';
 

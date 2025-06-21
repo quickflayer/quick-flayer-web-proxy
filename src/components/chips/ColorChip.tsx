@@ -1,5 +1,6 @@
-import { Box, Paper, Tooltip } from '@mui/material';
 import React, { FC, memo } from 'react';
+
+import { Box, Paper, Tooltip } from '@mui/material';
 
 type Props = {
   color?: string;

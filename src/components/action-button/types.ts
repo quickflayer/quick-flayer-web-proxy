@@ -1,5 +1,6 @@
-import { NumStr } from '@/types';
 import { IconButtonProps } from '@core/components/icon-button/type';
+
+import { NumStr } from '@/types';
 
 export type Actions = 'update' | 'delete';
 

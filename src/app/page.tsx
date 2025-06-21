@@ -2,11 +2,11 @@
 
 import { useEffect } from 'react';
 
-import { AUTH_CONFIG } from '@configs/auth/auth.config';
 import { Box, CircularProgress, Typography } from '@mui/material';
 
 import { useRouter } from 'next/navigation';
 
+import { AUTH_CONFIG } from '@configs/auth/auth.config';
 import { useAuth } from '@hooks/use-auth';
 
 export default function Home() {

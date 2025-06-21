@@ -2,11 +2,11 @@
 
 import React from 'react';
 
+import { CssBaseline } from '@mui/material';
 import {
   createTheme,
   ThemeProvider as MuiThemeProvider,
 } from '@mui/material/styles';
-import { CssBaseline } from '@mui/material';
 
 interface ThemeProviderProps {
   children: React.ReactNode;

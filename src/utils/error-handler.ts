@@ -1,7 +1,7 @@
 import { AxiosError } from 'axios';
 
 import { ERROR_MESSAGES, HTTP_STATUS } from '@/constants';
-import { TError } from '@/types';
+import { Any, TError } from '@/types';
 import { logger } from '@/utils/logger';
 import { tryCatch } from '@/utils/try-catch';
 
@@ -74,7 +74,7 @@ export const getErrorMessage = (error: AxiosError): string => {
 
   // Try to extract message from response data
   if (data && typeof data === 'object') {
-    const responseData = data as any;
+    const responseData = data as Any;
 
     if (typeof responseData.message === 'string') {
       return responseData.message;
@@ -122,7 +122,7 @@ export const handleValidationError = (error: unknown): string[] => {
     error instanceof AxiosError &&
     error.response?.status === HTTP_STATUS.UNPROCESSABLE_ENTITY
   ) {
-    const data = error.response.data as any;
+    const data = error.response.data as Any;
 
     if (Array.isArray(data.message)) {
       return data.message;
@@ -133,7 +133,7 @@ export const handleValidationError = (error: unknown): string[] => {
     }
 
     if (data.errors && Array.isArray(data.errors)) {
-      return data.errors.map((err: any) => err.message || String(err));
+      return data.errors.map((err: Any) => err.message || String(err));
     }
   }
 
@@ -146,13 +146,13 @@ export const handleValidationError = (error: unknown): string[] => {
 export const safeLog = (
   level: 'error' | 'warn' | 'log' | 'debug',
   message: string,
-  ...args: any[]
+  ...args: Any[]
 ) => {
   try {
     logger[level](message, ...args);
   } catch (logError) {
     // Fallback to console if logger fails
-    console[level](`[LOGGER ERROR] ${message}`, ...args, logError);
+    logger[level](`[LOGGER ERROR] ${message}`, ...args, logError);
   }
 };
 
@@ -162,7 +162,7 @@ export const safeLog = (
 export const createError = (
   message: string,
   status: number = HTTP_STATUS.INTERNAL_SERVER_ERROR,
-  data?: any
+  data?: Any
 ): TError => ({
   message,
   status,
@@ -269,4 +269,23 @@ export const withTimeout = <T>(
       setTimeout(() => reject(new Error(timeoutMessage)), timeoutMs);
     }),
   ]);
+};
+
+/**
+ * Returns a string representation of the given error, or a fallback error message if the given error is not an instance of the Error class.
+ * @param error The error to be converted to a string
+ * @param fallbackError The fallback error message to be returned if the given error is not an instance of the Error class
+ * @returns A string representation of the given error, or the fallback error message if the given error is not an instance of the Error class
+ */
+export const unknownError = (
+  error: unknown,
+  fallbackError?: string
+): string => {
+  if (error instanceof Error) {
+    return error.message;
+  }
+  if (fallbackError) {
+    return fallbackError;
+  }
+  return ERROR_MESSAGES.UNKNOWN_ERROR;
 };

@@ -1,18 +1,18 @@
 import { useEffect, useState } from 'react';
 
+import { useSelector, useDispatch } from 'react-redux';
+
+import { useRouter } from 'next/navigation';
+
 import { AUTH_CONFIG } from '@configs/auth/auth.config';
+import { RootState } from '@lib/store';
+import { setCredentials, logout, setError } from '@redux/auth/auth.slice';
 import {
   storeToken,
   removeToken,
   getToken,
   isTokenExpired,
 } from '@utils/auth/token-manager';
-import { useSelector, useDispatch } from 'react-redux';
-
-import { useRouter } from 'next/navigation';
-
-import { RootState } from '@lib/store';
-import { setCredentials, logout, setError } from '@redux/auth/auth.slice';
 import { logger } from '@utils/logger';
 import { tryCatch } from '@utils/try-catch';
 

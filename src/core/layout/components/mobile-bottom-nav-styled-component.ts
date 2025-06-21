@@ -1,6 +1,12 @@
 'use client';
 
-import { BottomNavigation, BottomNavigationAction, Box, Paper, styled } from '@mui/material';
+import {
+  BottomNavigation,
+  BottomNavigationAction,
+  Box,
+  Paper,
+  styled,
+} from '@mui/material';
 
 export const MobileNavContainer = styled(Box)(({ theme }) => ({
   position: 'fixed',
@@ -14,14 +20,14 @@ export const MobileNavContainer = styled(Box)(({ theme }) => ({
   },
 }));
 
-export const MobileNavPaper = styled(Paper)(({ theme }) => ({
+export const MobileNavPaper = styled(Paper)(({}) => ({
   background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
   borderRadius: 0,
   borderTop: '1px solid rgba(255, 255, 255, 0.1)',
   elevation: 8,
 }));
 
-export const MobileNavigation = styled(BottomNavigation)(({ theme }) => ({
+export const MobileNavigation = styled(BottomNavigation)(({}) => ({
   background: 'transparent',
   '& .MuiBottomNavigationAction-root': {
     color: 'rgba(255, 255, 255, 0.7)',
@@ -39,8 +45,10 @@ export const MobileNavigation = styled(BottomNavigation)(({ theme }) => ({
   },
 }));
 
-export const StyledBottomNavigationAction = styled(BottomNavigationAction)(({ theme }) => ({
-  '&:hover': {
-    color: 'rgba(255, 255, 255, 0.9)',
-  },
-}));
+export const StyledBottomNavigationAction = styled(BottomNavigationAction)(
+  ({}) => ({
+    '&:hover': {
+      color: 'rgba(255, 255, 255, 0.9)',
+    },
+  })
+);

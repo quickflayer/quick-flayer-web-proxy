@@ -1,16 +1,10 @@
 import { useEffect, useState, useCallback } from 'react';
 
-import { AUTH_CONFIG } from '@configs/auth/auth.config';
-import {
-  storeToken,
-  removeToken,
-  getToken,
-  isTokenExpired,
-} from '@utils/auth/token-manager';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { useRouter } from 'next/navigation';
 
+import { AUTH_CONFIG } from '@configs/auth/auth.config';
 import { RootState } from '@lib/store';
 import AuthService, { LoginRequest, User } from '@redux/auth/auth.service';
 import {
@@ -19,6 +13,12 @@ import {
   setError,
   clearError,
 } from '@redux/auth/auth.slice';
+import {
+  storeToken,
+  removeToken,
+  getToken,
+  isTokenExpired,
+} from '@utils/auth/token-manager';
 import { logger } from '@utils/logger';
 
 import { tryCatch } from '@/utils/try-catch';

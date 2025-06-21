@@ -2,12 +2,12 @@
 
 import { Box, styled } from '@mui/material';
 
-export const LayoutContainer = styled(Box)(({ theme }) => ({
+export const LayoutContainer = styled(Box)(({  }) => ({
   display: 'flex',
   minHeight: '100vh',
 }));
 
-export const HeaderContainer = styled(Box)(({ theme }) => ({
+export const HeaderContainer = styled(Box)(({  }) => ({
   position: 'fixed',
   top: 0,
   left: 0,
@@ -63,7 +63,7 @@ export const ContentWrapper = styled(Box)(({ theme }) => ({
   },
 }));
 
-export const MobileBackdrop = styled(Box)(({ theme }) => ({
+export const MobileBackdrop = styled(Box)(({  }) => ({
   position: 'fixed',
   top: 0,
   left: 0,

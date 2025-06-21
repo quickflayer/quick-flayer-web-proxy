@@ -3,6 +3,7 @@
 import { Box, Divider, Drawer, useTheme } from '@mui/material';
 
 import { useMobile } from '../../hooks/use-mobile';
+
 import { NavigationMenu } from './components/NavigationMenu';
 import { SidebarContainer } from './components/sidebar-styled-component';
 import { SidebarHeader } from './components/SidebarHeader';

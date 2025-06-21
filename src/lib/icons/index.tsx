@@ -1,5 +1,6 @@
-import { SvgIcon, SvgIconProps } from '@mui/material';
 import React, { memo } from 'react';
+
+import { SvgIcon, SvgIconProps } from '@mui/material';
 
 import mappedIcons from './mapped-icons';
 

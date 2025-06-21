@@ -35,4 +35,8 @@ export const ICONS = {
   SETTINGS_ICON: 'ic:outline-settings',
   USERS_ICON: 'ic:outline-people',
   LOGOUT_ICON: 'ic:outline-logout',
+  MOBILE_DASHBOARD_ICON: 'ic:outline-dashboard',
+  MOBILE_USERS_ICON: 'ic:outline-people',
+  MOBILE_REPORTS_ICON: 'ic:outline-assessment',
+  MOBILE_SETTINGS_ICON: 'ic:outline-settings',
 } as const;

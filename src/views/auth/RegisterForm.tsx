@@ -1,18 +1,18 @@
 import React, { useCallback } from 'react';
 
+import { useAuth } from '@hooks/use-auth';
+import { useToast } from '@hooks/use-toast';
+import { Box, Card, CardContent, Typography, Link, Grid } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
-import { Box, Card, CardContent, Typography, Link, Grid } from '@mui/material';
-
-import { useAuth } from '@hooks/use-auth';
-import { useToast } from '@hooks/use-toast';
-import { TextFieldController } from '@/components/field-controller';
-import resolver from '@/utils/resolver';
-
 import AppButton from '@core/components/app-button/Button';
+
+import { TextFieldController } from '@/components/field-controller';
 import PasswordStrength from '@/components/password-strength';
+import { unknownError } from '@/utils/error-handler';
 import { logger } from '@/utils/logger';
+import resolver from '@/utils/resolver';
 
 interface RegisterFormProps {
   onSuccess?: () => void;
@@ -94,20 +94,10 @@ const RegisterForm = ({ onSuccess, onSwitchToLogin }: RegisterFormProps) => {
         if (onSuccess) {
           onSuccess();
         }
-      } catch (error: any) {
-        let errorMessage = 'Registration failed. Please try again.';
-
-        if (error.data?.message) {
-          if (Array.isArray(error.data.message)) {
-            errorMessage = error.data.message.join(', ');
-          } else {
-            errorMessage = error.data.message;
-          }
-        } else if (error.message) {
-          errorMessage = error.message;
-        }
-
-        showError(errorMessage);
+      } catch (error: unknown) {
+        showError(
+          unknownError(error, 'Registration failed. Please try again.')
+        );
       }
     },
     [register, onSuccess, showError, showSuccess]
