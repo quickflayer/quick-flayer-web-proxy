@@ -33,8 +33,11 @@ export const useAuth = () => {
   );
   const [isCheckingAuth, setIsCheckingAuth] = useState(true);
 
-  const { refetch, isLoading: isProfileLoading } =
-    useProfileQuery(isAuthenticated);
+  const {
+    refetch,
+    isLoading: isProfileLoading,
+    data: profileData,
+  } = useProfileQuery(isAuthenticated);
 
   useEffect(() => {
     /**
@@ -83,6 +86,16 @@ export const useAuth = () => {
 
     initAuth();
   }, [dispatch, refetch]);
+
+  // Update Redux state when profile data is fetched
+  useEffect(() => {
+    if (profileData && isAuthenticated) {
+      logger.log('Profile data received, updating Redux state:', profileData);
+      dispatch(
+        setCredentials({ user: profileData, accessToken: getToken() || '' })
+      );
+    }
+  }, [profileData, isAuthenticated, dispatch]);
 
   /**
    * Logs in a user with the given email and password, and redirects to the
@@ -166,7 +179,7 @@ export const useAuth = () => {
     router.push(AUTH_CONFIG.LOGIN_ROUTE);
   };
 
-  const isAdmin = () => user?.role === AUTH_CONFIG.ADMIN_ROLE;
+  const isAdmin = () => profileData?.role === AUTH_CONFIG.ADMIN_ROLE;
 
   return {
     user,

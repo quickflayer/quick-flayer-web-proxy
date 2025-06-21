@@ -30,19 +30,19 @@ export function NavigationMenu({ onNavClick }: NavigationMenuProps) {
           name: 'Users',
           path: '/masters/users',
           icon: ICONS.USERS_ICON,
-          adminOnly: true,
+          // adminOnly: true, // Temporarily disabled for development
         },
         {
           name: 'Roles',
           path: '/roles',
           icon: 'ic:outline-admin-panel-settings',
-          adminOnly: true,
+          // adminOnly: true, // Temporarily disabled for development
         },
         {
           name: 'Permissions',
           path: '/permissions',
           icon: 'ic:outline-security',
-          adminOnly: true,
+          // adminOnly: true, // Temporarily disabled for development
         },
       ],
     },

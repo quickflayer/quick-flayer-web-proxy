@@ -2,7 +2,7 @@
 
 import React, { FC, memo } from 'react';
 
-import { AppButton } from './Button';
+import AppButton from './Button';
 import { AppButtonProps } from './types';
 
 interface ActionButtonProps extends Omit<AppButtonProps, 'gradient' | 'theme'> {
