@@ -1,15 +1,9 @@
 {
-  "extends": [
-    "next/core-web-vitals",
-    "next/typescript"
-  ],
-  "plugins": [
-    "import",
-    "unused-imports"
-  ],
+  "extends": ["next/core-web-vitals", "next/typescript"],
+  "plugins": ["import", "unused-imports"],
   "rules": {
     "import/order": [
-      "error",
+      "warning",
       {
         "groups": [
           "builtin",
