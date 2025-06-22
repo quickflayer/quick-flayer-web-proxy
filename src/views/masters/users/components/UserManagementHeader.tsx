@@ -1,11 +1,13 @@
 'use client';
 
 import React from 'react';
+
 import { Box, Typography } from '@mui/material';
+
+import { AppButton } from '@core/components/app-button';
 
 import Icon from '@/lib/icons';
 import { ICONS } from '@/lib/icons/icons-const';
-import { AppButton } from '@core/components/app-button';
 
 interface UserManagementHeaderProps {
   onAddUser: () => void;

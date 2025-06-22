@@ -1,11 +1,12 @@
 'use client';
 
 import React from 'react';
+
 import { Container } from '@mui/material';
 
 import { useAuth } from '@/hooks/use-auth';
-import { TemplateManagementView } from '@/views/masters/templates';
 import { AccessDeniedView } from '@/views/common';
+import { TemplateManagementView } from '@/views/masters/templates';
 
 export default function TemplatesPage() {
   const { isAdmin } = useAuth();

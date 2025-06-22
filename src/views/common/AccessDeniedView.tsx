@@ -1,7 +1,8 @@
 'use client';
 
 import React from 'react';
-import { Card, CardContent, Typography, Box } from '@mui/material';
+
+import { Card, CardContent, Typography } from '@mui/material';
 
 import Icon from '@/lib/icons';
 import { ICONS } from '@/lib/icons/icons-const';

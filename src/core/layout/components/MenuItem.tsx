@@ -12,9 +12,10 @@ import {
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
+import { useAuth } from '@hooks/use-auth';
+
 import Icon from '@/lib/icons';
 
-import { useAuth } from '@hooks/use-auth';
 
 import { BadgeContainer, MenuItemButton } from './sidebar-styled-component';
 

@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+
 import {
   Grid,
   Box,
@@ -9,9 +10,10 @@ import {
   Typography,
 } from '@mui/material';
 
+import { User } from '@/hooks/use-user-management';
 import Icon from '@/lib/icons';
 import { ICONS } from '@/lib/icons/icons-const';
-import { User } from '@/hooks/use-user-management';
+
 import { UserCard } from './UserCard';
 import { UserTable } from './UserTable';
 

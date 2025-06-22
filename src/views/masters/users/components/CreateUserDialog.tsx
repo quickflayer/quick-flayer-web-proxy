@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+
 import {
   Dialog,
   DialogTitle,
@@ -9,9 +10,10 @@ import {
   Box,
 } from '@mui/material';
 
-import { CreateUserRequest } from '@/hooks/use-user-management';
-import { AppTextField, AppSelectField } from '@core/components/app-inputs';
 import { AppButton } from '@core/components/app-button';
+import { AppTextField, AppSelectField } from '@core/components/app-inputs';
+
+import { CreateUserRequest } from '@/hooks/use-user-management';
 
 interface CreateUserDialogProps {
   open: boolean;

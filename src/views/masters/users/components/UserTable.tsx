@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useMemo } from 'react';
+
 import {
   Avatar,
   Chip,
@@ -13,10 +14,10 @@ import {
 } from '@mui/material';
 import { GridColDef } from '@mui/x-data-grid';
 
+import { AppDataGrid } from '@/core/components/app-table';
+import { User } from '@/hooks/use-user-management';
 import Icon from '@/lib/icons';
 import { ICONS } from '@/lib/icons/icons-const';
-import { User } from '@/hooks/use-user-management';
-import { AppDataGrid } from '@/core/components/app-table';
 
 interface UserTableProps {
   users: User[];

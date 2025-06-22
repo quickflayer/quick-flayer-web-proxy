@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+
 import {
   Card,
   CardContent,
@@ -10,6 +11,7 @@ import {
   Box,
 } from '@mui/material';
 
+import DeleteModal from '@/components/delete-modal';
 import {
   useTemplatesQuery,
   useUpdateTemplateMutation,
@@ -18,7 +20,6 @@ import {
   Template,
 } from '@/hooks/use-template-management';
 import { useToast } from '@/hooks/use-toast';
-import DeleteModal from '@/components/delete-modal';
 
 import {
   TemplateManagementHeader,

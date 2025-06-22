@@ -1,11 +1,12 @@
 'use client';
 
 import React from 'react';
+
 import { Container } from '@mui/material';
 
 import { useAuth } from '@/hooks/use-auth';
-import { UserManagementView } from '@/views/masters/users';
 import { AccessDeniedView } from '@/views/common';
+import { UserManagementView } from '@/views/masters/users';
 
 export default function UsersPage() {
   const { isAdmin } = useAuth();

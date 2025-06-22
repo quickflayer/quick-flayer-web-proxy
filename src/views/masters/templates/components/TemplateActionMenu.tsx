@@ -1,8 +1,12 @@
 import React from 'react';
+
 import { ListItemIcon, ListItemText } from '@mui/material';
+
 import Icon from '@lib/icons';
 import { ICONS } from '@lib/icons/icons-const';
+
 import { Template } from '@/hooks/use-template-management';
+
 import { StyledMenu, StyledMenuItem } from './styled-component';
 
 interface TemplateActionMenuProps {

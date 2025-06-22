@@ -1,8 +1,12 @@
 import React from 'react';
+
 import { Grid, CardContent, Typography, Box } from '@mui/material';
+
 import Icon from '@lib/icons';
 import { ICONS } from '@lib/icons/icons-const';
+
 import { Template } from '@/hooks/use-template-management';
+
 import {
   EmptyStateContainer,
   TemplateCard,

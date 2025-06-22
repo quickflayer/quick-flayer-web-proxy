@@ -1,19 +1,21 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+
 import {
   Dialog,
   DialogTitle,
   DialogContent,
   DialogActions,
-  Button,
   Box,
 } from '@mui/material';
+import { FormControlLabel, Switch } from '@mui/material';
+
+import { AppButton } from '@core/components/app-button';
+import { AppTextField, AppSelectField } from '@core/components/app-inputs';
 
 import { User, UpdateUserRequest } from '@/hooks/use-user-management';
-import { AppTextField, AppSelectField } from '@core/components/app-inputs';
-import { AppButton } from '@core/components/app-button';
-import { FormControlLabel, Switch } from '@mui/material';
+
 
 interface EditUserDialogProps {
   open: boolean;

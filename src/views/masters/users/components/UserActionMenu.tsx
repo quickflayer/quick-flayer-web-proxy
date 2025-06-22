@@ -1,11 +1,12 @@
 'use client';
 
 import React from 'react';
+
 import { Menu, MenuItem } from '@mui/material';
 
+import { User } from '@/hooks/use-user-management';
 import Icon from '@/lib/icons';
 import { ICONS } from '@/lib/icons/icons-const';
-import { User } from '@/hooks/use-user-management';
 
 interface UserActionMenuProps {
   anchorEl: null | HTMLElement;
