@@ -75,7 +75,7 @@ export function EditUserDialog({
 
   useEffect(() => {
     if (user) {
-      const userRole = roleOptions.find((option) => option.id === user.role);
+      const userRole = roleOptions.find((option) => option?.id === user.role);
       reset({
         firstName: user.firstName || '',
         lastName: user.lastName || '',
