@@ -33,8 +33,8 @@ export function DeleteUserDialog({
       <DialogTitle>Confirm Delete</DialogTitle>
       <DialogContent>
         <Typography>
-          Are you sure you want to delete user "{user?.email}"? This action
-          cannot be undone.
+          Are you sure you want to delete user &quot;{user?.email}&quot;? This
+          action cannot be undone.
         </Typography>
       </DialogContent>
       <DialogActions>
