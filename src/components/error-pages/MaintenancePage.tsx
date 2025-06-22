@@ -2,10 +2,17 @@
 
 import { useEffect, useState } from 'react';
 
-import { Box, Button, Card, CardContent, Container, LinearProgress, Typography } from '@mui/material';
-
 import Icon from '@lib/icons';
 import { ICONS } from '@lib/icons/icons-const';
+import {
+  Box,
+  Button,
+  Card,
+  CardContent,
+  Container,
+  LinearProgress,
+  Typography,
+} from '@mui/material';
 
 interface MaintenancePageProps {
   estimatedDuration?: string;
@@ -41,7 +48,10 @@ export default function MaintenancePage({
     if (startTime && endTime) {
       const total = endTime.getTime() - startTime.getTime();
       const elapsed = currentTime.getTime() - startTime.getTime();
-      const progressPercent = Math.min(Math.max((elapsed / total) * 100, 0), 100);
+      const progressPercent = Math.min(
+        Math.max((elapsed / total) * 100, 0),
+        100
+      );
       setProgress(progressPercent);
     }
   }, [currentTime, startTime, endTime]);
@@ -60,13 +70,13 @@ export default function MaintenancePage({
 
   const getTimeRemaining = () => {
     if (!endTime) return null;
-    
+
     const remaining = endTime.getTime() - currentTime.getTime();
     if (remaining <= 0) return 'Maintenance should be completed';
-    
+
     const hours = Math.floor(remaining / (1000 * 60 * 60));
     const minutes = Math.floor((remaining % (1000 * 60 * 60)) / (1000 * 60));
-    
+
     if (hours > 0) {
       return `Estimated completion: ${hours}h ${minutes}m`;
     }
@@ -197,7 +207,8 @@ export default function MaintenancePage({
                     backgroundColor: 'grey.200',
                     '& .MuiLinearProgress-bar': {
                       borderRadius: 4,
-                      background: 'linear-gradient(90deg, #667eea 0%, #764ba2 100%)',
+                      background:
+                        'linear-gradient(90deg, #667eea 0%, #764ba2 100%)',
                     },
                   }}
                 />
@@ -227,7 +238,7 @@ export default function MaintenancePage({
               >
                 Maintenance Schedule
               </Typography>
-              
+
               {startTime && (
                 <Typography
                   variant="body2"
@@ -236,7 +247,7 @@ export default function MaintenancePage({
                   <strong>Started:</strong> {formatTime(startTime)}
                 </Typography>
               )}
-              
+
               {endTime && (
                 <Typography
                   variant="body2"
@@ -245,19 +256,22 @@ export default function MaintenancePage({
                   <strong>Expected End:</strong> {formatTime(endTime)}
                 </Typography>
               )}
-              
+
               <Typography
                 variant="body2"
                 sx={{ mb: 1, color: 'text.secondary' }}
               >
                 <strong>Duration:</strong> {estimatedDuration}
               </Typography>
-              
+
               {getTimeRemaining() && (
                 <Typography
                   variant="body2"
-                  sx={{ 
-                    color: endTime && currentTime > endTime ? 'success.main' : 'warning.main',
+                  sx={{
+                    color:
+                      endTime && currentTime > endTime
+                        ? 'success.main'
+                        : 'warning.main',
                     fontWeight: 500,
                   }}
                 >
@@ -299,21 +313,42 @@ export default function MaintenancePage({
             >
               <Typography
                 variant="subtitle2"
-                sx={{ fontWeight: 600, mb: 2, color: 'primary.main', textAlign: 'center' }}
+                sx={{
+                  fontWeight: 600,
+                  mb: 2,
+                  color: 'primary.main',
+                  textAlign: 'center',
+                }}
               >
-                What We're Working On:
+                What We&apos;re Working On:
               </Typography>
               <Box component="ul" sx={{ m: 0, pl: 2 }}>
-                <Typography component="li" variant="body2" sx={{ mb: 1, color: 'text.secondary' }}>
+                <Typography
+                  component="li"
+                  variant="body2"
+                  sx={{ mb: 1, color: 'text.secondary' }}
+                >
                   Server performance improvements
                 </Typography>
-                <Typography component="li" variant="body2" sx={{ mb: 1, color: 'text.secondary' }}>
+                <Typography
+                  component="li"
+                  variant="body2"
+                  sx={{ mb: 1, color: 'text.secondary' }}
+                >
                   Security updates and patches
                 </Typography>
-                <Typography component="li" variant="body2" sx={{ mb: 1, color: 'text.secondary' }}>
+                <Typography
+                  component="li"
+                  variant="body2"
+                  sx={{ mb: 1, color: 'text.secondary' }}
+                >
                   Database optimization
                 </Typography>
-                <Typography component="li" variant="body2" sx={{ color: 'text.secondary' }}>
+                <Typography
+                  component="li"
+                  variant="body2"
+                  sx={{ color: 'text.secondary' }}
+                >
                   New feature deployments
                 </Typography>
               </Box>
@@ -339,9 +374,11 @@ export default function MaintenancePage({
                   py: 1.5,
                   fontSize: '1rem',
                   fontWeight: 600,
-                  background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                  background:
+                    'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
                   '&:hover': {
-                    background: 'linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%)',
+                    background:
+                      'linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%)',
                   },
                 }}
               >
@@ -373,7 +410,7 @@ export default function MaintenancePage({
                 fontSize: '0.875rem',
               }}
             >
-              Thank you for your patience. We'll be back online shortly!
+              Thank you for your patience. We&apos;ll be back online shortly!
             </Typography>
           </CardContent>
         </Card>
