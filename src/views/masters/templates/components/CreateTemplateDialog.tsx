@@ -25,8 +25,12 @@ const createTemplateSchema = z.object({
     .max(100, 'Name too long'),
   description: z.string().optional(),
   file: z
-    .any()
-    .refine((file) => file instanceof File, 'Image file is required'),
+    .instanceof(File, { message: 'Image file is required' })
+    .refine((file) => file.size > 0, 'Please select a file')
+    .refine(
+      (file) => file.type.startsWith('image/'),
+      'Only image files are allowed'
+    ),
 });
 
 type CreateTemplateFormData = z.infer<typeof createTemplateSchema>;
@@ -54,8 +58,8 @@ export function CreateTemplateDialog({
     defaultValues: {
       name: '',
       description: '',
-      file: null,
     },
+    mode: 'onChange',
   });
 
   const handleClose = () => {
