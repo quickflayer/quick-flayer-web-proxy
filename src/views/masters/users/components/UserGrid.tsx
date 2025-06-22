@@ -65,16 +65,10 @@ export function UserGrid({ users, onMenuOpen }: UserGridProps) {
           }}
         >
           <ToggleButton value="table" aria-label="table view">
-            <Icon
-              icon={ICONS.TABLE_VIEW || 'ic:outline-table-rows'}
-              style={{ fontSize: '18px' }}
-            />
+            <Icon icon={ICONS.TABLE_VIEW} style={{ fontSize: '18px' }} />
           </ToggleButton>
           <ToggleButton value="grid" aria-label="grid view">
-            <Icon
-              icon={ICONS.GRID_VIEW || 'ic:outline-grid-view'}
-              style={{ fontSize: '18px' }}
-            />
+            <Icon icon={ICONS.GRID_VIEW} style={{ fontSize: '18px' }} />
           </ToggleButton>
         </ToggleButtonGroup>
       </Box>

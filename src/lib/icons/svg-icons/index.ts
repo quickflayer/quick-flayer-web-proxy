@@ -56,6 +56,8 @@ export {
   IcOutlineSave,
   IcOutlineClose,
   IcOutlineAdd,
+  IcOutlineTableRows,
+  IcOutlineGridView,
 } from './ic-outline-icons';
 
 // SVG Spinners

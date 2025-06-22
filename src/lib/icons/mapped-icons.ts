@@ -57,6 +57,8 @@ import {
   IcOutlineSave,
   IcOutlineClose,
   IcOutlineAdd,
+  IcOutlineTableRows,
+  IcOutlineGridView,
 } from './svg-icons';
 import { MappedIcons } from './types';
 
@@ -122,6 +124,8 @@ const mappedIcons: MappedIcons = {
   ['ic:outline-save']: IcOutlineSave,
   ['ic:outline-close']: IcOutlineClose,
   ['ic:outline-add']: IcOutlineAdd,
+  ['ic:outline-table-rows']: IcOutlineTableRows,
+  ['ic:outline-grid-view']: IcOutlineGridView,
 };
 
 export default mappedIcons;
