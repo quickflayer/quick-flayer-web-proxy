@@ -197,6 +197,13 @@ export const API_ENDPOINTS = {
     UPDATE: (id: string) => `/users/${id}`,
     DELETE: (id: string) => `/users/${id}`,
   },
+  TEMPLATES: {
+    LIST: '/templates',
+    CREATE: '/templates',
+    GET: (id: string) => `/templates/${id}`,
+    UPDATE: (id: string) => `/templates/${id}`,
+    DELETE: (id: string) => `/templates/${id}`,
+  },
 } as const;
 
 // ** Environment Types

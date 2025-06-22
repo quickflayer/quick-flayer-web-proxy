@@ -1,0 +1,1 @@
+export { TemplateManagementView } from './TemplateManagementView';

@@ -19,6 +19,7 @@
     "@mui/material": "^7.1.0",
     "@mui/x-data-grid": "^8.5.2",
     "@reduxjs/toolkit": "^2.8.2",
+    "@vercel/blob": "^1.1.1",
     "axios": "^1.9.0",
     "lodash": "^4.17.21",
     "next": "15.1.8",

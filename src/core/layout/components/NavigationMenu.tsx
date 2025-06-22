@@ -33,6 +33,12 @@ export function NavigationMenu({ onNavClick }: NavigationMenuProps) {
           // adminOnly: true, // Temporarily disabled for development
         },
         {
+          name: 'Templates',
+          path: '/masters/templates',
+          icon: 'ic:outline-image',
+          // adminOnly: true, // Temporarily disabled for development
+        },
+        {
           name: 'Roles',
           path: '/roles',
           icon: 'ic:outline-admin-panel-settings',
