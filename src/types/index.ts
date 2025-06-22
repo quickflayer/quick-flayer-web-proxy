@@ -25,6 +25,6 @@ export type NumStr = number | string;
 export type Nullable<T> = T | null;
 
 export type DeleteItem = {
-  id: number;
+  id: number | string;
   name: string;
 };

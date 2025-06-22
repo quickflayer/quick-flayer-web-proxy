@@ -89,9 +89,9 @@ export function TemplateManagementView() {
     }
   };
 
-  const handleDeleteTemplate = async (id: string) => {
+  const handleDeleteTemplate = async (id: number | string) => {
     try {
-      await deleteTemplateMutation.mutateAsync(id);
+      await deleteTemplateMutation.mutateAsync(id as string);
       showSuccess('Template deleted successfully');
       setDeleteConfirmTemplate(null);
       refetch();

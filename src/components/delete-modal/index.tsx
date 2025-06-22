@@ -13,7 +13,7 @@ import { StyledModal } from './styled-component';
 type Props = {
   onClose: () => void;
   itemToDelete: DeleteItem;
-  onDelete: (id: number) => void;
+  onDelete: (id: number | string) => void;
   loading?: boolean;
 };
 
