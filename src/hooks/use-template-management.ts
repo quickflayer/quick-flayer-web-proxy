@@ -1,7 +1,7 @@
 import { useAxiosQuery, useAxiosMutation } from './use-axios-query';
 import http from '@lib/http';
 import { logger } from '@utils/logger';
-import { API_ENDPOINTS } from '@constants';
+import { API_ENDPOINTS } from '@/constants';
 
 // Types for template management
 export interface Template {
@@ -106,8 +106,12 @@ export function useCreateTemplateMutation() {
  * Hook for template update mutation (admin only)
  */
 export function useUpdateTemplateMutation() {
-  return useAxiosMutation<Template, { id: string; updates: UpdateTemplateRequest }>(
-    ({ id, updates }) => http.patch<Template>(API_ENDPOINTS.TEMPLATES.UPDATE(id), updates),
+  return useAxiosMutation<
+    Template,
+    { id: string; updates: UpdateTemplateRequest }
+  >(
+    ({ id, updates }) =>
+      http.patch<Template>(API_ENDPOINTS.TEMPLATES.UPDATE(id), updates),
     {
       onSuccess: (data, _variables) => {
         logger.log('Template updated successfully:', data);
@@ -124,7 +128,8 @@ export function useUpdateTemplateMutation() {
  */
 export function useDeleteTemplateMutation() {
   return useAxiosMutation<void, string>(
-    (templateId) => http.delete<void>(API_ENDPOINTS.TEMPLATES.DELETE(templateId)),
+    (templateId) =>
+      http.delete<void>(API_ENDPOINTS.TEMPLATES.DELETE(templateId)),
     {
       onSuccess: (_data, variables) => {
         logger.log('Template deleted successfully:', variables);
@@ -140,7 +145,10 @@ export function useDeleteTemplateMutation() {
  * Hook for template image upload mutation (admin only)
  */
 export function useUploadTemplateImageMutation() {
-  return useAxiosMutation<{ url: string; metadata: any }, { templateId: string; file: File }>(
+  return useAxiosMutation<
+    { url: string; metadata: any },
+    { templateId: string; file: File }
+  >(
     ({ templateId, file }) => {
       const formData = new FormData();
       formData.append('file', file);
@@ -157,10 +165,16 @@ export function useUploadTemplateImageMutation() {
     },
     {
       onSuccess: (data, variables) => {
-        logger.log('Template image uploaded successfully:', { templateId: variables.templateId, data });
+        logger.log('Template image uploaded successfully:', {
+          templateId: variables.templateId,
+          data,
+        });
       },
       onError: (error, variables) => {
-        logger.error(`Template image upload failed for ID ${variables.templateId}:`, error);
+        logger.error(
+          `Template image upload failed for ID ${variables.templateId}:`,
+          error
+        );
       },
     }
   );

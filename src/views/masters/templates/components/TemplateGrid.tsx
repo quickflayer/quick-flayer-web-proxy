@@ -1,16 +1,16 @@
 import React from 'react';
-import {
-  Grid,
-  Card,
-  CardMedia,
-  CardContent,
-  Typography,
-  IconButton,
-  Box,
-  Chip,
-} from '@mui/material';
-import { Icon } from '@iconify/react';
+import { Grid, CardContent, Typography, Box } from '@mui/material';
+import Icon from '@lib/icons';
+import { ICONS } from '@lib/icons/icons-const';
 import { Template } from '@/hooks/use-template-management';
+import {
+  EmptyStateContainer,
+  TemplateCard,
+  TemplateImageContainer,
+  TemplateImage,
+  TemplateMenuButton,
+  TemplateChip,
+} from './styled-component';
 
 interface TemplateGridProps {
   templates: Template[];
@@ -50,12 +50,7 @@ export function TemplateGrid({ templates, onMenuOpen }: TemplateGridProps) {
           color: 'text.secondary',
         }}
       >
-        <Icon
-          icon="ic:outline-image"
-          width={80}
-          height={80}
-          style={{ marginBottom: 16 }}
-        />
+        <Icon icon={ICONS.CARDS_ICON} sx={{ width: 80, height: 80, mb: 2 }} />
         <Typography variant="h6" gutterBottom>
           No templates found
         </Typography>
@@ -109,7 +104,7 @@ export function TemplateGrid({ templates, onMenuOpen }: TemplateGridProps) {
                 }}
                 size="small"
               >
-                <Icon icon="ic:round-more-vert" />
+                <Icon icon={ICONS.MORE_VERTICAL} />
               </IconButton>
             </Box>
 

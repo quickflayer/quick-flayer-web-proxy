@@ -1,12 +1,15 @@
 import React from 'react';
 import { Box, Typography, Button } from '@mui/material';
-import { Icon } from '@iconify/react';
+import Icon from '@lib/icons';
+import { ICONS } from '@lib/icons/icons-const';
 
 interface TemplateManagementHeaderProps {
   onAddTemplate: () => void;
 }
 
-export function TemplateManagementHeader({ onAddTemplate }: TemplateManagementHeaderProps) {
+export function TemplateManagementHeader({
+  onAddTemplate,
+}: TemplateManagementHeaderProps) {
   return (
     <Box
       sx={{
@@ -38,13 +41,14 @@ export function TemplateManagementHeader({ onAddTemplate }: TemplateManagementHe
           color="text.secondary"
           sx={{ maxWidth: 600 }}
         >
-          Manage image templates for your application. Upload, edit, and organize template files.
+          Manage image templates for your application. Upload, edit, and
+          organize template files.
         </Typography>
       </Box>
 
       <Button
         variant="contained"
-        startIcon={<Icon icon="ic:round-add" />}
+        startIcon={<Icon icon={ICONS.CREATE} />}
         onClick={onAddTemplate}
         sx={{
           background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',

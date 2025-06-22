@@ -1,7 +1,9 @@
 import React from 'react';
-import { Menu, MenuItem, ListItemIcon, ListItemText } from '@mui/material';
-import { Icon } from '@iconify/react';
+import { ListItemIcon, ListItemText } from '@mui/material';
+import Icon from '@lib/icons';
+import { ICONS } from '@lib/icons/icons-const';
 import { Template } from '@/hooks/use-template-management';
+import { StyledMenu, StyledMenuItem } from './styled-component';
 
 interface TemplateActionMenuProps {
   anchorEl: HTMLElement | null;
@@ -46,40 +48,37 @@ export function TemplateActionMenu({
   };
 
   return (
-    <Menu
+    <StyledMenu
       anchorEl={anchorEl}
       open={open}
       onClose={onClose}
-      PaperProps={{
-        sx: {
-          borderRadius: 2,
-          minWidth: 180,
-          boxShadow: '0 8px 24px rgba(0, 0, 0, 0.12)',
-        },
-      }}
       transformOrigin={{ horizontal: 'right', vertical: 'top' }}
       anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
     >
-      <MenuItem onClick={handleEdit}>
+      <StyledMenuItem onClick={handleEdit}>
         <ListItemIcon>
-          <Icon icon="ic:round-edit" width={20} />
+          <Icon icon={ICONS.EDIT_USER} sx={{ width: 20, height: 20 }} />
         </ListItemIcon>
         <ListItemText primary="Edit Template" />
-      </MenuItem>
+      </StyledMenuItem>
 
-      <MenuItem onClick={handleDownload}>
+      <StyledMenuItem onClick={handleDownload}>
         <ListItemIcon>
-          <Icon icon="ic:round-download" width={20} />
+          <Icon icon={ICONS.SAVE} sx={{ width: 20, height: 20 }} />
         </ListItemIcon>
         <ListItemText primary="Download" />
-      </MenuItem>
+      </StyledMenuItem>
 
-      <MenuItem onClick={handleDelete} sx={{ color: 'error.main' }}>
+      <StyledMenuItem onClick={handleDelete} className="delete-item">
         <ListItemIcon>
-          <Icon icon="ic:round-delete" width={20} color="currentColor" />
+          <Icon
+            icon={ICONS.DELETE_USER}
+            color="error"
+            sx={{ width: 20, height: 20 }}
+          />
         </ListItemIcon>
         <ListItemText primary="Delete Template" />
-      </MenuItem>
-    </Menu>
+      </StyledMenuItem>
+    </StyledMenu>
   );
 }
