@@ -12,12 +12,20 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 
-import { TextFieldController, FileUploadController } from '@/components/field-controller';
+import {
+  TextFieldController,
+  FileUploadController,
+} from '@/components/field-controller';
 
 const createTemplateSchema = z.object({
-  name: z.string().min(1, 'Template name is required').max(100, 'Name too long'),
+  name: z
+    .string()
+    .min(1, 'Template name is required')
+    .max(100, 'Name too long'),
   description: z.string().optional(),
-  file: z.any().refine((file) => file && file.length > 0, 'Image file is required'),
+  file: z
+    .any()
+    .refine((file) => file instanceof File, 'Image file is required'),
 });
 
 type CreateTemplateFormData = z.infer<typeof createTemplateSchema>;

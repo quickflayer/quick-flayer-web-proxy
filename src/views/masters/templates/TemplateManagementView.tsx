@@ -105,7 +105,7 @@ export function TemplateManagementView() {
       await createTemplateMutation.mutateAsync({
         name: templateData.name,
         description: templateData.description,
-        file: templateData.file[0], // FileList to File
+        file: templateData.file, // File object from FileUploader
       });
       showSuccess('Template created successfully');
       setShowCreateDialog(false);
