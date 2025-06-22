@@ -39,17 +39,7 @@ export function TemplateGrid({ templates, onMenuOpen }: TemplateGridProps) {
 
   if (templates.length === 0) {
     return (
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          minHeight: 300,
-          textAlign: 'center',
-          color: 'text.secondary',
-        }}
-      >
+      <EmptyStateContainer>
         <Icon icon={ICONS.CARDS_ICON} sx={{ width: 80, height: 80, mb: 2 }} />
         <Typography variant="h6" gutterBottom>
           No templates found
@@ -57,7 +47,7 @@ export function TemplateGrid({ templates, onMenuOpen }: TemplateGridProps) {
         <Typography variant="body2">
           Start by uploading your first template image.
         </Typography>
-      </Box>
+      </EmptyStateContainer>
     );
   }
 
@@ -65,48 +55,20 @@ export function TemplateGrid({ templates, onMenuOpen }: TemplateGridProps) {
     <Grid container spacing={3}>
       {templates.map((template) => (
         <Grid item xs={12} sm={6} md={4} lg={3} key={template.id}>
-          <Card
-            sx={{
-              height: '100%',
-              display: 'flex',
-              flexDirection: 'column',
-              borderRadius: 2,
-              boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
-              transition: 'all 0.3s ease',
-              '&:hover': {
-                transform: 'translateY(-4px)',
-                boxShadow: '0 8px 24px rgba(0, 0, 0, 0.15)',
-              },
-            }}
-          >
-            <Box sx={{ position: 'relative' }}>
-              <CardMedia
+          <TemplateCard>
+            <TemplateImageContainer>
+              <TemplateImage
                 component="img"
-                height="200"
                 image={template.imageUrl}
                 alt={template.name}
-                sx={{
-                  objectFit: 'cover',
-                  backgroundColor: 'grey.100',
-                }}
               />
-              <IconButton
+              <TemplateMenuButton
                 onClick={(event) => onMenuOpen(event, template)}
-                sx={{
-                  position: 'absolute',
-                  top: 8,
-                  right: 8,
-                  backgroundColor: 'rgba(255, 255, 255, 0.9)',
-                  backdropFilter: 'blur(4px)',
-                  '&:hover': {
-                    backgroundColor: 'rgba(255, 255, 255, 1)',
-                  },
-                }}
                 size="small"
               >
                 <Icon icon={ICONS.MORE_VERTICAL} />
-              </IconButton>
-            </Box>
+              </TemplateMenuButton>
+            </TemplateImageContainer>
 
             <CardContent sx={{ flexGrow: 1, p: 2 }}>
               <Typography
@@ -138,15 +100,14 @@ export function TemplateGrid({ templates, onMenuOpen }: TemplateGridProps) {
               </Box>
 
               <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
-                <Chip
+                <TemplateChip
                   label={template.mimeType.split('/')[1].toUpperCase()}
                   size="small"
                   variant="outlined"
-                  sx={{ fontSize: '0.75rem' }}
                 />
               </Box>
             </CardContent>
-          </Card>
+          </TemplateCard>
         </Grid>
       ))}
     </Grid>
