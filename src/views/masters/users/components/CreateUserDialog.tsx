@@ -1,7 +1,8 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 
+import { zodResolver } from '@hookform/resolvers/zod';
 import {
   Dialog,
   DialogTitle,
@@ -9,11 +10,33 @@ import {
   DialogActions,
   Box,
 } from '@mui/material';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
 
 import { AppButton } from '@core/components/app-button';
-import { AppTextField, AppSelectField } from '@core/components/app-inputs';
 
+import {
+  TextFieldController,
+  SelectController,
+} from '@/components/field-controller';
 import { CreateUserRequest } from '@/hooks/use-user-management';
+import { BaseOption } from '@/types';
+
+// Form validation schema
+const createUserSchema = z.object({
+  email: z.string().email('Invalid email address'),
+  password: z.string().min(8, 'Password must be at least 8 characters'),
+  firstName: z.string().optional(),
+  lastName: z.string().optional(),
+  role: z
+    .object({
+      id: z.string(),
+      name: z.string(),
+    })
+    .nullable(),
+});
+
+type CreateUserFormData = z.infer<typeof createUserSchema>;
 
 interface CreateUserDialogProps {
   open: boolean;
@@ -22,110 +45,107 @@ interface CreateUserDialogProps {
   onCreate: (userData: CreateUserRequest) => void;
 }
 
+// Role options in BaseOption format
+const roleOptions: BaseOption[] = [
+  { id: 'user', name: 'User' },
+  { id: 'admin', name: 'Admin' },
+];
+
 export function CreateUserDialog({
   open,
   isLoading,
   onClose,
   onCreate,
 }: CreateUserDialogProps) {
-  const [formData, setFormData] = useState<CreateUserRequest>({
-    email: '',
-    password: '',
-    firstName: '',
-    lastName: '',
-    role: 'user',
-  });
-
-  const handleCreate = () => {
-    onCreate(formData);
-  };
-
-  const handleClose = () => {
-    onClose();
-    // Reset form when closing
-    setFormData({
+  const {
+    control,
+    handleSubmit,
+    reset,
+    formState: { isValid },
+  } = useForm<CreateUserFormData>({
+    resolver: zodResolver(createUserSchema),
+    defaultValues: {
       email: '',
       password: '',
       firstName: '',
       lastName: '',
-      role: 'user',
-    });
+      role: null,
+    },
+    mode: 'onChange',
+  });
+
+  const handleClose = () => {
+    reset();
+    onClose();
   };
 
-  const isFormValid =
-    formData.email && formData.password && formData.password.length >= 8;
-
-  const roleOptions = [
-    { value: 'user', label: 'User' },
-    { value: 'admin', label: 'Admin' },
-  ];
+  const onSubmit = (data: CreateUserFormData) => {
+    const userData: CreateUserRequest = {
+      email: data.email,
+      password: data.password,
+      firstName: data.firstName || undefined,
+      lastName: data.lastName || undefined,
+      role: (data.role?.id as 'admin' | 'user') || 'user',
+    };
+    onCreate(userData);
+  };
 
   return (
     <Dialog open={open} onClose={handleClose} maxWidth="sm" fullWidth>
       <DialogTitle>Create New User</DialogTitle>
       <DialogContent>
-        <Box sx={{ pt: 1, display: 'flex', flexDirection: 'column', gap: 2 }}>
-          <AppTextField
+        <Box
+          component="form"
+          onSubmit={handleSubmit(onSubmit)}
+          sx={{ pt: 1, display: 'flex', flexDirection: 'column', gap: 2 }}
+        >
+          <TextFieldController
+            name="email"
+            control={control}
             label="Email"
             type="email"
-            value={formData.email}
-            onChange={(e) =>
-              setFormData({ ...formData, email: e.target.value })
-            }
+            isRequired
             fullWidth
-            required
           />
 
-          <AppTextField
+          <TextFieldController
+            name="password"
+            control={control}
             label="Password"
             type="password"
-            value={formData.password}
-            onChange={(e) =>
-              setFormData({ ...formData, password: e.target.value })
-            }
-            fullWidth
-            required
+            isRequired
             helperText="Minimum 8 characters"
+            fullWidth
           />
 
-          <AppTextField
+          <TextFieldController
+            name="firstName"
+            control={control}
             label="First Name"
-            value={formData.firstName}
-            onChange={(e) =>
-              setFormData({ ...formData, firstName: e.target.value })
-            }
             fullWidth
           />
 
-          <AppTextField
+          <TextFieldController
+            name="lastName"
+            control={control}
             label="Last Name"
-            value={formData.lastName}
-            onChange={(e) =>
-              setFormData({ ...formData, lastName: e.target.value })
-            }
             fullWidth
           />
 
-          <AppSelectField
+          <SelectController
+            name="role"
+            control={control}
             label="Role"
-            value={formData.role}
-            onChange={(e) =>
-              setFormData({
-                ...formData,
-                role: e.target.value as 'admin' | 'user',
-              })
-            }
             options={roleOptions}
-            fullWidth
           />
         </Box>
       </DialogContent>
       <DialogActions>
         <AppButton onClick={handleClose}>Cancel</AppButton>
         <AppButton
-          onClick={handleCreate}
+          onClick={handleSubmit(onSubmit)}
           variant="contained"
-          disabled={isLoading || !isFormValid}
+          disabled={isLoading || !isValid}
         >
           {isLoading ? 'Creating...' : 'Create User'}
         </AppButton>

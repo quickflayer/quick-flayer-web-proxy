@@ -1,7 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-
+import React, { useEffect } from 'react';
 import {
   Dialog,
   DialogTitle,
@@ -9,13 +8,39 @@ import {
   DialogActions,
   Box,
 } from '@mui/material';
-import { FormControlLabel, Switch } from '@mui/material';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
 
 import { AppButton } from '@core/components/app-button';
-import { AppTextField, AppSelectField } from '@core/components/app-inputs';
-
+import {
+  TextFieldController,
+  SelectController,
+  SwitchController,
+} from '@/components/field-controller';
 import { User, UpdateUserRequest } from '@/hooks/use-user-management';
+import { BaseOption } from '@/types';
 
+// Form validation schema
+const editUserSchema = z.object({
+  firstName: z.string().optional(),
+  lastName: z.string().optional(),
+  role: z
+    .object({
+      id: z.string(),
+      name: z.string(),
+    })
+    .nullable(),
+  isActive: z.boolean(),
+});
+
+type EditUserFormData = z.infer<typeof editUserSchema>;
+
+// Role options in BaseOption format
+const roleOptions: BaseOption[] = [
+  { id: 'user', name: 'User' },
+  { id: 'admin', name: 'Admin' },
+];
 
 interface EditUserDialogProps {
   open: boolean;
