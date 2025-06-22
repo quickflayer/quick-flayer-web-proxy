@@ -30,8 +30,8 @@ const createUserSchema = z.object({
   lastName: z.string().optional(),
   role: z
     .object({
-      id: z.string(),
-      name: z.string(),
+      id: z.union([z.string(), z.number()]).optional(),
+      name: z.string().optional(),
     })
     .nullable(),
 });
