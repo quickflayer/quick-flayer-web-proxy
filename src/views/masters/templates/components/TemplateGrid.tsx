@@ -54,7 +54,7 @@ export function TemplateGrid({ templates, onMenuOpen }: TemplateGridProps) {
   return (
     <Grid container spacing={3}>
       {templates.map((template) => (
-        <Grid item xs={12} sm={6} md={4} lg={3} key={template.id}>
+        <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }} key={template.id}>
           <TemplateCard>
             <TemplateImageContainer>
               <TemplateImage
