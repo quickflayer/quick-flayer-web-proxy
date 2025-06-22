@@ -81,7 +81,7 @@ export function UserManagementView() {
     }
   };
 
-  const handleDeleteUser = async (id: number) => {
+  const handleDeleteUser = async (id: number | string) => {
     try {
       await deleteUserMutation.mutateAsync(id.toString());
       showSuccess('User deleted successfully');
