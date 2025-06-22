@@ -57,101 +57,88 @@ export function EditUserDialog({
   onClose,
   onSave,
 }: EditUserDialogProps) {
-  const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    role: 'user' as 'admin' | 'user',
-    isActive: true,
+  const {
+    control,
+    handleSubmit,
+    reset,
+    formState: { isValid },
+  } = useForm<EditUserFormData>({
+    resolver: zodResolver(editUserSchema),
+    defaultValues: {
+      firstName: '',
+      lastName: '',
+      role: null,
+      isActive: true,
+    },
+    mode: 'onChange',
   });
 
   useEffect(() => {
     if (user) {
-      setFormData({
+      const userRole = roleOptions.find((option) => option.id === user.role);
+      reset({
         firstName: user.firstName || '',
         lastName: user.lastName || '',
-        role: user.role as 'admin' | 'user',
+        role: userRole || null,
         isActive: user.isActive,
       });
     }
-  }, [user]);
-
-  const handleSave = () => {
-    onSave(formData);
-  };
+  }, [user, reset]);
 
   const handleClose = () => {
+    reset();
     onClose();
-    // Reset form when closing
-    if (user) {
-      setFormData({
-        firstName: user.firstName || '',
-        lastName: user.lastName || '',
-        role: user.role as 'admin' | 'user',
-        isActive: user.isActive,
-      });
-    }
   };
 
-  const roleOptions = [
-    { value: 'user', label: 'User' },
-    { value: 'admin', label: 'Admin' },
-  ];
+  const onSubmit = (data: EditUserFormData) => {
+    const updateData: UpdateUserRequest = {
+      firstName: data.firstName || undefined,
+      lastName: data.lastName || undefined,
+      role: (data.role?.id as 'admin' | 'user') || undefined,
+      isActive: data.isActive,
+    };
+    onSave(updateData);
+  };
 
   return (
     <Dialog open={open} onClose={handleClose} maxWidth="sm" fullWidth>
       <DialogTitle>Edit User</DialogTitle>
       <DialogContent>
-        <Box sx={{ pt: 1, display: 'flex', flexDirection: 'column', gap: 2 }}>
-          <AppTextField
+        <Box
+          component="form"
+          onSubmit={handleSubmit(onSubmit)}
+          sx={{ pt: 1, display: 'flex', flexDirection: 'column', gap: 2 }}
+        >
+          <TextFieldController
+            name="firstName"
+            control={control}
             label="First Name"
-            value={formData.firstName}
-            onChange={(e) =>
-              setFormData({ ...formData, firstName: e.target.value })
-            }
             fullWidth
           />
 
-          <AppTextField
+          <TextFieldController
+            name="lastName"
+            control={control}
             label="Last Name"
-            value={formData.lastName}
-            onChange={(e) =>
-              setFormData({ ...formData, lastName: e.target.value })
-            }
             fullWidth
           />
 
-          <AppSelectField
+          <SelectController
+            name="role"
+            control={control}
             label="Role"
-            value={formData.role}
-            onChange={(e) =>
-              setFormData({
-                ...formData,
-                role: e.target.value as 'admin' | 'user',
-              })
-            }
             options={roleOptions}
-            fullWidth
           />
 
-          <FormControlLabel
-            control={
-              <Switch
-                checked={formData.isActive}
-                onChange={(e) =>
-                  setFormData({ ...formData, isActive: e.target.checked })
-                }
-              />
-            }
-            label="Active"
-          />
+          <SwitchController name="isActive" control={control} label="Active" />
         </Box>
       </DialogContent>
       <DialogActions>
         <AppButton onClick={handleClose}>Cancel</AppButton>
         <AppButton
-          onClick={handleSave}
+          onClick={handleSubmit(onSubmit)}
           variant="contained"
-          disabled={isLoading}
+          disabled={isLoading || !isValid}
         >
           {isLoading ? 'Saving...' : 'Save'}
         </AppButton>
