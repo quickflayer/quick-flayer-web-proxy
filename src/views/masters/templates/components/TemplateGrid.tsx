@@ -57,11 +57,7 @@ export function TemplateGrid({ templates, onMenuOpen }: TemplateGridProps) {
         <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }} key={template.id}>
           <TemplateCard>
             <TemplateImageContainer>
-              <TemplateImage
-                component="img"
-                image={template.imageUrl}
-                alt={template.name}
-              />
+              <TemplateImage image={template.imageUrl} title={template.name} />
               <TemplateMenuButton
                 onClick={(event) => onMenuOpen(event, template)}
                 size="small"
