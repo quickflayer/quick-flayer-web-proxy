@@ -120,7 +120,6 @@ export function CreateTemplateDialog({
               label="Template Image"
               isRequired
               disabled={isLoading}
-              accept="image/*"
             />
           </Box>
         </DialogContent>
