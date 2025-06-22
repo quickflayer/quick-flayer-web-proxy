@@ -3,7 +3,7 @@
   "plugins": ["import", "unused-imports"],
   "rules": {
     "import/order": [
-      "warning",
+      "warn",
       {
         "groups": [
           "builtin",
